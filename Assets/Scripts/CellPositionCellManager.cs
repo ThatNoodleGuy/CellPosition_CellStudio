@@ -1,22 +1,29 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using TMPro;
 
 public class CellPositionCellManager : MonoBehaviour
 {
-    public CellDataManager cellDataManager; // Reference to the CellDataManager script
+    [Header("Cells")]
     public GameObject cellPrefab; // Reference to your cell prefab
-    public Material[] interactionMaterials; // Array of materials for different interaction types
-    public TextMeshProUGUI bioticksTimerText; // UI Text to display current bioTick
+    public Material[] interactionMaterials;
 
-    private int currentBioTick = 0;
+    [Header("Timer")]
+    public int currentBioTick = 0;
     public float timeMultiplier = 1.0f;
-    public int timeUpdateCheck = 50; // Interval to check for updates
+    public int timeUpdateCheck = 50;
+    public TextMeshProUGUI bioticksTimerText;
+
+    private List<CellPositionCSVReader.CSVData> dataList = new List<CellPositionCSVReader.CSVData>();
+    private string csvFilePath = "Assets/Resources/Data/CellPosition.csv";
     private List<GameObject> spawnedCells = new List<GameObject>();
 
     void Start()
     {
+        LoadCSVData();
         SpawnInitialCells(); // Initial spawn
         StartCoroutine(CheckForUpdates());
     }
@@ -26,36 +33,75 @@ public class CellPositionCellManager : MonoBehaviour
         bioticksTimerText.text = "BioTick: " + currentBioTick;
     }
 
-    private void SpawnInitialCells()
+    private void LoadCSVData()
     {
-        if (cellDataManager.dataByBioTick.TryGetValue(0, out List<CellDataManager.CSVData> initialData))
+        if (File.Exists(csvFilePath))
         {
-            foreach (var data in initialData)
-            {
-                SpawnCell(data);
-            }
-        }
-    }
+            string csvText = File.ReadAllText(csvFilePath);
 
-    private GameObject SpawnCell(CellDataManager.CSVData data)
-    {
-        GameObject cell = Instantiate(cellPrefab, new Vector3(data.posX, data.posY, data.posZ), Quaternion.identity);
-        cell.transform.parent = transform;
-        cell.name = "Cell_" + data.agentID;
-
-        TextMeshPro textMesh = cell.GetComponentInChildren<TextMeshPro>();
-        if (textMesh != null)
-        {
-            textMesh.text = "Cell: " + data.agentID;
+            CellPositionCSVReader.ParseCSVData(csvText, dataList);
         }
         else
         {
-            Debug.LogWarning("TextMeshPro component not found in the cell prefab.");
+            Debug.LogError("CSV file not found at path: " + csvFilePath);
         }
+    }
 
-        UpdateCellMaterial(cell, data.interactionType);
-        spawnedCells.Add(cell);
-        return cell;
+    void SpawnInitialCells()
+    {
+        // Create and position cells for bioTick = 0
+        List<CellPositionCSVReader.CSVData> initialData = dataList.FindAll(data => data.bioTicks == 0);
+
+        foreach (CellPositionCSVReader.CSVData data in initialData)
+        {
+            GameObject cell = Instantiate(cellPrefab);
+            Vector3 cellPosition = new Vector3(data.posX, data.posY, data.posZ);
+            cell.transform.position = cellPosition;
+            cell.transform.parent = transform;
+            cell.name = "Cell_" + data.agentID;
+
+            TextMeshPro textMeshPro = cell.GetComponentInChildren<TextMeshPro>();
+
+            if (textMeshPro != null)
+            {
+                textMeshPro.text = "Cell: " + data.agentID;
+            }
+            else
+            {
+                Debug.LogWarning("TextMeshPro component not found in child object.");
+            }
+
+            // Set the material based on interaction type
+            Renderer cellRenderer = cell.GetComponent<Renderer>();
+            if (cellRenderer != null)
+            {
+                // Ensure that the interaction type is a valid index in the interactionMaterials array
+                if (data.interactionType >= 0 && data.interactionType < interactionMaterials.Length)
+                {
+                    Material matchingMaterial = interactionMaterials[data.interactionType];
+
+                    if (matchingMaterial != null)
+                    {
+                        cellRenderer.material = matchingMaterial;
+                    }
+                    else
+                    {
+                        Debug.LogWarning("No matching material found for interaction type: " + data.interactionType);
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning("Invalid interaction type index: " + data.interactionType);
+                }
+            }
+            else
+            {
+                Debug.LogWarning("Renderer component not found in child object.");
+            }
+
+            // Add the spawned cell to the list
+            spawnedCells.Add(cell);
+        }
     }
 
     IEnumerator CheckForUpdates()
@@ -63,36 +109,54 @@ public class CellPositionCellManager : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(1.0f / timeMultiplier);
+
+            // Increment the bioTick counter
             currentBioTick++;
+
+            // Check if it's time to update (every X bioTicks)
             if (currentBioTick % timeUpdateCheck == 0)
             {
+                // Load the updated CSV data
+                LoadCSVData();
+
+                // Update cell positions for the current bioTick
                 UpdateCellPositions(currentBioTick);
             }
         }
     }
 
-    private void UpdateCellPositions(int bioTick)
+    void UpdateCellPositions(int bioTick)
     {
-        if (cellDataManager.dataByBioTick.TryGetValue(bioTick, out List<CellDataManager.CSVData> cellsForBioTick))
+        // Update the positions and materials of existing cells based on the current bioTick
+        foreach (GameObject cell in spawnedCells)
         {
-            foreach (var cellData in cellsForBioTick)
+            int agentID = int.Parse(cell.GetComponentInChildren<TextMeshPro>().text.Replace("Cell: ", ""));
+            CellPositionCSVReader.CSVData data = dataList.Find(d => d.agentID == agentID && d.bioTicks == bioTick);
+
+            if (data != null)
             {
-                GameObject cellGameObject = spawnedCells.Find(cell => cell.name == "Cell_" + cellData.agentID);
-                if (cellGameObject != null)
+                Vector3 cellPosition = new Vector3(data.posX, data.posY, data.posZ);
+                cell.transform.position = cellPosition;
+
+                // Ensure that the interaction type is a valid index in the interactionMaterials array
+                if (data.interactionType >= 0 && data.interactionType < interactionMaterials.Length)
                 {
-                    cellGameObject.transform.position = new Vector3(cellData.posX, cellData.posY, cellData.posZ);
-                    UpdateCellMaterial(cellGameObject, cellData.interactionType);
+                    Material material = interactionMaterials[data.interactionType];
+                    Renderer cellRenderer = cell.GetComponent<Renderer>();
+                    if (cellRenderer != null)
+                    {
+                        cellRenderer.material = material;
+                    }
+                    else
+                    {
+                        Debug.LogWarning("Renderer component not found in child object.");
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning("Invalid interaction type index: " + data.interactionType);
                 }
             }
-        }
-    }
-
-    private void UpdateCellMaterial(GameObject cell, int interactionType)
-    {
-        Renderer cellRenderer = cell.GetComponent<Renderer>();
-        if (cellRenderer != null && interactionType >= 0 && interactionType < interactionMaterials.Length)
-        {
-            cellRenderer.material = interactionMaterials[interactionType];
         }
     }
 }

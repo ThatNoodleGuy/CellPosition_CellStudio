@@ -383,16 +383,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d6f551444305b9478ce687c4a403da6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cellDataManager: {fileID: 1992832228}
   cellPrefab: {fileID: 1580431748523265128, guid: 0bda9ade7c71aea1c93acc1bb737527d, type: 3}
   interactionMaterials:
   - {fileID: 2100000, guid: 3c25a1b889e1573c08823a90c90fc53e, type: 2}
   - {fileID: 2100000, guid: 1de8867a24aef9028844be9e064f766d, type: 2}
   - {fileID: 2100000, guid: 178441e9717a54000bd12a68bb6d571a, type: 2}
   - {fileID: 2100000, guid: 68d518bb35b2841518c990781c25c80b, type: 2}
-  bioticksTimerText: {fileID: 772562616}
+  currentBioTick: 0
   timeMultiplier: 25
   timeUpdateCheck: 50
+  bioticksTimerText: {fileID: 772562616}
 --- !u!1 &772562614
 GameObject:
   m_ObjectHideFlags: 0
@@ -635,6 +635,51 @@ MonoBehaviour:
   moveSpeed: 350
   rotationSpeed: 60
   resetRotationKey: 114
+--- !u!1 &1103232242
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1103232244}
+  - component: {fileID: 1103232243}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1103232243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1103232242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71c82e04380b003448b08a48685a983f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  csvFilePath: Assets/Resources/Data/CellPosition.csv
+--- !u!4 &1103232244
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1103232242}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2538.625, y: 605.63055, z: 1160.0895}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1703064162
 GameObject:
   m_ObjectHideFlags: 0
@@ -834,7 +879,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 704893f22fb915f44bbe18c5f5e941b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  csvFilePath: Assets/Resources/Data/CellPosition.csv
+  csvResourcePath: Data/CellPosition
 --- !u!4 &1992832229
 Transform:
   m_ObjectHideFlags: 0
@@ -844,7 +889,7 @@ Transform:
   m_GameObject: {fileID: 1992832227}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 688.851, y: 464.8924, z: 2145.8738}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -861,3 +906,4 @@ SceneRoots:
   - {fileID: 1961619964}
   - {fileID: 191754257}
   - {fileID: 1992832229}
+  - {fileID: 1103232244}

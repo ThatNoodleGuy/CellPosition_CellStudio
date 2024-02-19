@@ -4,7 +4,7 @@ using UnityEngine;
 public class CellDataManager : MonoBehaviour
 {
     public Dictionary<int, List<CSVData>> dataByBioTick = new Dictionary<int, List<CSVData>>();
-    public string csvFilePath = "Resources/Data/CellPosition.csv"; // Define the full file path here
+    public string csvResourcePath = "Data/CellPosition";
 
     [System.Serializable]
     public class CSVData
@@ -20,19 +20,20 @@ public class CellDataManager : MonoBehaviour
 
     void Start()
     {
-        LoadAndParseCSVData(csvFilePath);
+        LoadAndParseCSVData(csvResourcePath);
     }
 
-    private void LoadAndParseCSVData(string filePath)
+    private void LoadAndParseCSVData(string resourcePath)
     {
-        if (System.IO.File.Exists(filePath))
+        TextAsset csvFile = Resources.Load<TextAsset>(resourcePath);
+        if (csvFile != null)
         {
-            string csvText = System.IO.File.ReadAllText(filePath);
+            string csvText = csvFile.text;
             ParseCSVDataAndOrganize(csvText);
         }
         else
         {
-            Debug.LogError("CSV file not found at path: " + filePath);
+            Debug.LogError("CSV file not found at path: " + resourcePath);
         }
     }
 
