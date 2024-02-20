@@ -2,7 +2,7 @@
 <Cylinders>
 	<Cylinder>
 		<ID>1</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>0</centery>
 		<centerz>0</centerz>
 		<directionx>1</directionx>
@@ -13,7 +13,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>2</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>0</centery>
 		<centerz>50</centerz>
 		<directionx>1</directionx>
@@ -24,7 +24,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>3</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>0</centery>
 		<centerz>100</centerz>
 		<directionx>1</directionx>
@@ -35,7 +35,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>4</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>0</centery>
 		<centerz>150</centerz>
 		<directionx>1</directionx>
@@ -46,7 +46,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>5</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>0</centery>
 		<centerz>200</centerz>
 		<directionx>1</directionx>
@@ -57,7 +57,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>6</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>0</centery>
 		<centerz>250</centerz>
 		<directionx>1</directionx>
@@ -68,7 +68,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>7</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>0</centery>
 		<centerz>300</centerz>
 		<directionx>1</directionx>
@@ -79,7 +79,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>8</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>0</centery>
 		<centerz>350</centerz>
 		<directionx>1</directionx>
@@ -90,7 +90,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>9</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>0</centery>
 		<centerz>400</centerz>
 		<directionx>1</directionx>
@@ -101,7 +101,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>10</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>0</centery>
 		<centerz>450</centerz>
 		<directionx>1</directionx>
@@ -112,7 +112,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>11</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>0</centery>
 		<centerz>500</centerz>
 		<directionx>1</directionx>
@@ -125,7 +125,7 @@
 		<ID>12</ID>
 		<centerx>0</centerx>
 		<centery>0</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -136,7 +136,7 @@
 		<ID>13</ID>
 		<centerx>50</centerx>
 		<centery>0</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -147,7 +147,7 @@
 		<ID>14</ID>
 		<centerx>100</centerx>
 		<centery>0</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -158,7 +158,7 @@
 		<ID>15</ID>
 		<centerx>150</centerx>
 		<centery>0</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -169,7 +169,7 @@
 		<ID>16</ID>
 		<centerx>200</centerx>
 		<centery>0</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -180,7 +180,7 @@
 		<ID>17</ID>
 		<centerx>250</centerx>
 		<centery>0</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -191,7 +191,7 @@
 		<ID>18</ID>
 		<centerx>300</centerx>
 		<centery>0</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -202,7 +202,7 @@
 		<ID>19</ID>
 		<centerx>350</centerx>
 		<centery>0</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -213,7 +213,7 @@
 		<ID>20</ID>
 		<centerx>400</centerx>
 		<centery>0</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -224,7 +224,7 @@
 		<ID>21</ID>
 		<centerx>450</centerx>
 		<centery>0</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -235,7 +235,7 @@
 		<ID>22</ID>
 		<centerx>500</centerx>
 		<centery>0</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -244,7 +244,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>23</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>20</centery>
 		<centerz>0</centerz>
 		<directionx>1</directionx>
@@ -255,7 +255,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>24</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>20</centery>
 		<centerz>50</centerz>
 		<directionx>1</directionx>
@@ -266,7 +266,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>25</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>20</centery>
 		<centerz>100</centerz>
 		<directionx>1</directionx>
@@ -277,7 +277,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>26</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>20</centery>
 		<centerz>150</centerz>
 		<directionx>1</directionx>
@@ -288,7 +288,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>27</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>20</centery>
 		<centerz>200</centerz>
 		<directionx>1</directionx>
@@ -299,7 +299,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>28</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>20</centery>
 		<centerz>250</centerz>
 		<directionx>1</directionx>
@@ -310,7 +310,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>29</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>20</centery>
 		<centerz>300</centerz>
 		<directionx>1</directionx>
@@ -321,7 +321,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>30</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>20</centery>
 		<centerz>350</centerz>
 		<directionx>1</directionx>
@@ -332,7 +332,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>31</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>20</centery>
 		<centerz>400</centerz>
 		<directionx>1</directionx>
@@ -343,7 +343,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>32</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>20</centery>
 		<centerz>450</centerz>
 		<directionx>1</directionx>
@@ -354,7 +354,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>33</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>20</centery>
 		<centerz>500</centerz>
 		<directionx>1</directionx>
@@ -367,7 +367,7 @@
 		<ID>34</ID>
 		<centerx>0</centerx>
 		<centery>20</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -378,7 +378,7 @@
 		<ID>35</ID>
 		<centerx>50</centerx>
 		<centery>20</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -389,7 +389,7 @@
 		<ID>36</ID>
 		<centerx>100</centerx>
 		<centery>20</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -400,7 +400,7 @@
 		<ID>37</ID>
 		<centerx>150</centerx>
 		<centery>20</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -411,7 +411,7 @@
 		<ID>38</ID>
 		<centerx>200</centerx>
 		<centery>20</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -422,7 +422,7 @@
 		<ID>39</ID>
 		<centerx>250</centerx>
 		<centery>20</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -433,7 +433,7 @@
 		<ID>40</ID>
 		<centerx>300</centerx>
 		<centery>20</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -444,7 +444,7 @@
 		<ID>41</ID>
 		<centerx>350</centerx>
 		<centery>20</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -455,7 +455,7 @@
 		<ID>42</ID>
 		<centerx>400</centerx>
 		<centery>20</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -466,7 +466,7 @@
 		<ID>43</ID>
 		<centerx>450</centerx>
 		<centery>20</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -477,7 +477,7 @@
 		<ID>44</ID>
 		<centerx>500</centerx>
 		<centery>20</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -486,7 +486,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>45</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>40</centery>
 		<centerz>0</centerz>
 		<directionx>1</directionx>
@@ -497,7 +497,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>46</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>40</centery>
 		<centerz>50</centerz>
 		<directionx>1</directionx>
@@ -508,7 +508,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>47</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>40</centery>
 		<centerz>100</centerz>
 		<directionx>1</directionx>
@@ -519,7 +519,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>48</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>40</centery>
 		<centerz>150</centerz>
 		<directionx>1</directionx>
@@ -530,7 +530,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>49</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>40</centery>
 		<centerz>200</centerz>
 		<directionx>1</directionx>
@@ -541,7 +541,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>50</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>40</centery>
 		<centerz>250</centerz>
 		<directionx>1</directionx>
@@ -552,7 +552,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>51</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>40</centery>
 		<centerz>300</centerz>
 		<directionx>1</directionx>
@@ -563,7 +563,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>52</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>40</centery>
 		<centerz>350</centerz>
 		<directionx>1</directionx>
@@ -574,7 +574,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>53</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>40</centery>
 		<centerz>400</centerz>
 		<directionx>1</directionx>
@@ -585,7 +585,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>54</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>40</centery>
 		<centerz>450</centerz>
 		<directionx>1</directionx>
@@ -596,7 +596,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>55</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>40</centery>
 		<centerz>500</centerz>
 		<directionx>1</directionx>
@@ -609,7 +609,7 @@
 		<ID>56</ID>
 		<centerx>0</centerx>
 		<centery>40</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -620,7 +620,7 @@
 		<ID>57</ID>
 		<centerx>50</centerx>
 		<centery>40</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -631,7 +631,7 @@
 		<ID>58</ID>
 		<centerx>100</centerx>
 		<centery>40</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -642,7 +642,7 @@
 		<ID>59</ID>
 		<centerx>150</centerx>
 		<centery>40</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -653,7 +653,7 @@
 		<ID>60</ID>
 		<centerx>200</centerx>
 		<centery>40</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -664,7 +664,7 @@
 		<ID>61</ID>
 		<centerx>250</centerx>
 		<centery>40</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -675,7 +675,7 @@
 		<ID>62</ID>
 		<centerx>300</centerx>
 		<centery>40</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -686,7 +686,7 @@
 		<ID>63</ID>
 		<centerx>350</centerx>
 		<centery>40</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -697,7 +697,7 @@
 		<ID>64</ID>
 		<centerx>400</centerx>
 		<centery>40</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -708,7 +708,7 @@
 		<ID>65</ID>
 		<centerx>450</centerx>
 		<centery>40</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -719,7 +719,7 @@
 		<ID>66</ID>
 		<centerx>500</centerx>
 		<centery>40</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -728,7 +728,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>67</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>60</centery>
 		<centerz>0</centerz>
 		<directionx>1</directionx>
@@ -739,7 +739,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>68</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>60</centery>
 		<centerz>50</centerz>
 		<directionx>1</directionx>
@@ -750,7 +750,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>69</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>60</centery>
 		<centerz>100</centerz>
 		<directionx>1</directionx>
@@ -761,7 +761,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>70</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>60</centery>
 		<centerz>150</centerz>
 		<directionx>1</directionx>
@@ -772,7 +772,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>71</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>60</centery>
 		<centerz>200</centerz>
 		<directionx>1</directionx>
@@ -783,7 +783,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>72</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>60</centery>
 		<centerz>250</centerz>
 		<directionx>1</directionx>
@@ -794,7 +794,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>73</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>60</centery>
 		<centerz>300</centerz>
 		<directionx>1</directionx>
@@ -805,7 +805,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>74</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>60</centery>
 		<centerz>350</centerz>
 		<directionx>1</directionx>
@@ -816,7 +816,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>75</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>60</centery>
 		<centerz>400</centerz>
 		<directionx>1</directionx>
@@ -827,7 +827,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>76</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>60</centery>
 		<centerz>450</centerz>
 		<directionx>1</directionx>
@@ -838,7 +838,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>77</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>60</centery>
 		<centerz>500</centerz>
 		<directionx>1</directionx>
@@ -851,7 +851,7 @@
 		<ID>78</ID>
 		<centerx>0</centerx>
 		<centery>60</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -862,7 +862,7 @@
 		<ID>79</ID>
 		<centerx>50</centerx>
 		<centery>60</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -873,7 +873,7 @@
 		<ID>80</ID>
 		<centerx>100</centerx>
 		<centery>60</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -884,7 +884,7 @@
 		<ID>81</ID>
 		<centerx>150</centerx>
 		<centery>60</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -895,7 +895,7 @@
 		<ID>82</ID>
 		<centerx>200</centerx>
 		<centery>60</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -906,7 +906,7 @@
 		<ID>83</ID>
 		<centerx>250</centerx>
 		<centery>60</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -917,7 +917,7 @@
 		<ID>84</ID>
 		<centerx>300</centerx>
 		<centery>60</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -928,7 +928,7 @@
 		<ID>85</ID>
 		<centerx>350</centerx>
 		<centery>60</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -939,7 +939,7 @@
 		<ID>86</ID>
 		<centerx>400</centerx>
 		<centery>60</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -950,7 +950,7 @@
 		<ID>87</ID>
 		<centerx>450</centerx>
 		<centery>60</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -961,7 +961,7 @@
 		<ID>88</ID>
 		<centerx>500</centerx>
 		<centery>60</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -970,7 +970,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>89</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>80</centery>
 		<centerz>0</centerz>
 		<directionx>1</directionx>
@@ -981,7 +981,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>90</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>80</centery>
 		<centerz>50</centerz>
 		<directionx>1</directionx>
@@ -992,7 +992,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>91</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>80</centery>
 		<centerz>100</centerz>
 		<directionx>1</directionx>
@@ -1003,7 +1003,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>92</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>80</centery>
 		<centerz>150</centerz>
 		<directionx>1</directionx>
@@ -1014,7 +1014,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>93</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>80</centery>
 		<centerz>200</centerz>
 		<directionx>1</directionx>
@@ -1025,7 +1025,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>94</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>80</centery>
 		<centerz>250</centerz>
 		<directionx>1</directionx>
@@ -1036,7 +1036,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>95</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>80</centery>
 		<centerz>300</centerz>
 		<directionx>1</directionx>
@@ -1047,7 +1047,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>96</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>80</centery>
 		<centerz>350</centerz>
 		<directionx>1</directionx>
@@ -1058,7 +1058,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>97</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>80</centery>
 		<centerz>400</centerz>
 		<directionx>1</directionx>
@@ -1069,7 +1069,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>98</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>80</centery>
 		<centerz>450</centerz>
 		<directionx>1</directionx>
@@ -1080,7 +1080,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>99</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>80</centery>
 		<centerz>500</centerz>
 		<directionx>1</directionx>
@@ -1093,7 +1093,7 @@
 		<ID>100</ID>
 		<centerx>0</centerx>
 		<centery>80</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -1104,7 +1104,7 @@
 		<ID>101</ID>
 		<centerx>50</centerx>
 		<centery>80</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -1115,7 +1115,7 @@
 		<ID>102</ID>
 		<centerx>100</centerx>
 		<centery>80</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -1126,7 +1126,7 @@
 		<ID>103</ID>
 		<centerx>150</centerx>
 		<centery>80</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -1137,7 +1137,7 @@
 		<ID>104</ID>
 		<centerx>200</centerx>
 		<centery>80</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -1148,7 +1148,7 @@
 		<ID>105</ID>
 		<centerx>250</centerx>
 		<centery>80</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -1159,7 +1159,7 @@
 		<ID>106</ID>
 		<centerx>300</centerx>
 		<centery>80</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -1170,7 +1170,7 @@
 		<ID>107</ID>
 		<centerx>350</centerx>
 		<centery>80</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -1181,7 +1181,7 @@
 		<ID>108</ID>
 		<centerx>400</centerx>
 		<centery>80</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -1192,7 +1192,7 @@
 		<ID>109</ID>
 		<centerx>450</centerx>
 		<centery>80</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -1203,7 +1203,7 @@
 		<ID>110</ID>
 		<centerx>500</centerx>
 		<centery>80</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -1212,7 +1212,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>111</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>100</centery>
 		<centerz>0</centerz>
 		<directionx>1</directionx>
@@ -1223,7 +1223,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>112</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>100</centery>
 		<centerz>50</centerz>
 		<directionx>1</directionx>
@@ -1234,7 +1234,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>113</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>100</centery>
 		<centerz>100</centerz>
 		<directionx>1</directionx>
@@ -1245,7 +1245,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>114</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>100</centery>
 		<centerz>150</centerz>
 		<directionx>1</directionx>
@@ -1256,7 +1256,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>115</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>100</centery>
 		<centerz>200</centerz>
 		<directionx>1</directionx>
@@ -1267,7 +1267,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>116</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>100</centery>
 		<centerz>250</centerz>
 		<directionx>1</directionx>
@@ -1278,7 +1278,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>117</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>100</centery>
 		<centerz>300</centerz>
 		<directionx>1</directionx>
@@ -1289,7 +1289,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>118</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>100</centery>
 		<centerz>350</centerz>
 		<directionx>1</directionx>
@@ -1300,7 +1300,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>119</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>100</centery>
 		<centerz>400</centerz>
 		<directionx>1</directionx>
@@ -1311,7 +1311,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>120</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>100</centery>
 		<centerz>450</centerz>
 		<directionx>1</directionx>
@@ -1322,7 +1322,7 @@
 	</Cylinder>
 	<Cylinder>
 		<ID>121</ID>
-		<centerx>0</centerx>
+		<centerx>250.0</centerx>
 		<centery>100</centery>
 		<centerz>500</centerz>
 		<directionx>1</directionx>
@@ -1335,7 +1335,7 @@
 		<ID>122</ID>
 		<centerx>0</centerx>
 		<centery>100</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -1346,7 +1346,7 @@
 		<ID>123</ID>
 		<centerx>50</centerx>
 		<centery>100</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -1357,7 +1357,7 @@
 		<ID>124</ID>
 		<centerx>100</centerx>
 		<centery>100</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -1368,7 +1368,7 @@
 		<ID>125</ID>
 		<centerx>150</centerx>
 		<centery>100</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -1379,7 +1379,7 @@
 		<ID>126</ID>
 		<centerx>200</centerx>
 		<centery>100</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -1390,7 +1390,7 @@
 		<ID>127</ID>
 		<centerx>250</centerx>
 		<centery>100</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -1401,7 +1401,7 @@
 		<ID>128</ID>
 		<centerx>300</centerx>
 		<centery>100</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -1412,7 +1412,7 @@
 		<ID>129</ID>
 		<centerx>350</centerx>
 		<centery>100</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -1423,7 +1423,7 @@
 		<ID>130</ID>
 		<centerx>400</centerx>
 		<centery>100</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -1434,7 +1434,7 @@
 		<ID>131</ID>
 		<centerx>450</centerx>
 		<centery>100</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -1445,7 +1445,7 @@
 		<ID>132</ID>
 		<centerx>500</centerx>
 		<centery>100</centery>
-		<centerz>0</centerz>
+		<centerz>250.0</centerz>
 		<directionx>0</directionx>
 		<directiony>0</directiony>
 		<directionz>1</directionz>
@@ -1455,7 +1455,7 @@
 	<Cylinder>
 		<ID>133</ID>
 		<centerx>0</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>0</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -1466,7 +1466,7 @@
 	<Cylinder>
 		<ID>134</ID>
 		<centerx>50</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>0</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -1477,7 +1477,7 @@
 	<Cylinder>
 		<ID>135</ID>
 		<centerx>100</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>0</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -1488,7 +1488,7 @@
 	<Cylinder>
 		<ID>136</ID>
 		<centerx>150</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>0</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -1499,7 +1499,7 @@
 	<Cylinder>
 		<ID>137</ID>
 		<centerx>200</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>0</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -1510,7 +1510,7 @@
 	<Cylinder>
 		<ID>138</ID>
 		<centerx>250</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>0</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -1521,7 +1521,7 @@
 	<Cylinder>
 		<ID>139</ID>
 		<centerx>300</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>0</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -1532,7 +1532,7 @@
 	<Cylinder>
 		<ID>140</ID>
 		<centerx>350</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>0</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -1543,7 +1543,7 @@
 	<Cylinder>
 		<ID>141</ID>
 		<centerx>400</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>0</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -1554,7 +1554,7 @@
 	<Cylinder>
 		<ID>142</ID>
 		<centerx>450</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>0</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -1565,7 +1565,7 @@
 	<Cylinder>
 		<ID>143</ID>
 		<centerx>500</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>0</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -1576,7 +1576,7 @@
 	<Cylinder>
 		<ID>144</ID>
 		<centerx>0</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>50</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -1587,7 +1587,7 @@
 	<Cylinder>
 		<ID>145</ID>
 		<centerx>50</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>50</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -1598,7 +1598,7 @@
 	<Cylinder>
 		<ID>146</ID>
 		<centerx>100</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>50</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -1609,7 +1609,7 @@
 	<Cylinder>
 		<ID>147</ID>
 		<centerx>150</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>50</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -1620,7 +1620,7 @@
 	<Cylinder>
 		<ID>148</ID>
 		<centerx>200</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>50</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -1631,7 +1631,7 @@
 	<Cylinder>
 		<ID>149</ID>
 		<centerx>250</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>50</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -1642,7 +1642,7 @@
 	<Cylinder>
 		<ID>150</ID>
 		<centerx>300</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>50</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -1653,7 +1653,7 @@
 	<Cylinder>
 		<ID>151</ID>
 		<centerx>350</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>50</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -1664,7 +1664,7 @@
 	<Cylinder>
 		<ID>152</ID>
 		<centerx>400</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>50</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -1675,7 +1675,7 @@
 	<Cylinder>
 		<ID>153</ID>
 		<centerx>450</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>50</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -1686,7 +1686,7 @@
 	<Cylinder>
 		<ID>154</ID>
 		<centerx>500</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>50</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -1697,7 +1697,7 @@
 	<Cylinder>
 		<ID>155</ID>
 		<centerx>0</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>100</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -1708,7 +1708,7 @@
 	<Cylinder>
 		<ID>156</ID>
 		<centerx>50</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>100</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -1719,7 +1719,7 @@
 	<Cylinder>
 		<ID>157</ID>
 		<centerx>100</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>100</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -1730,7 +1730,7 @@
 	<Cylinder>
 		<ID>158</ID>
 		<centerx>150</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>100</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -1741,7 +1741,7 @@
 	<Cylinder>
 		<ID>159</ID>
 		<centerx>200</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>100</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -1752,7 +1752,7 @@
 	<Cylinder>
 		<ID>160</ID>
 		<centerx>250</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>100</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -1763,7 +1763,7 @@
 	<Cylinder>
 		<ID>161</ID>
 		<centerx>300</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>100</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -1774,7 +1774,7 @@
 	<Cylinder>
 		<ID>162</ID>
 		<centerx>350</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>100</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -1785,7 +1785,7 @@
 	<Cylinder>
 		<ID>163</ID>
 		<centerx>400</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>100</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -1796,7 +1796,7 @@
 	<Cylinder>
 		<ID>164</ID>
 		<centerx>450</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>100</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -1807,7 +1807,7 @@
 	<Cylinder>
 		<ID>165</ID>
 		<centerx>500</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>100</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -1818,7 +1818,7 @@
 	<Cylinder>
 		<ID>166</ID>
 		<centerx>0</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>150</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -1829,7 +1829,7 @@
 	<Cylinder>
 		<ID>167</ID>
 		<centerx>50</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>150</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -1840,7 +1840,7 @@
 	<Cylinder>
 		<ID>168</ID>
 		<centerx>100</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>150</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -1851,7 +1851,7 @@
 	<Cylinder>
 		<ID>169</ID>
 		<centerx>150</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>150</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -1862,7 +1862,7 @@
 	<Cylinder>
 		<ID>170</ID>
 		<centerx>200</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>150</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -1873,7 +1873,7 @@
 	<Cylinder>
 		<ID>171</ID>
 		<centerx>250</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>150</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -1884,7 +1884,7 @@
 	<Cylinder>
 		<ID>172</ID>
 		<centerx>300</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>150</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -1895,7 +1895,7 @@
 	<Cylinder>
 		<ID>173</ID>
 		<centerx>350</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>150</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -1906,7 +1906,7 @@
 	<Cylinder>
 		<ID>174</ID>
 		<centerx>400</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>150</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -1917,7 +1917,7 @@
 	<Cylinder>
 		<ID>175</ID>
 		<centerx>450</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>150</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -1928,7 +1928,7 @@
 	<Cylinder>
 		<ID>176</ID>
 		<centerx>500</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>150</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -1939,7 +1939,7 @@
 	<Cylinder>
 		<ID>177</ID>
 		<centerx>0</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>200</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -1950,7 +1950,7 @@
 	<Cylinder>
 		<ID>178</ID>
 		<centerx>50</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>200</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -1961,7 +1961,7 @@
 	<Cylinder>
 		<ID>179</ID>
 		<centerx>100</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>200</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -1972,7 +1972,7 @@
 	<Cylinder>
 		<ID>180</ID>
 		<centerx>150</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>200</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -1983,7 +1983,7 @@
 	<Cylinder>
 		<ID>181</ID>
 		<centerx>200</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>200</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -1994,7 +1994,7 @@
 	<Cylinder>
 		<ID>182</ID>
 		<centerx>250</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>200</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2005,7 +2005,7 @@
 	<Cylinder>
 		<ID>183</ID>
 		<centerx>300</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>200</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2016,7 +2016,7 @@
 	<Cylinder>
 		<ID>184</ID>
 		<centerx>350</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>200</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2027,7 +2027,7 @@
 	<Cylinder>
 		<ID>185</ID>
 		<centerx>400</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>200</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2038,7 +2038,7 @@
 	<Cylinder>
 		<ID>186</ID>
 		<centerx>450</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>200</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2049,7 +2049,7 @@
 	<Cylinder>
 		<ID>187</ID>
 		<centerx>500</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>200</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2060,7 +2060,7 @@
 	<Cylinder>
 		<ID>188</ID>
 		<centerx>0</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>250</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2071,7 +2071,7 @@
 	<Cylinder>
 		<ID>189</ID>
 		<centerx>50</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>250</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2082,7 +2082,7 @@
 	<Cylinder>
 		<ID>190</ID>
 		<centerx>100</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>250</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2093,7 +2093,7 @@
 	<Cylinder>
 		<ID>191</ID>
 		<centerx>150</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>250</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2104,7 +2104,7 @@
 	<Cylinder>
 		<ID>192</ID>
 		<centerx>200</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>250</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2115,7 +2115,7 @@
 	<Cylinder>
 		<ID>193</ID>
 		<centerx>250</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>250</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2126,7 +2126,7 @@
 	<Cylinder>
 		<ID>194</ID>
 		<centerx>300</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>250</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2137,7 +2137,7 @@
 	<Cylinder>
 		<ID>195</ID>
 		<centerx>350</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>250</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2148,7 +2148,7 @@
 	<Cylinder>
 		<ID>196</ID>
 		<centerx>400</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>250</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2159,7 +2159,7 @@
 	<Cylinder>
 		<ID>197</ID>
 		<centerx>450</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>250</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2170,7 +2170,7 @@
 	<Cylinder>
 		<ID>198</ID>
 		<centerx>500</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>250</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2181,7 +2181,7 @@
 	<Cylinder>
 		<ID>199</ID>
 		<centerx>0</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>300</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2192,7 +2192,7 @@
 	<Cylinder>
 		<ID>200</ID>
 		<centerx>50</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>300</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2203,7 +2203,7 @@
 	<Cylinder>
 		<ID>201</ID>
 		<centerx>100</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>300</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2214,7 +2214,7 @@
 	<Cylinder>
 		<ID>202</ID>
 		<centerx>150</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>300</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2225,7 +2225,7 @@
 	<Cylinder>
 		<ID>203</ID>
 		<centerx>200</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>300</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2236,7 +2236,7 @@
 	<Cylinder>
 		<ID>204</ID>
 		<centerx>250</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>300</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2247,7 +2247,7 @@
 	<Cylinder>
 		<ID>205</ID>
 		<centerx>300</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>300</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2258,7 +2258,7 @@
 	<Cylinder>
 		<ID>206</ID>
 		<centerx>350</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>300</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2269,7 +2269,7 @@
 	<Cylinder>
 		<ID>207</ID>
 		<centerx>400</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>300</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2280,7 +2280,7 @@
 	<Cylinder>
 		<ID>208</ID>
 		<centerx>450</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>300</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2291,7 +2291,7 @@
 	<Cylinder>
 		<ID>209</ID>
 		<centerx>500</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>300</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2302,7 +2302,7 @@
 	<Cylinder>
 		<ID>210</ID>
 		<centerx>0</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>350</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2313,7 +2313,7 @@
 	<Cylinder>
 		<ID>211</ID>
 		<centerx>50</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>350</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2324,7 +2324,7 @@
 	<Cylinder>
 		<ID>212</ID>
 		<centerx>100</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>350</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2335,7 +2335,7 @@
 	<Cylinder>
 		<ID>213</ID>
 		<centerx>150</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>350</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2346,7 +2346,7 @@
 	<Cylinder>
 		<ID>214</ID>
 		<centerx>200</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>350</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2357,7 +2357,7 @@
 	<Cylinder>
 		<ID>215</ID>
 		<centerx>250</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>350</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2368,7 +2368,7 @@
 	<Cylinder>
 		<ID>216</ID>
 		<centerx>300</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>350</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2379,7 +2379,7 @@
 	<Cylinder>
 		<ID>217</ID>
 		<centerx>350</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>350</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2390,7 +2390,7 @@
 	<Cylinder>
 		<ID>218</ID>
 		<centerx>400</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>350</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2401,7 +2401,7 @@
 	<Cylinder>
 		<ID>219</ID>
 		<centerx>450</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>350</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2412,7 +2412,7 @@
 	<Cylinder>
 		<ID>220</ID>
 		<centerx>500</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>350</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2423,7 +2423,7 @@
 	<Cylinder>
 		<ID>221</ID>
 		<centerx>0</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>400</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2434,7 +2434,7 @@
 	<Cylinder>
 		<ID>222</ID>
 		<centerx>50</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>400</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2445,7 +2445,7 @@
 	<Cylinder>
 		<ID>223</ID>
 		<centerx>100</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>400</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2456,7 +2456,7 @@
 	<Cylinder>
 		<ID>224</ID>
 		<centerx>150</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>400</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2467,7 +2467,7 @@
 	<Cylinder>
 		<ID>225</ID>
 		<centerx>200</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>400</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2478,7 +2478,7 @@
 	<Cylinder>
 		<ID>226</ID>
 		<centerx>250</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>400</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2489,7 +2489,7 @@
 	<Cylinder>
 		<ID>227</ID>
 		<centerx>300</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>400</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2500,7 +2500,7 @@
 	<Cylinder>
 		<ID>228</ID>
 		<centerx>350</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>400</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2511,7 +2511,7 @@
 	<Cylinder>
 		<ID>229</ID>
 		<centerx>400</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>400</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2522,7 +2522,7 @@
 	<Cylinder>
 		<ID>230</ID>
 		<centerx>450</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>400</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2533,7 +2533,7 @@
 	<Cylinder>
 		<ID>231</ID>
 		<centerx>500</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>400</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2544,7 +2544,7 @@
 	<Cylinder>
 		<ID>232</ID>
 		<centerx>0</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>450</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2555,7 +2555,7 @@
 	<Cylinder>
 		<ID>233</ID>
 		<centerx>50</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>450</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2566,7 +2566,7 @@
 	<Cylinder>
 		<ID>234</ID>
 		<centerx>100</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>450</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2577,7 +2577,7 @@
 	<Cylinder>
 		<ID>235</ID>
 		<centerx>150</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>450</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2588,7 +2588,7 @@
 	<Cylinder>
 		<ID>236</ID>
 		<centerx>200</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>450</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2599,7 +2599,7 @@
 	<Cylinder>
 		<ID>237</ID>
 		<centerx>250</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>450</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2610,7 +2610,7 @@
 	<Cylinder>
 		<ID>238</ID>
 		<centerx>300</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>450</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2621,7 +2621,7 @@
 	<Cylinder>
 		<ID>239</ID>
 		<centerx>350</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>450</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2632,7 +2632,7 @@
 	<Cylinder>
 		<ID>240</ID>
 		<centerx>400</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>450</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2643,7 +2643,7 @@
 	<Cylinder>
 		<ID>241</ID>
 		<centerx>450</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>450</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2654,7 +2654,7 @@
 	<Cylinder>
 		<ID>242</ID>
 		<centerx>500</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>450</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2665,7 +2665,7 @@
 	<Cylinder>
 		<ID>243</ID>
 		<centerx>0</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>500</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2676,7 +2676,7 @@
 	<Cylinder>
 		<ID>244</ID>
 		<centerx>50</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>500</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2687,7 +2687,7 @@
 	<Cylinder>
 		<ID>245</ID>
 		<centerx>100</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>500</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2698,7 +2698,7 @@
 	<Cylinder>
 		<ID>246</ID>
 		<centerx>150</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>500</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2709,7 +2709,7 @@
 	<Cylinder>
 		<ID>247</ID>
 		<centerx>200</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>500</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2720,7 +2720,7 @@
 	<Cylinder>
 		<ID>248</ID>
 		<centerx>250</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>500</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2731,7 +2731,7 @@
 	<Cylinder>
 		<ID>249</ID>
 		<centerx>300</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>500</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2742,7 +2742,7 @@
 	<Cylinder>
 		<ID>250</ID>
 		<centerx>350</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>500</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2753,7 +2753,7 @@
 	<Cylinder>
 		<ID>251</ID>
 		<centerx>400</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>500</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2764,7 +2764,7 @@
 	<Cylinder>
 		<ID>252</ID>
 		<centerx>450</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>500</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>
@@ -2775,7 +2775,7 @@
 	<Cylinder>
 		<ID>253</ID>
 		<centerx>500</centerx>
-		<centery>0</centery>
+		<centery>50.0</centery>
 		<centerz>500</centerz>
 		<directionx>0</directionx>
 		<directiony>1</directiony>

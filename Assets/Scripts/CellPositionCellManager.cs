@@ -18,7 +18,7 @@ public class CellPositionCellManager : MonoBehaviour
     public TextMeshProUGUI bioticksTimerText;
 
     private List<CellPositionCSVReader.CSVData> dataList = new List<CellPositionCSVReader.CSVData>();
-    private string csvFilePath = "Assets/Resources/Data/CellPosition.csv";
+    private string csvFilePath = "Assets/Resources/CellPosition.csv";
     private List<GameObject> spawnedCells = new List<GameObject>();
 
     void Start()
@@ -106,7 +106,9 @@ public class CellPositionCellManager : MonoBehaviour
 
     IEnumerator CheckForUpdates()
     {
-        while (true)
+        bool isDataAvailable = true; // Flag to check if data is still available
+
+        while (isDataAvailable)
         {
             yield return new WaitForSeconds(1.0f / timeMultiplier);
 
@@ -119,10 +121,22 @@ public class CellPositionCellManager : MonoBehaviour
                 // Load the updated CSV data
                 LoadCSVData();
 
-                // Update cell positions for the current bioTick
-                UpdateCellPositions(currentBioTick);
+                // Check if there are updates available for the current bioTick
+                List<CellPositionCSVReader.CSVData> currentData = dataList.FindAll(data => data.bioTicks == currentBioTick);
+                if (currentData.Count > 0)
+                {
+                    // Update cell positions for the current bioTick
+                    UpdateCellPositions(currentBioTick);
+                }
+                else
+                {
+                    // If no data is found for the current bioTick, it means we've reached the end of the CSV data
+                    isDataAvailable = false; 
+                    bioticksTimerText.text = "End of Simulation Data."; 
+                }
             }
         }
+        bioticksTimerText.text = "End of Simulation Data."; 
     }
 
     void UpdateCellPositions(int bioTick)

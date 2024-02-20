@@ -7,7 +7,7 @@ public class CellPositionCSVReader : MonoBehaviour
 {
     private List<CSVData> dataList = new List<CSVData>();
 
-    public string csvFilePath = "Assets/Resources/Data/CellPosition.csv"; // Define the full file path here
+    public string csvFilePath = "Assets/Resources/CellPosition.csv"; // Define the full file path here
 
     [System.Serializable]
     public class CSVData
