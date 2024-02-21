@@ -147,6 +147,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe332bb9c9da1c34c917d25c24dbed09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agentID: 0
+  textMeshPro: {fileID: 2926605394413810676}
 --- !u!1 &3560615149689899922
 GameObject:
   m_ObjectHideFlags: 0
