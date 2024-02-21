@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using UnityEngine;
 
-public class CellPositionCSVReader : MonoBehaviour
+public class CSVReader : MonoBehaviour
 {
     public string csvFilePath = "Assets/Resources/CellPosition.csv";
 

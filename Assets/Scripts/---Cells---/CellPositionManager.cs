@@ -6,11 +6,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class CellPositionCellManager : MonoBehaviour
+public class CellPositionManager : MonoBehaviour
 {
     [Header("Cells")]
     [SerializeField] private GameObject cellPrefab;
     [SerializeField] private Material[] interactionMaterials;
+    [SerializeField] private List<GameObject> spawnedCells = new List<GameObject>();
 
     [Header("Timer")]
     [SerializeField] private int currentBioTick = 0;
@@ -18,11 +19,10 @@ public class CellPositionCellManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI bioticksTimerText;
 
     [Header("Misc")]
-    [SerializeField] private CellPositionCSVReader csvReader; // Reference to the CSVReader component
+    [SerializeField] private CSVReader csvReader; // Reference to the CSVReader component
     [SerializeField] private Button spawnCellsButton;
     [SerializeField] private Button startSimulationButton; // Assign in the Unity Inspector
 
-    private List<GameObject> spawnedCells = new List<GameObject>();
 
 
     void Start()
@@ -51,23 +51,23 @@ public class CellPositionCellManager : MonoBehaviour
     IEnumerator PreloadDataAndInitializeCells()
     {
         var agentIDs = csvReader.GetAllAgentIDs();
-        int cellsPerBatch = 10; // Adjust based on performance
+        int cellsPerBatch = 1000; // Adjust based on performance
 
         for (int i = 0; i < agentIDs.Count; i++)
         {
             int agentID = agentIDs[i];
             GameObject cellObject = FindOrCreateCell(agentID);
-            CellBehaviour cellBehaviour = cellObject.GetComponent<CellBehaviour>();
+            CellManager cell = cellObject.GetComponent<CellManager>();
             var dataTimeline = csvReader.GetDataForAgent(agentID);
             if (dataTimeline.Count > 0)
             {
                 // Pass the first data entry as the initial state
-                cellBehaviour.Initialize(agentID, interactionMaterials, dataTimeline[0]);
+                cell.Initialize(agentID, interactionMaterials, dataTimeline[0]);
             }
 
             foreach (var dataEntry in dataTimeline)
             {
-                cellBehaviour.AddData(dataEntry);
+                cell.AddData(dataEntry);
             }
 
             if ((i + 1) % cellsPerBatch == 0 || i == agentIDs.Count - 1)
@@ -85,7 +85,7 @@ public class CellPositionCellManager : MonoBehaviour
         // Check if the cell already exists
         foreach (GameObject cell in spawnedCells)
         {
-            if (cell.GetComponent<CellBehaviour>().agentID == agentID)
+            if (cell.GetComponent<CellManager>().agentID == agentID)
             {
                 return cell;
             }
@@ -93,7 +93,7 @@ public class CellPositionCellManager : MonoBehaviour
 
         // If not, create a new cell
         GameObject newCell = Instantiate(cellPrefab, transform);
-        newCell.GetComponent<CellBehaviour>().agentID = agentID;
+        newCell.GetComponent<CellManager>().agentID = agentID;
         spawnedCells.Add(newCell);
         return newCell;
     }
@@ -108,8 +108,8 @@ public class CellPositionCellManager : MonoBehaviour
 
             foreach (GameObject cellObject in spawnedCells)
             {
-                CellBehaviour cellBehaviour = cellObject.GetComponent<CellBehaviour>();
-                cellBehaviour.UpdateState(currentBioTick, interactionMaterials);
+                CellManager cellmanager = cellObject.GetComponent<CellManager>();
+                cellmanager.UpdateState(currentBioTick, interactionMaterials);
             }
         }
     }

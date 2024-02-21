@@ -650,7 +650,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 762604836}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d6f551444305b9478ce687c4a403da6, type: 3}
+  m_Script: {fileID: 11500000, guid: 6863e229879bbcc438c96fc6fcee0189, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cellPrefab: {fileID: 1580431748523265128, guid: 0bda9ade7c71aea1c93acc1bb737527d, type: 3}
@@ -659,6 +659,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 1de8867a24aef9028844be9e064f766d, type: 2}
   - {fileID: 2100000, guid: 178441e9717a54000bd12a68bb6d571a, type: 2}
   - {fileID: 2100000, guid: 68d518bb35b2841518c990781c25c80b, type: 2}
+  spawnedCells: []
   currentBioTick: 0
   timeMultiplier: 20
   bioticksTimerText: {fileID: 772562616}
@@ -1100,7 +1101,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1103232242}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71c82e04380b003448b08a48685a983f, type: 3}
+  m_Script: {fileID: 11500000, guid: fbc78982f2145554790d06394945a75f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   csvFilePath: Assets/Resources/CellPosition.csv
