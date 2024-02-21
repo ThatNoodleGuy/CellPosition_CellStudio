@@ -390,9 +390,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 178441e9717a54000bd12a68bb6d571a, type: 2}
   - {fileID: 2100000, guid: 68d518bb35b2841518c990781c25c80b, type: 2}
   currentBioTick: 0
-  timeMultiplier: 1
+  timeMultiplier: 20
   timeUpdateCheck: 50
   bioticksTimerText: {fileID: 772562616}
+  csvReader: {fileID: 1103232243}
 --- !u!1 &772562614
 GameObject:
   m_ObjectHideFlags: 0
@@ -698,6 +699,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c82e04380b003448b08a48685a983f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  batchSize: 20000
   csvFilePath: Assets/Resources/CellPosition.csv
 --- !u!4 &1103232244
 Transform:
