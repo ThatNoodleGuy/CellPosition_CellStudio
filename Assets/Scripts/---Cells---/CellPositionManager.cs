@@ -102,16 +102,30 @@ public class CellPositionManager : MonoBehaviour
 
     IEnumerator CheckForUpdates()
     {
+        float timeAccumulator = 0f; // Accumulate time here
+
         while (true)
         {
-            yield return new WaitForSeconds(1.0f / timeMultiplier);
-            currentBioTick++;
-            onScreenText.text = "BioTick: " + currentBioTick;
+            // Wait for the next frame
+            yield return null;
 
-            foreach (GameObject cellObject in spawnedCells)
+            // Accumulate delta time multiplied by the timeMultiplier
+            timeAccumulator += Time.deltaTime * timeMultiplier;
+
+            // Check if at least one whole bio tick has passed
+            while (timeAccumulator >= 1.0f)
             {
-                CellManager cellmanager = cellObject.GetComponent<CellManager>();
-                cellmanager.UpdateState(currentBioTick, interactionMaterials);
+                currentBioTick++;
+                timeAccumulator -= 1.0f; // Decrease accumulator by one tick, handling multiple ticks if necessary
+
+                onScreenText.text = "BioTick: " + currentBioTick;
+
+                // Update each cell for the currentBioTick
+                foreach (GameObject cellObject in spawnedCells)
+                {
+                    CellManager cellManager = cellObject.GetComponent<CellManager>();
+                    cellManager.UpdateState(currentBioTick, interactionMaterials);
+                }
             }
         }
     }
