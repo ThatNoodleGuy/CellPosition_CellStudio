@@ -16,21 +16,22 @@ public class CellPositionManager : MonoBehaviour
     [Header("Timer")]
     [SerializeField] private int currentBioTick = 0;
     [SerializeField] private float timeMultiplier = 1.0f; // Adjust the speed of time in your simulation
-    [SerializeField] private TextMeshProUGUI bioticksTimerText;
 
     [Header("Misc")]
     [SerializeField] private CSVReader csvReader; // Reference to the CSVReader component
     [SerializeField] private Button spawnCellsButton;
     [SerializeField] private Button startSimulationButton; // Assign in the Unity Inspector
-
-
+    [SerializeField] private TextMeshProUGUI onScreenText;
 
     void Start()
     {
+        onScreenText.text = "Preloading Data, Please Wait...";
+
         spawnCellsButton.gameObject.SetActive(false);
         startSimulationButton.gameObject.SetActive(false); // Ensure the start button is also hidden initially
         StartCoroutine(csvReader.PreloadAllData(() =>
         {
+            onScreenText.text = "Preloading Data Complete, Please Spawn Cells In...";
             spawnCellsButton.gameObject.SetActive(true);
         }));
     }
@@ -38,8 +39,8 @@ public class CellPositionManager : MonoBehaviour
     public void OnSpawnCellsButtonClicked()
     {
         spawnCellsButton.gameObject.SetActive(false); // Hide the spawn button
+        onScreenText.text = "Please Wait...";
         StartCoroutine(PreloadDataAndInitializeCells());
-        // Don't start the CheckForUpdates coroutine here
     }
 
     public void OnStartSimulationButtonClicked()
@@ -51,7 +52,7 @@ public class CellPositionManager : MonoBehaviour
     IEnumerator PreloadDataAndInitializeCells()
     {
         var agentIDs = csvReader.GetAllAgentIDs();
-        int cellsPerBatch = 1000; // Adjust based on performance
+        int cellsPerBatch = 500; // Adjust based on performance
 
         for (int i = 0; i < agentIDs.Count; i++)
         {
@@ -77,6 +78,7 @@ public class CellPositionManager : MonoBehaviour
         }
 
         // After all cells are initialized
+        onScreenText.text = "Simulation Is Ready, Press Start";
         startSimulationButton.gameObject.SetActive(true);
     }
 
@@ -104,7 +106,7 @@ public class CellPositionManager : MonoBehaviour
         {
             yield return new WaitForSeconds(1.0f / timeMultiplier);
             currentBioTick++;
-            bioticksTimerText.text = "BioTick: " + currentBioTick;
+            onScreenText.text = "BioTick: " + currentBioTick;
 
             foreach (GameObject cellObject in spawnedCells)
             {
@@ -112,10 +114,5 @@ public class CellPositionManager : MonoBehaviour
                 cellmanager.UpdateState(currentBioTick, interactionMaterials);
             }
         }
-    }
-
-    void Update()
-    {
-        bioticksTimerText.text = "BioTick: " + currentBioTick;
     }
 }

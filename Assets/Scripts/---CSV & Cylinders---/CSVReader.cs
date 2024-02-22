@@ -17,6 +17,7 @@ public class CSVReader : MonoBehaviour
         public float posX, posY, posZ;
         public int interactionType;
         public int otherCellID;
+        public string cellType;
     }
 
     // Add a dictionary to hold preloaded data organized by agentID
@@ -24,7 +25,6 @@ public class CSVReader : MonoBehaviour
 
     public IEnumerator PreloadAllData(Action onCompleted = null)
     {
-        Debug.Log("Starting data preload...");
         if (!File.Exists(csvFilePath))
         {
             Debug.LogError("CSV file not found at path: " + csvFilePath);
@@ -38,7 +38,7 @@ public class CSVReader : MonoBehaviour
         {
             string line = lines[i];
             string[] values = line.Split(',');
-            if (values.Length >= 7)
+            if (values.Length >= 8)
             {
                 CSVData data = new CSVData();
                 if (int.TryParse(values[0].Trim(), out data.agentID) &&
@@ -49,6 +49,9 @@ public class CSVReader : MonoBehaviour
                     int.TryParse(values[5].Trim(), out data.interactionType) &&
                     int.TryParse(values[6].Trim(), out data.otherCellID))
                 {
+                    // Direct assignment for strings, no need for TryParse
+                    data.cellType = values[7].Trim();
+
                     if (!preloadedData.ContainsKey(data.agentID))
                     {
                         preloadedData[data.agentID] = new List<CSVData>();
@@ -64,7 +67,6 @@ public class CSVReader : MonoBehaviour
             }
         }
 
-        Debug.Log("Data preloading completed.");
         onCompleted?.Invoke(); // Invoke the completion callback
     }
 
