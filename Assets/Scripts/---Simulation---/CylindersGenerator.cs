@@ -98,7 +98,7 @@ public class CylindersGenerator : MonoBehaviour
 
                 // Assign name with ID
                 int id = int.Parse(cylinderNode.SelectSingleNode("ID").InnerText);
-                cylinder.name = "Cylinder_" + id;
+                cylinder.name = "Cylinder_" + (id - 1);
 
                 cylinder.transform.parent = transform;
 
