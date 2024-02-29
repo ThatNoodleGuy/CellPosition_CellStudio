@@ -14,15 +14,21 @@ public class CellManager : MonoBehaviour
     public int agentID;
     public string cellType;
     public TextMeshPro cellTypeText;
+    public int cellState;
+
+    [SerializeField] private string interaction;
+
     private List<CSVReader.CSVData> cellData = new List<CSVReader.CSVData>();
     private int currentDataIndex = 0;
+    private bool sizeHasBeenSet = false; // Flag to track if size has been set
+    private int interactionType; // Visible in the Unity Editor
 
     private Dictionary<string, SizeRange> cellTypeSizeRanges = new Dictionary<string, SizeRange>()
-{
-    {"Monocyte", new SizeRange { minSize = new Vector3(7f, 7f, 7f), maxSize = new Vector3(9f, 9f, 9f) }},
-    {"TCell", new SizeRange { minSize = new Vector3(4f, 4f, 4f), maxSize = new Vector3(6f, 6f, 6f) }},
-    // Add other cell types and their size ranges here
-};
+    {
+        {"Monocyte", new SizeRange { minSize = new Vector3(7f, 7f, 7f), maxSize = new Vector3(9f, 9f, 9f) }},
+        {"TCell", new SizeRange { minSize = new Vector3(4f, 4f, 4f), maxSize = new Vector3(6f, 6f, 6f) }},
+        // Additional cell types and their size ranges
+    };
 
     public void Initialize(int agentID, Material[] interactionMaterials, CSVReader.CSVData initialData = null)
     {
@@ -30,6 +36,12 @@ public class CellManager : MonoBehaviour
         if (initialData != null)
         {
             SetCellProperties(initialData, interactionMaterials);
+            // Ensure the size is set only once upon initialization
+            if (!sizeHasBeenSet)
+            {
+                SetCellSize(initialData.cellType);
+                sizeHasBeenSet = true;
+            }
         }
     }
 
@@ -42,7 +54,10 @@ public class CellManager : MonoBehaviour
     {
         gameObject.name = "Cell_" + data.agentID;
         cellType = data.cellType;
+        this.interactionType = data.interactionType; // Update interaction type here
+        interaction = data.interactionType.ToString();
         transform.position = new Vector3(data.posX, data.posY, data.posZ);
+        cellState = data.cellState;
 
         if (interactionMaterials != null && data.interactionType >= 0 && data.interactionType < interactionMaterials.Length)
         {
@@ -54,7 +69,16 @@ public class CellManager : MonoBehaviour
             cellTypeText.text = cellType;
         }
 
-        // Set random scale based on cell type
+        // Only set size if it hasn't been set yet
+        if (!sizeHasBeenSet)
+        {
+            SetCellSize(cellType);
+            sizeHasBeenSet = true;
+        }
+    }
+
+    private void SetCellSize(string cellType)
+    {
         if (cellTypeSizeRanges.TryGetValue(cellType, out SizeRange sizeRange))
         {
             Vector3 randomSize = new Vector3(

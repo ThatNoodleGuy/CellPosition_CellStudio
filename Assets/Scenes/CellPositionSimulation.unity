@@ -811,7 +811,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 68d518bb35b2841518c990781c25c80b, type: 2}
   spawnedCells: []
   currentBioTick: 0
-  timeMultiplier: 2
+  timeMultiplier: 1
   csvReader: {fileID: 1103232243}
   spawnCellsButton: {fileID: 835520868}
   startSimulationButton: {fileID: 2010767673}
