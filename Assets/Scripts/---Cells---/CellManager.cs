@@ -14,7 +14,8 @@ public class CellManager : MonoBehaviour
     public int agentID;
     public string cellType;
     public TextMeshPro cellTypeText;
-    public int cellState;
+    public int cellLifeState;
+    public int cylinderInteraction;
 
     [SerializeField] private string interaction;
 
@@ -57,7 +58,8 @@ public class CellManager : MonoBehaviour
         this.interactionType = data.interactionType; // Update interaction type here
         interaction = data.interactionType.ToString();
         transform.position = new Vector3(data.posX, data.posY, data.posZ);
-        cellState = data.cellState;
+        cellLifeState = data.cellLifeState;
+        cylinderInteraction = data.cylinderInteraction;
 
         if (interactionMaterials != null && data.interactionType >= 0 && data.interactionType < interactionMaterials.Length)
         {
@@ -100,5 +102,10 @@ public class CellManager : MonoBehaviour
             SetCellProperties(cellData[currentDataIndex], interactionMaterials);
             currentDataIndex++;
         }
+    }
+
+    public int GetCellLifeState()
+    {
+        return cellLifeState;
     }
 }

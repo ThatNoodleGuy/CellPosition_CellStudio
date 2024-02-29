@@ -12,6 +12,7 @@ public class CellPositionManager : MonoBehaviour
     [SerializeField] private GameObject cellPrefab;
     [SerializeField] private Material[] interactionMaterials;
     [SerializeField] private List<GameObject> spawnedCells = new List<GameObject>();
+    [SerializeField] private Material deadCellMaterial;
 
     [Header("Timer")]
     [SerializeField] private int currentBioTick = 0;
@@ -52,7 +53,7 @@ public class CellPositionManager : MonoBehaviour
     IEnumerator PreloadDataAndInitializeCells()
     {
         var agentIDs = csvReader.GetAllAgentIDs();
-        int cellsPerBatch = 500; // Adjust based on performance
+        int cellsPerBatch = 1000; // Adjust based on performance
 
         for (int i = 0; i < agentIDs.Count; i++)
         {
@@ -124,7 +125,14 @@ public class CellPositionManager : MonoBehaviour
                 foreach (GameObject cellObject in spawnedCells)
                 {
                     CellManager cellManager = cellObject.GetComponent<CellManager>();
-                    cellManager.UpdateState(currentBioTick, interactionMaterials);
+                    if (cellManager.GetCellLifeState() == 1)
+                    {
+                        cellManager.UpdateState(currentBioTick, interactionMaterials);
+                    }
+                    else
+                    {
+                        cellManager.gameObject.GetComponent<MeshRenderer>().material = deadCellMaterial;
+                    }
                 }
             }
         }

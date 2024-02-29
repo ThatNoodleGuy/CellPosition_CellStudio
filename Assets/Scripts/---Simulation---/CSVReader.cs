@@ -18,7 +18,8 @@ public class CSVReader : MonoBehaviour
         public int interactionType;
         public int otherCellID;
         public string cellType;
-        public int cellState;
+        public int cellLifeState;
+        public int cylinderInteraction;
     }
 
     // Add a dictionary to hold preloaded data organized by agentID
@@ -39,7 +40,7 @@ public class CSVReader : MonoBehaviour
         {
             string line = lines[i];
             string[] values = line.Split(',');
-            if (values.Length >= 9)
+            if (values.Length >= 10)
             {
                 CSVData data = new CSVData();
                 if (int.TryParse(values[0].Trim(), out data.agentID) &&
@@ -49,7 +50,8 @@ public class CSVReader : MonoBehaviour
                     float.TryParse(values[4].Trim(), out data.posZ) &&
                     int.TryParse(values[5].Trim(), out data.interactionType) &&
                     int.TryParse(values[6].Trim(), out data.otherCellID) &&
-                    int.TryParse(values[8].Trim(), out data.cellState))
+                    int.TryParse(values[8].Trim(), out data.cellLifeState) &&
+                    int.TryParse(values[9].Trim(), out data.cylinderInteraction))
                 {
                     // Direct assignment for strings, no need for TryParse
                     data.cellType = values[7].Trim();
