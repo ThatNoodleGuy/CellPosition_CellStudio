@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2905957097663704262}
+  - component: {fileID: 7638375677043085752}
   - component: {fileID: 1827024838252110822}
   - component: {fileID: 562266234695789834}
   - component: {fileID: 1874336689052066300}
   - component: {fileID: 6294256028409233950}
-  - component: {fileID: 7638375677043085752}
   m_Layer: 0
   m_Name: Agent
   m_TagString: Agent
@@ -37,6 +37,24 @@ Transform:
   - {fileID: 3703013477895042743}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7638375677043085752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1580431748523265128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4506d9e692a6dae4e9e2974d779c84eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentID: 0
+  cellType: 
+  cellTypeText: {fileID: 4756108589008789033}
+  cellLifeState: 0
+  cylinderInteraction: 0
+  interaction: 
 --- !u!33 &1827024838252110822
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -135,21 +153,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 1
---- !u!114 &7638375677043085752
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1580431748523265128}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4506d9e692a6dae4e9e2974d779c84eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agentID: 0
-  cellType: 
-  cellTypeText: {fileID: 4756108589008789033}
 --- !u!1 &3948411359127183423
 GameObject:
   m_ObjectHideFlags: 0

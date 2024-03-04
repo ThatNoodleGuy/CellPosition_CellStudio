@@ -125,13 +125,13 @@ public class CellPositionManager : MonoBehaviour
                 foreach (GameObject cellObject in spawnedCells)
                 {
                     CellManager cellManager = cellObject.GetComponent<CellManager>();
-                    if (cellManager.GetCellLifeState() == 1)
+                    if (cellManager.GetCellState() == "APOPTOSIS") // if cellState is 5 - #"APOPTOSIS"
                     {
-                        cellManager.UpdateState(currentBioTick, interactionMaterials);
+                        cellManager.gameObject.GetComponent<MeshRenderer>().material = deadCellMaterial;                       
                     }
                     else
                     {
-                        cellManager.gameObject.GetComponent<MeshRenderer>().material = deadCellMaterial;
+                        cellManager.UpdateState(currentBioTick, interactionMaterials);
                     }
                 }
             }
