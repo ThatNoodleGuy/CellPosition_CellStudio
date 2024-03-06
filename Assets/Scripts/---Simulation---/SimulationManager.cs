@@ -6,7 +6,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class CellPositionManager : MonoBehaviour
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
+public class SimulationManager : MonoBehaviour
 {
     [Header("Cells")]
     [SerializeField] private GameObject cellPrefab;
@@ -18,18 +22,27 @@ public class CellPositionManager : MonoBehaviour
     [SerializeField] private int currentBioTick = 0;
     [SerializeField] private float timeMultiplier = 1.0f; // Adjust the speed of time in your simulation
 
+    [Header("UI")]
+    [SerializeField] private Button spawnCellsButton;
+    [SerializeField] private Button startSimulationButton;
+    [SerializeField] private Button pauseSimulationButton;
+    [SerializeField] private Button resumeSimulationButton;
+    [SerializeField] private Button exitButton;
+    [SerializeField] private TextMeshProUGUI onScreenText;
+
     [Header("Misc")]
     [SerializeField] private CSVReader csvReader; // Reference to the CSVReader component
-    [SerializeField] private Button spawnCellsButton;
-    [SerializeField] private Button startSimulationButton; // Assign in the Unity Inspector
-    [SerializeField] private TextMeshProUGUI onScreenText;
 
     void Start()
     {
         onScreenText.text = "Preloading Data, Please Wait...";
 
+        exitButton.onClick.AddListener(ExitSimulation);
+
         spawnCellsButton.gameObject.SetActive(false);
-        startSimulationButton.gameObject.SetActive(false); // Ensure the start button is also hidden initially
+        startSimulationButton.gameObject.SetActive(false);
+        pauseSimulationButton.gameObject.SetActive(false);
+        resumeSimulationButton.gameObject.SetActive(false);
         StartCoroutine(csvReader.PreloadAllData(() =>
         {
             onScreenText.text = "Preloading Data Complete, Please Spawn Cells In...";
@@ -47,7 +60,9 @@ public class CellPositionManager : MonoBehaviour
     public void OnStartSimulationButtonClicked()
     {
         StartCoroutine(CheckForUpdates());
-        startSimulationButton.gameObject.SetActive(false); // Optionally hide the start button after clicking
+        startSimulationButton.gameObject.SetActive(false);
+        pauseSimulationButton.gameObject.SetActive(true);
+        resumeSimulationButton.gameObject.SetActive(false);
     }
 
     IEnumerator PreloadDataAndInitializeCells()
@@ -127,7 +142,7 @@ public class CellPositionManager : MonoBehaviour
                     CellManager cellManager = cellObject.GetComponent<CellManager>();
                     if (cellManager.GetCellState() == "APOPTOSIS") // if cellState is 5 - #"APOPTOSIS"
                     {
-                        cellManager.gameObject.GetComponent<MeshRenderer>().material = deadCellMaterial;                       
+                        cellManager.gameObject.GetComponent<MeshRenderer>().material = deadCellMaterial;
                     }
                     else
                     {
@@ -136,5 +151,28 @@ public class CellPositionManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void PauseSimulation()
+    {
+        timeMultiplier = 0;
+        pauseSimulationButton.gameObject.SetActive(false);
+        resumeSimulationButton.gameObject.SetActive(true);
+    }
+
+    public void ResumeSimulation()
+    {
+        timeMultiplier = 1.0f;
+        pauseSimulationButton.gameObject.SetActive(true);
+        resumeSimulationButton.gameObject.SetActive(false);
+    }
+
+    public void ExitSimulation()
+    {
+#if UNITY_EDITOR
+    UnityEditor.EditorApplication.isPlaying = false; // Exit play mode in Unity Editor
+#else
+        Application.Quit(); // Close the app in a standalone build
+#endif
     }
 }

@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public float moveSpeed = 5.0f; // Camera movement speed
-    public float rotationSpeed = 45.0f; // Camera rotation speed
-    public KeyCode resetRotationKey = KeyCode.R; // Key to reset camera rotation
+    [SerializeField] private float moveSpeed = 5.0f; // Camera movement speed
+    [SerializeField] private float rotationSpeed = 45.0f; // Camera rotation speed
+    [SerializeField] private KeyCode resetRotationKey = KeyCode.R; // Key to reset camera rotation
 
     private void Update()
     {

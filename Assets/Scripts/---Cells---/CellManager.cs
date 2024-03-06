@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class CellManager : MonoBehaviour
@@ -11,13 +12,20 @@ public class CellManager : MonoBehaviour
         public Vector3 maxSize;
     }
 
+    [Header("Cell Info")]
     public int agentID;
     public string cellType;
-    public TextMeshPro cellTypeText;
     public string cellState;
     public int cylinderInteraction;
 
     [SerializeField] private string interaction;
+
+    [Header("Cell UI")]
+    [SerializeField] private GameObject cellInfoPanel;
+    [SerializeField] private TextMeshProUGUI cellIdText;
+    [SerializeField] private TextMeshProUGUI cellTypeText;
+    [SerializeField] private TextMeshProUGUI cellStateText;
+    [SerializeField] private Button closeCellUIButton;
 
     private List<CSVReader.CSVData> cellData = new List<CSVReader.CSVData>();
     private int currentDataIndex = 0;
@@ -30,6 +38,31 @@ public class CellManager : MonoBehaviour
         {"TCell", new SizeRange { minSize = new Vector3(4f, 4f, 4f), maxSize = new Vector3(6f, 6f, 6f) }},
         // Additional cell types and their size ranges
     };
+
+    private void Start()
+    {
+        HideCellUI();
+        closeCellUIButton.onClick.AddListener(HideCellUI);
+    }
+
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0)) // Checks for left mouse click
+        {
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out hit, 100.0f)) // Raycasts to detect clicks on objects
+            {
+                CellManager clickedCell = hit.collider.GetComponent<CellManager>();
+                if (clickedCell != null)
+                {
+                    // If the hit object has a CellManager, show its info using its own method
+                    clickedCell.UpdateCellUI(clickedCell.agentID, clickedCell.cellType, clickedCell.cellState);
+                }
+            }
+        }
+    }
 
     public void Initialize(int agentID, Material[] interactionMaterials, CSVReader.CSVData initialData = null)
     {
@@ -64,11 +97,6 @@ public class CellManager : MonoBehaviour
         if (interactionMaterials != null && data.interactionType >= 0 && data.interactionType < interactionMaterials.Length)
         {
             GetComponent<Renderer>().material = interactionMaterials[data.interactionType];
-        }
-
-        if (cellTypeText != null)
-        {
-            cellTypeText.text = cellType;
         }
 
         // Only set size if it hasn't been set yet
@@ -107,5 +135,18 @@ public class CellManager : MonoBehaviour
     public string GetCellState()
     {
         return cellState;
+    }
+
+    public void UpdateCellUI(int agentID, string cellType, string cellState)
+    {
+        cellIdText.text = "ID: " + agentID;
+        cellTypeText.text = "Type: " + cellType;
+        cellStateText.text = "State: " + cellState;
+        cellInfoPanel.SetActive(true);
+    }
+
+    public void HideCellUI()
+    {
+        cellInfoPanel.SetActive(false);
     }
 }
