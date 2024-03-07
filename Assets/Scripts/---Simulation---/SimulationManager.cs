@@ -12,8 +12,6 @@ using UnityEditor;
 
 public class SimulationManager : MonoBehaviour
 {
-    public static event Action<int> OnBioTickUpdated;
-
     [Header("Cells")]
     [SerializeField] private GameObject cellPrefab;
     [SerializeField] private Material[] interactionMaterials;
@@ -34,22 +32,37 @@ public class SimulationManager : MonoBehaviour
 
     [Header("Misc")]
     [SerializeField] private CSVReader csvReader; // Reference to the CSVReader component
-/*
-    void OnEnable()
-    {
-        VoxelGridGenerator.OnDataLoadedComplete += HandleDataLoaded;
-    }
-
-    void OnDisable()
-    {
-        VoxelGridGenerator.OnDataLoadedComplete -= HandleDataLoaded;
-    }
 
     void HandleDataLoaded()
     {
-        
+        bool isCellDataLoaded = false;
+        bool isVoxelDataLoaded = false;
+
+        // Assuming csvReader is an instance of CSVReader
+        StartCoroutine(csvReader.PreloadCellPositionData(() =>
+        {
+            isCellDataLoaded = true;
+            CheckDataLoadingCompletion();
+        }));
+
+        StartCoroutine(csvReader.PreloadVoxelData(csvReader.moleculeCSVFilePath, () =>
+        {
+            isVoxelDataLoaded = true;
+            CheckDataLoadingCompletion();
+        }));
+
+        void CheckDataLoadingCompletion()
+        {
+            if (isCellDataLoaded && isVoxelDataLoaded)
+            {
+                // Update the UI here based on your logic, for example:
+                Debug.Log("All data loaded successfully.");
+                onScreenText.text = "Preloading Data Complete. You can now spawn cells or start the simulation.";
+                spawnCellsButton.gameObject.SetActive(true);
+            }
+        }
     }
-*/
+
     void Start()
     {
         onScreenText.text = "Preloading Data, Please Wait...";
@@ -60,12 +73,7 @@ public class SimulationManager : MonoBehaviour
         startSimulationButton.gameObject.SetActive(false);
         pauseSimulationButton.gameObject.SetActive(false);
         resumeSimulationButton.gameObject.SetActive(false);
-
-        StartCoroutine(csvReader.PreloadAllData(() =>
-        {
-            onScreenText.text = "Preloading Data Complete, Please Spawn Cells In...";
-            spawnCellsButton.gameObject.SetActive(true);
-        }));
+        HandleDataLoaded();
     }
 
     public void OnSpawnCellsButtonClicked()
@@ -150,7 +158,6 @@ public class SimulationManager : MonoBehaviour
             while (timeAccumulator >= 1.0f)
             {
                 currentBioTick++;
-                //OnBioTickUpdated?.Invoke(currentBioTick);
                 timeAccumulator -= 1.0f; // Decrease accumulator by one tick, handling multiple ticks if necessary
 
                 onScreenText.text = "BioTick: " + currentBioTick;

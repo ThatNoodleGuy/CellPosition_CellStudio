@@ -1790,8 +1790,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbc78982f2145554790d06394945a75f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  csvFilePath: Assets/Resources/CellPosition.csv
-  linesPerFrame: 50000
+  cellPositionCSVFilePath: Assets/Resources/CellPosition.csv
+  moleculeCSVFilePath: Assets/Resources/MolExpr.csv
+  cellPositionCSVLinesPerFrame: 50000
+  moleculeCSVLinesPerFrame: 50000
+  cellPositionCSVLinesLoaded: 0
+  moleculeCSVLinesLoaded: 0
 --- !u!4 &1103232244
 Transform:
   m_ObjectHideFlags: 0
@@ -2510,7 +2514,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2086319368}
-  - component: {fileID: 2086319369}
   m_Layer: 0
   m_Name: VoxelGridGenerator
   m_TagString: Untagged
@@ -2533,21 +2536,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2052553720}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2086319369
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2086319367}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce4b0eca6a07e2d4096a38e3bc7febb2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  linesPerFrame: 20000
-  VoxelPrefab: {fileID: 2606775755480607014, guid: d4bbcd2dc7bb2264a985ce261e6bd872, type: 3}
-  voxelCounter: 0
 --- !u!1 &2108893355
 GameObject:
   m_ObjectHideFlags: 0
