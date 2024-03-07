@@ -12,6 +12,8 @@ using UnityEditor;
 
 public class SimulationManager : MonoBehaviour
 {
+    public static event Action<int> OnBioTickUpdated;
+
     [Header("Cells")]
     [SerializeField] private GameObject cellPrefab;
     [SerializeField] private Material[] interactionMaterials;
@@ -32,7 +34,22 @@ public class SimulationManager : MonoBehaviour
 
     [Header("Misc")]
     [SerializeField] private CSVReader csvReader; // Reference to the CSVReader component
+/*
+    void OnEnable()
+    {
+        VoxelGridGenerator.OnDataLoadedComplete += HandleDataLoaded;
+    }
 
+    void OnDisable()
+    {
+        VoxelGridGenerator.OnDataLoadedComplete -= HandleDataLoaded;
+    }
+
+    void HandleDataLoaded()
+    {
+        
+    }
+*/
     void Start()
     {
         onScreenText.text = "Preloading Data, Please Wait...";
@@ -43,6 +60,7 @@ public class SimulationManager : MonoBehaviour
         startSimulationButton.gameObject.SetActive(false);
         pauseSimulationButton.gameObject.SetActive(false);
         resumeSimulationButton.gameObject.SetActive(false);
+
         StartCoroutine(csvReader.PreloadAllData(() =>
         {
             onScreenText.text = "Preloading Data Complete, Please Spawn Cells In...";
@@ -132,6 +150,7 @@ public class SimulationManager : MonoBehaviour
             while (timeAccumulator >= 1.0f)
             {
                 currentBioTick++;
+                //OnBioTickUpdated?.Invoke(currentBioTick);
                 timeAccumulator -= 1.0f; // Decrease accumulator by one tick, handling multiple ticks if necessary
 
                 onScreenText.text = "BioTick: " + currentBioTick;

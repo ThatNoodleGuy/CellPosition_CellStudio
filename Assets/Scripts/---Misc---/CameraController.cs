@@ -30,12 +30,12 @@ public class CameraController : MonoBehaviour
         // Camera rotation based on Q and E keys
         float rotation = 0.0f;
 
-        if (Input.GetKey(KeyCode.Q))
+        if (Input.GetKey(KeyCode.E))
         {
             rotation -= rotationSpeed * Time.deltaTime;
         }
 
-        if (Input.GetKey(KeyCode.E))
+        if (Input.GetKey(KeyCode.Q))
         {
             rotation += rotationSpeed * Time.deltaTime;
         }
