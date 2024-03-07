@@ -27,7 +27,7 @@ public class CellManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI cellStateText;
     [SerializeField] private Button closeCellUIButton;
 
-    private List<CSVReader.CellPositionCSVData> cellData = new List<CSVReader.CellPositionCSVData>();
+    private List<CellPositionCSVData> cellData = new List<CellPositionCSVData>();
     private int currentDataIndex = 0;
     private bool sizeHasBeenSet = false; // Flag to track if size has been set
     private int interactionType; // Visible in the Unity Editor
@@ -64,7 +64,7 @@ public class CellManager : MonoBehaviour
         }
     }
 
-    public void Initialize(int agentID, Material[] interactionMaterials, CSVReader.CellPositionCSVData initialData = null)
+    public void Initialize(int agentID, Material[] interactionMaterials, CellPositionCSVData initialData = null)
     {
         this.agentID = agentID;
         if (initialData != null)
@@ -79,12 +79,12 @@ public class CellManager : MonoBehaviour
         }
     }
 
-    public void AddData(CSVReader.CellPositionCSVData data)
+    public void AddData(CellPositionCSVData data)
     {
         cellData.Add(data);
     }
 
-    private void SetCellProperties(CSVReader.CellPositionCSVData data, Material[] interactionMaterials)
+    private void SetCellProperties(CellPositionCSVData data, Material[] interactionMaterials)
     {
         gameObject.name = "Cell_" + data.agentID;
         cellType = data.cellType;

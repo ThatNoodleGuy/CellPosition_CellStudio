@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Xml;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -18,6 +19,11 @@ public class SimulationManager : MonoBehaviour
     [SerializeField] private List<GameObject> spawnedCells = new List<GameObject>();
     [SerializeField] private Material deadCellMaterial;
 
+    [Header("Voxels")]
+    [SerializeField] private GameObject voxelPrefab; // Assign in the Inspector
+    private Vector3 gridSize;
+    private Vector3 voxelDimensions;
+
     [Header("Timer")]
     [SerializeField] private int currentBioTick = 0;
     [SerializeField] private float timeMultiplier = 1.0f; // Adjust the speed of time in your simulation
@@ -32,12 +38,11 @@ public class SimulationManager : MonoBehaviour
 
     [Header("Misc")]
     [SerializeField] private CSVReader csvReader; // Reference to the CSVReader component
+    bool isCellDataLoaded = false;
+    bool isVoxelDataLoaded = false;
 
     void HandleDataLoaded()
     {
-        bool isCellDataLoaded = false;
-        bool isVoxelDataLoaded = false;
-
         // Assuming csvReader is an instance of CSVReader
         StartCoroutine(csvReader.PreloadCellPositionData(() =>
         {
@@ -47,7 +52,8 @@ public class SimulationManager : MonoBehaviour
 
         StartCoroutine(csvReader.PreloadVoxelData(csvReader.moleculeCSVFilePath, () =>
         {
-            isVoxelDataLoaded = true;
+            LoadConfigurationFromXML("Assets/Resources/ExampleReduced_SV.xml");
+            GenerateVoxelGrid();
             CheckDataLoadingCompletion();
         }));
 
@@ -191,6 +197,67 @@ public class SimulationManager : MonoBehaviour
         timeMultiplier = 1.0f;
         pauseSimulationButton.gameObject.SetActive(true);
         resumeSimulationButton.gameObject.SetActive(false);
+    }
+
+    void LoadConfigurationFromXML(string filePath)
+    {
+        XmlDocument xmlDoc = new XmlDocument();
+        xmlDoc.Load(filePath);
+
+        XmlNode areaSizeNode = xmlDoc.SelectSingleNode("//area_size");
+        gridSize = new Vector3(
+            float.Parse(areaSizeNode.SelectSingleNode("x").InnerText),
+            float.Parse(areaSizeNode.SelectSingleNode("y").InnerText),
+            float.Parse(areaSizeNode.SelectSingleNode("z").InnerText));
+
+        XmlNode areaStepNode = xmlDoc.SelectSingleNode("//area_step");
+        voxelDimensions = new Vector3(
+            float.Parse(areaStepNode.SelectSingleNode("x").InnerText),
+            float.Parse(areaStepNode.SelectSingleNode("y").InnerText),
+            float.Parse(areaStepNode.SelectSingleNode("z").InnerText));
+    }
+
+    void GenerateVoxelGrid()
+    {
+        int voxelIndex = 0;
+
+        Vector3 gridCubeNumber = new Vector3(
+            gridSize.x / voxelDimensions.x,
+            gridSize.y / voxelDimensions.y,
+            gridSize.z / voxelDimensions.z);
+
+        Vector3 startPosition = transform.position; // Adjust as needed
+
+        for (int z = 0; z < gridCubeNumber.z; z++)
+        {
+            for (int y = 0; y < gridCubeNumber.y; y++)
+            {
+                for (int x = 0; x < gridCubeNumber.x; x++)
+                {
+                    // Calculate the position based on grid coordinates and voxel dimensions
+                    Vector3 position = startPosition + new Vector3(x * voxelDimensions.x, y * voxelDimensions.y, z * voxelDimensions.z);
+
+                    // Call GetVoxelDataAtPosition with x, y, z integers
+                    VoxelData voxelData = csvReader.GetVoxelDataAtPosition(x, y, z);
+                    if (voxelData != null)
+                    {
+                        // Instantiate voxel GameObject and initialize its properties using voxelData
+                        GameObject voxelGO = Instantiate(voxelPrefab, position, Quaternion.identity);
+                        voxelGO.transform.parent = transform;
+                        voxelGO.transform.name = "Voxel_" + voxelIndex;
+                        VoxelManager voxelManager = voxelGO.GetComponent<VoxelManager>();
+                        if (voxelManager != null)
+                        {
+                            voxelManager.Initialize(voxelData.voxelID, voxelData); // Pass voxelID and voxelData to Initialize method
+                        }
+                    }
+
+                    voxelIndex++;
+                }
+            }
+        }
+        isVoxelDataLoaded = true;
+
     }
 
     public void ExitSimulation()

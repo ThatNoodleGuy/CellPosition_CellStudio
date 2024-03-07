@@ -5,6 +5,28 @@ using System.IO;
 using System.Linq;
 using UnityEngine;
 
+[System.Serializable]
+public class CellPositionCSVData
+{
+    public int agentID;
+    public float bioTicks;
+    public float posX, posY, posZ;
+    public int interactionType;
+    public int otherCellID;
+    public string cellType;
+    public int cylinderInteraction;
+    public string cellState;
+}
+
+[System.Serializable]
+public class VoxelData
+{
+    public int voxelID;
+    public float concentration;
+    public int moleculeType;
+    public int bioTick;
+}
+
 public class CSVReader : MonoBehaviour
 {
     [Header("CellPosition CSV")]
@@ -18,28 +40,7 @@ public class CSVReader : MonoBehaviour
     public int moleculeCSVLinesPerFrame = 5000; // Adjust based on performance
     [SerializeField] private int moleculeCSVLinesLoaded = 0;
     private Dictionary<int, VoxelData> voxelDataDictionary = new Dictionary<int, VoxelData>();
-
-    [System.Serializable]
-    public class CellPositionCSVData
-    {
-        public int agentID;
-        public float bioTicks;
-        public float posX, posY, posZ;
-        public int interactionType;
-        public int otherCellID;
-        public string cellType;
-        public int cylinderInteraction;
-        public string cellState;
-    }
-
-    [System.Serializable]
-    public class VoxelData
-    {
-        public int voxelID;
-        public float concentration;
-        public int moleculeType;
-        public int bioTick;
-    }
+    private List<VoxelData> voxelDataList = new List<VoxelData>();
 
     public IEnumerator PreloadCellPositionData(Action onCompleted = null)
     {
@@ -151,7 +152,7 @@ public class CSVReader : MonoBehaviour
         Debug.Log($"Total voxel lines loaded: {moleculeCSVLinesLoaded}");
         onCompleted?.Invoke(); // Invoke the completion callback
     }
-    
+
     // Method to get preloaded data for a specific agentID
     public List<CellPositionCSVData> GetDataForAgent(int agentID)
     {
@@ -171,16 +172,30 @@ public class CSVReader : MonoBehaviour
     // Method to get preloaded voxel data for a specific VoxelID
     public List<VoxelData> GetVoxelDataForVoxelID(int voxelID)
     {
+        Debug.Log($"Attempting to retrieve data for voxel ID: {voxelID}");
         if (voxelDataDictionary.ContainsKey(voxelID))
         {
-            return new List<VoxelData> { voxelDataDictionary[voxelID] };
+            var data = voxelDataDictionary[voxelID];
+            Debug.Log($"Retrieved data for voxel ID {voxelID}: MoleculeType={data.moleculeType}, Concentration={data.concentration}, BioTick={data.bioTick}");
+            return new List<VoxelData> { data };
         }
-        return new List<VoxelData>();
+        else
+        {
+            Debug.Log($"No data found for voxel ID: {voxelID}");
+            return new List<VoxelData>();
+        }
     }
 
     public List<int> GetAllVoxelIDs()
     {
         // Utilize LINQ to extract all unique voxel IDs from the preloaded data
         return voxelDataDictionary.Keys.ToList();
+    }
+
+    public VoxelData GetVoxelDataAtPosition(int x, int y, int z)
+    {
+        // Implementation logic here
+        // For example, calculate an index based on x, y, z and return the corresponding VoxelData
+        return new VoxelData(); // Placeholder return
     }
 }

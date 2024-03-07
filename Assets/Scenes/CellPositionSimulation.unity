@@ -810,6 +810,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 68d518bb35b2841518c990781c25c80b, type: 2}
   spawnedCells: []
   deadCellMaterial: {fileID: 2100000, guid: a0dfa1ba3011ede4eb3430715274be31, type: 2}
+  voxelPrefab: {fileID: 2606775755480607014, guid: d4bbcd2dc7bb2264a985ce261e6bd872, type: 3}
   currentBioTick: 0
   timeMultiplier: 1
   spawnCellsButton: {fileID: 787233666}
@@ -1791,10 +1792,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cellPositionCSVFilePath: Assets/Resources/CellPosition.csv
-  moleculeCSVFilePath: Assets/Resources/MolExpr.csv
   cellPositionCSVLinesPerFrame: 50000
-  moleculeCSVLinesPerFrame: 50000
   cellPositionCSVLinesLoaded: 0
+  moleculeCSVFilePath: Assets/Resources/MolExpr.csv
+  moleculeCSVLinesPerFrame: 50000
   moleculeCSVLinesLoaded: 0
 --- !u!4 &1103232244
 Transform:
@@ -2502,39 +2503,7 @@ Transform:
   - {fileID: 1103232244}
   - {fileID: 191754257}
   - {fileID: 586042828}
-  - {fileID: 2086319368}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2086319367
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2086319368}
-  m_Layer: 0
-  m_Name: VoxelGridGenerator
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2086319368
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2086319367}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2052553720}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2108893355
 GameObject:
