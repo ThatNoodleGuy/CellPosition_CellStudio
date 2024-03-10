@@ -17,8 +17,7 @@ public class CellManager : MonoBehaviour
     public string cellType;
     public string cellState;
     public int cylinderInteraction;
-
-    [SerializeField] private string interaction;
+    private string interaction;
 
     [Header("Cell UI")]
     [SerializeField] private GameObject cellInfoPanel;

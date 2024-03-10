@@ -811,8 +811,9 @@ MonoBehaviour:
   spawnedCells: []
   deadCellMaterial: {fileID: 2100000, guid: a0dfa1ba3011ede4eb3430715274be31, type: 2}
   voxelPrefab: {fileID: 2606775755480607014, guid: d4bbcd2dc7bb2264a985ce261e6bd872, type: 3}
+  spawnedVoxels: []
   currentBioTick: 0
-  timeMultiplier: 1
+  timeMultiplier: 50
   spawnCellsButton: {fileID: 787233666}
   startSimulationButton: {fileID: 1417734900}
   pauseSimulationButton: {fileID: 771399081}
@@ -987,8 +988,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 48.91858, y: 22.82135}
-  m_SizeDelta: {x: -97.8372, y: -282.3476}
+  m_AnchoredPosition: {x: 48.91858, y: -95.7}
+  m_SizeDelta: {x: -97.8372, y: -191.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &772562616
 MonoBehaviour:
@@ -1792,10 +1793,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cellPositionCSVFilePath: Assets/Resources/CellPosition.csv
-  cellPositionCSVLinesPerFrame: 50000
+  cellPositionCSVLinesPerFrame: 100000
   cellPositionCSVLinesLoaded: 0
   moleculeCSVFilePath: Assets/Resources/MolExpr.csv
-  moleculeCSVLinesPerFrame: 50000
+  moleculeCSVLinesPerFrame: 100000
   moleculeCSVLinesLoaded: 0
 --- !u!4 &1103232244
 Transform:

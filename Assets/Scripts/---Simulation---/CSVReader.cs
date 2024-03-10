@@ -19,9 +19,9 @@ public class CellPositionCSVData
 }
 
 [System.Serializable]
-public class VoxelData
+public class MoleculeCSVData
 {
-    public int voxelID;
+    public int globalID;
     public float concentration;
     public int moleculeType;
     public int bioTick;
@@ -39,8 +39,7 @@ public class CSVReader : MonoBehaviour
     public string moleculeCSVFilePath = "Assets/Resources/MolExpr.csv";
     public int moleculeCSVLinesPerFrame = 5000; // Adjust based on performance
     [SerializeField] private int moleculeCSVLinesLoaded = 0;
-    private Dictionary<int, VoxelData> voxelDataDictionary = new Dictionary<int, VoxelData>();
-    private List<VoxelData> voxelDataList = new List<VoxelData>();
+    private Dictionary<int, List<MoleculeCSVData>> moleculeData = new Dictionary<int, List<MoleculeCSVData>>();
 
     public IEnumerator PreloadCellPositionData(Action onCompleted = null)
     {
@@ -96,22 +95,22 @@ public class CSVReader : MonoBehaviour
                 cellPositionCSVLinesLoaded++;
             }
 
-            Debug.Log($"Total lines loaded: {cellPositionCSVLinesLoaded}");
+            Debug.Log($"Total CellPosition CSV lines loaded: {cellPositionCSVLinesLoaded}");
             onCompleted?.Invoke(); // Invoke the completion callback
         }
     }
 
-    public IEnumerator PreloadVoxelData(string voxelCsvFilePath, Action onCompleted = null)
+    public IEnumerator PreloadMoleculeData(Action onCompleted = null)
     {
         moleculeCSVLinesLoaded = 0; // Reset count at the start
 
-        if (!File.Exists(voxelCsvFilePath))
+        if (!File.Exists(moleculeCSVFilePath))
         {
-            Debug.LogError("Voxel CSV file not found at path: " + voxelCsvFilePath);
+            Debug.LogError("Molecule CSV file not found at path: " + moleculeCSVFilePath);
             yield break;
         }
 
-        using (StreamReader reader = new StreamReader(voxelCsvFilePath))
+        using (StreamReader reader = new StreamReader(moleculeCSVFilePath))
         {
             string line;
             int lineCount = 0;
@@ -123,37 +122,34 @@ public class CSVReader : MonoBehaviour
                 string[] values = line.Split(',');
                 if (values.Length >= 4)
                 {
-                    int voxelID = int.Parse(values[0].Trim());
-                    float concentration = float.Parse(values[1].Trim());
-                    int moleculeType = int.Parse(values[2].Trim());
-                    int bioTick = int.Parse(values[3].Trim());
-
-                    // Create a new VoxelData object and fill it with the parsed data
-                    VoxelData voxelData = new VoxelData
+                    MoleculeCSVData data = new MoleculeCSVData();
+                    if (int.TryParse(values[0].Trim(), out data.globalID) &&
+                        float.TryParse(values[1].Trim(), out data.concentration) &&
+                        int.TryParse(values[2].Trim(), out data.moleculeType) &&
+                        int.TryParse(values[3].Trim(), out data.bioTick))
                     {
-                        voxelID = voxelID,
-                        concentration = concentration,
-                        moleculeType = moleculeType,
-                        bioTick = bioTick
-                    };
-
-                    // Update the voxel data structure, e.g., a dictionary
-                    voxelDataDictionary[voxelID] = voxelData;
-                    moleculeCSVLinesLoaded++; // Increment the loaded line counter
+                        if (!moleculeData.ContainsKey(data.globalID))
+                        {
+                            moleculeData[data.globalID] = new List<MoleculeCSVData>();
+                        }
+                        moleculeData[data.globalID].Add(data);
+                    }
                 }
 
                 if (lineCount % moleculeCSVLinesPerFrame == 0)
                 {
                     yield return null; // Yield execution to keep the UI responsive
                 }
-            }
-        }
 
-        Debug.Log($"Total voxel lines loaded: {moleculeCSVLinesLoaded}");
-        onCompleted?.Invoke(); // Invoke the completion callback
+                moleculeCSVLinesLoaded++;
+            }
+
+            // Here, you'd typically update any relevant UI or state to reflect that molecule data has been loaded
+            Debug.Log($"Total MoleExpre CSV lines loaded: {moleculeCSVLinesLoaded}");
+            onCompleted?.Invoke();
+        }
     }
 
-    // Method to get preloaded data for a specific agentID
     public List<CellPositionCSVData> GetDataForAgent(int agentID)
     {
         if (cellPositionData.ContainsKey(agentID))
@@ -163,39 +159,22 @@ public class CSVReader : MonoBehaviour
         return new List<CellPositionCSVData>();
     }
 
+    public List<MoleculeCSVData> GetDataForVoxel(int globalID)
+    {
+        if (moleculeData.ContainsKey(globalID))
+        {
+            return moleculeData[globalID];
+        }
+        return new List<MoleculeCSVData>();
+    }
+
     public List<int> GetAllAgentIDs()
     {
-        // Utilize LINQ to extract all unique agent IDs from the preloaded data
         return cellPositionData.Keys.ToList();
     }
 
-    // Method to get preloaded voxel data for a specific VoxelID
-    public List<VoxelData> GetVoxelDataForVoxelID(int voxelID)
+    public List<int> GetAllVoxelsIDs()
     {
-        Debug.Log($"Attempting to retrieve data for voxel ID: {voxelID}");
-        if (voxelDataDictionary.ContainsKey(voxelID))
-        {
-            var data = voxelDataDictionary[voxelID];
-            Debug.Log($"Retrieved data for voxel ID {voxelID}: MoleculeType={data.moleculeType}, Concentration={data.concentration}, BioTick={data.bioTick}");
-            return new List<VoxelData> { data };
-        }
-        else
-        {
-            Debug.Log($"No data found for voxel ID: {voxelID}");
-            return new List<VoxelData>();
-        }
-    }
-
-    public List<int> GetAllVoxelIDs()
-    {
-        // Utilize LINQ to extract all unique voxel IDs from the preloaded data
-        return voxelDataDictionary.Keys.ToList();
-    }
-
-    public VoxelData GetVoxelDataAtPosition(int x, int y, int z)
-    {
-        // Implementation logic here
-        // For example, calculate an index based on x, y, z and return the corresponding VoxelData
-        return new VoxelData(); // Placeholder return
+        return moleculeData.Keys.ToList();
     }
 }

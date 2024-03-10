@@ -21,6 +21,7 @@ public class SimulationManager : MonoBehaviour
 
     [Header("Voxels")]
     [SerializeField] private GameObject voxelPrefab; // Assign in the Inspector
+    [SerializeField] private List<GameObject> spawnedVoxels = new List<GameObject>();
     private Vector3 gridSize;
     private Vector3 voxelDimensions;
 
@@ -50,7 +51,7 @@ public class SimulationManager : MonoBehaviour
             CheckDataLoadingCompletion();
         }));
 
-        StartCoroutine(csvReader.PreloadVoxelData(csvReader.moleculeCSVFilePath, () =>
+        StartCoroutine(csvReader.PreloadMoleculeData(() =>
         {
             LoadConfigurationFromXML("Assets/Resources/ExampleReduced_SV.xml");
             GenerateVoxelGrid();
@@ -181,6 +182,12 @@ public class SimulationManager : MonoBehaviour
                         cellManager.UpdateState(currentBioTick, interactionMaterials);
                     }
                 }
+
+                foreach (GameObject voxelObject in spawnedVoxels)
+                {
+                    VoxelManager voxelManager = voxelObject.GetComponent<VoxelManager>();
+                    voxelManager.UpdateVoxelForBioTick(currentBioTick);
+                }
             }
         }
     }
@@ -237,18 +244,24 @@ public class SimulationManager : MonoBehaviour
                     // Calculate the position based on grid coordinates and voxel dimensions
                     Vector3 position = startPosition + new Vector3(x * voxelDimensions.x, y * voxelDimensions.y, z * voxelDimensions.z);
 
-                    // Call GetVoxelDataAtPosition with x, y, z integers
-                    VoxelData voxelData = csvReader.GetVoxelDataAtPosition(x, y, z);
-                    if (voxelData != null)
+                    List<MoleculeCSVData> voxelDataList = csvReader.GetDataForVoxel(voxelIndex);
+                    if (voxelDataList.Count > 0)
                     {
+                        // Assuming we take the first entry as the data example
+                        MoleculeCSVData data = voxelDataList[0];
+
                         // Instantiate voxel GameObject and initialize its properties using voxelData
                         GameObject voxelGO = Instantiate(voxelPrefab, position, Quaternion.identity);
                         voxelGO.transform.parent = transform;
-                        voxelGO.transform.name = "Voxel_" + voxelIndex;
                         VoxelManager voxelManager = voxelGO.GetComponent<VoxelManager>();
+                        voxelGO.transform.name = "Voxel_" + voxelIndex;
+                        spawnedVoxels.Add(voxelGO);
+
                         if (voxelManager != null)
                         {
-                            voxelManager.Initialize(voxelData.voxelID, voxelData); // Pass voxelID and voxelData to Initialize method
+                            voxelManager.Initialize(data.globalID, data);
+
+                            voxelManager.UpdateVoxelData(data);
                         }
                     }
 
@@ -257,7 +270,6 @@ public class SimulationManager : MonoBehaviour
             }
         }
         isVoxelDataLoaded = true;
-
     }
 
     public void ExitSimulation()
