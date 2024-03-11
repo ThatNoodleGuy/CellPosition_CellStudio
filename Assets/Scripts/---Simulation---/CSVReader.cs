@@ -29,6 +29,8 @@ public class MoleculeCSVData
 
 public class CSVReader : MonoBehaviour
 {
+    public static CSVReader instance;
+
     [Header("CellPosition CSV")]
     public string cellPositionCSVFilePath = "Assets/Resources/CellPosition.csv";
     public int cellPositionCSVLinesPerFrame = 5000; // Adjust based on performance
@@ -40,6 +42,18 @@ public class CSVReader : MonoBehaviour
     public int moleculeCSVLinesPerFrame = 5000; // Adjust based on performance
     [SerializeField] private int moleculeCSVLinesLoaded = 0;
     private Dictionary<int, List<MoleculeCSVData>> moleculeData = new Dictionary<int, List<MoleculeCSVData>>();
+
+    private void Awake()
+    {
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
+    }
 
     public IEnumerator PreloadCellPositionData(Action onCompleted = null)
     {
@@ -176,5 +190,24 @@ public class CSVReader : MonoBehaviour
     public List<int> GetAllVoxelsIDs()
     {
         return moleculeData.Keys.ToList();
+    }
+
+    public int GetMaxBioTick()
+    {
+        int maxBioTick = 0;
+        foreach (var list in cellPositionData.Values)
+        {
+            foreach (var data in list)
+            {
+                if (data.bioTicks > maxBioTick)
+                    maxBioTick = (int)data.bioTicks;
+            }
+        }
+        return maxBioTick;
+    }
+
+    public Dictionary<int, List<CellPositionCSVData>> CellPositionData
+    {
+        get { return cellPositionData; }
     }
 }

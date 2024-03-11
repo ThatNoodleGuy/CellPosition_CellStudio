@@ -11,13 +11,23 @@ using TMPro;
 using UnityEditor;
 #endif
 
+[System.Serializable]
+public class CellTypeMaterialSet
+{
+    public string cellType;
+    public Material[] materials; // 0 - NO_HIT, 1 - WALL_HIT, 2 - CYLINDER_HIT, 3 - CELL_HIT, 4 - CELL_DEAD
+}
+
 public class SimulationManager : MonoBehaviour
 {
+    public static SimulationManager instance;
+
     [Header("Cells")]
+    [SerializeField] private List<CellTypeMaterialSet> cellTypeMaterialSets;
+    [Space(10)]
     [SerializeField] private GameObject cellPrefab;
-    [SerializeField] private Material[] interactionMaterials;
     [SerializeField] private List<GameObject> spawnedCells = new List<GameObject>();
-    [SerializeField] private Material deadCellMaterial;
+    private Dictionary<string, Material[]> cellMaterialsMap = new Dictionary<string, Material[]>();
 
     [Header("Voxels")]
     [SerializeField] private GameObject voxelPrefab; // Assign in the Inspector
@@ -36,11 +46,34 @@ public class SimulationManager : MonoBehaviour
     [SerializeField] private Button resumeSimulationButton;
     [SerializeField] private Button exitButton;
     [SerializeField] private TextMeshProUGUI onScreenText;
+    [SerializeField] private TextMeshProUGUI bioTickDisplay;
+    [SerializeField] private Slider timeSlider;
 
     [Header("Misc")]
     [SerializeField] private CSVReader csvReader; // Reference to the CSVReader component
+    private int simulationDuration;
     bool isCellDataLoaded = false;
     bool isVoxelDataLoaded = false;
+
+
+    private void Awake()
+    {
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
+
+        foreach (var set in cellTypeMaterialSets)
+        {
+            cellMaterialsMap[set.cellType] = set.materials;
+        }
+
+        timeSlider.gameObject.SetActive(false);
+    }
 
     void HandleDataLoaded()
     {
@@ -48,16 +81,17 @@ public class SimulationManager : MonoBehaviour
         StartCoroutine(csvReader.PreloadCellPositionData(() =>
         {
             isCellDataLoaded = true;
+            isVoxelDataLoaded = true;
             CheckDataLoadingCompletion();
         }));
-
-        StartCoroutine(csvReader.PreloadMoleculeData(() =>
-        {
-            LoadConfigurationFromXML("Assets/Resources/ExampleReduced_SV.xml");
-            GenerateVoxelGrid();
-            CheckDataLoadingCompletion();
-        }));
-
+        /*
+                StartCoroutine(csvReader.PreloadMoleculeData(() =>
+                {
+                    
+                    GenerateVoxelGrid();
+                    CheckDataLoadingCompletion();
+                }));
+        */
         void CheckDataLoadingCompletion()
         {
             if (isCellDataLoaded && isVoxelDataLoaded)
@@ -72,7 +106,15 @@ public class SimulationManager : MonoBehaviour
 
     void Start()
     {
+        cellMaterialsMap = new Dictionary<string, Material[]>();
+        foreach (var set in cellTypeMaterialSets)
+        {
+            cellMaterialsMap[set.cellType] = set.materials;
+        }
+
         onScreenText.text = "Preloading Data, Please Wait...";
+
+        LoadConfigurationFromXML("Assets/Resources/ExampleReduced_SV.xml");
 
         exitButton.onClick.AddListener(ExitSimulation);
 
@@ -80,7 +122,20 @@ public class SimulationManager : MonoBehaviour
         startSimulationButton.gameObject.SetActive(false);
         pauseSimulationButton.gameObject.SetActive(false);
         resumeSimulationButton.gameObject.SetActive(false);
+        timeSlider.gameObject.SetActive(false);
         HandleDataLoaded();
+    }
+
+    void InitializeTimeSlider()
+    {
+        // This should be called after all data is loaded
+        bioTickDisplay.text = "BioTick: " + currentBioTick + "/" + simulationDuration;
+
+        int maxBioTick = simulationDuration; // Make sure this method gets the maximum bioTick from your data
+        timeSlider.maxValue = maxBioTick;
+
+        // Set the slider's current value to the currentBioTick, which might be 0 initially or another value if the simulation was paused/resumed
+        timeSlider.value = currentBioTick;
     }
 
     public void OnSpawnCellsButtonClicked()
@@ -96,6 +151,11 @@ public class SimulationManager : MonoBehaviour
         startSimulationButton.gameObject.SetActive(false);
         pauseSimulationButton.gameObject.SetActive(true);
         resumeSimulationButton.gameObject.SetActive(false);
+        onScreenText.gameObject.SetActive(false);
+        timeSlider.gameObject.SetActive(true);
+
+        timeSlider.onValueChanged.AddListener(HandleSliderValueChanged);
+        InitializeTimeSlider();
     }
 
     IEnumerator PreloadDataAndInitializeCells()
@@ -106,18 +166,22 @@ public class SimulationManager : MonoBehaviour
         for (int i = 0; i < agentIDs.Count; i++)
         {
             int agentID = agentIDs[i];
-            GameObject cellObject = FindOrCreateCell(agentID);
-            CellManager cell = cellObject.GetComponent<CellManager>();
             var dataTimeline = csvReader.GetDataForAgent(agentID);
             if (dataTimeline.Count > 0)
             {
-                // Pass the first data entry as the initial state
-                cell.Initialize(agentID, interactionMaterials, dataTimeline[0]);
-            }
+                GameObject cellObject = FindOrCreateCell(agentID, dataTimeline[0].cellType);
+                CellManager cell = cellObject.GetComponent<CellManager>();
 
-            foreach (var dataEntry in dataTimeline)
-            {
-                cell.AddData(dataEntry);
+                // Find the correct material set based on the cell's type
+                Material[] materialsForType = GetMaterialsForCellType(cell.cellType);
+
+                // Initialize the CellManager with the specific materials
+                cell.Initialize(agentID, dataTimeline[0].cellType, dataTimeline[0]);
+
+                foreach (var dataEntry in dataTimeline)
+                {
+                    cell.AddData(dataEntry);
+                }
             }
 
             if ((i + 1) % cellsPerBatch == 0 || i == agentIDs.Count - 1)
@@ -129,22 +193,24 @@ public class SimulationManager : MonoBehaviour
         // After all cells are initialized
         onScreenText.text = "Simulation Is Ready, Press Start";
         startSimulationButton.gameObject.SetActive(true);
+
     }
 
-    GameObject FindOrCreateCell(int agentID)
+    GameObject FindOrCreateCell(int agentID, string cellType)
     {
-        // Check if the cell already exists
         foreach (GameObject cell in spawnedCells)
         {
-            if (cell.GetComponent<CellManager>().agentID == agentID)
+            CellManager cellManager = cell.GetComponent<CellManager>();
+            if (cellManager.agentID == agentID)
             {
                 return cell;
             }
         }
 
-        // If not, create a new cell
         GameObject newCell = Instantiate(cellPrefab, transform);
-        newCell.GetComponent<CellManager>().agentID = agentID;
+        CellManager newCellManager = newCell.GetComponent<CellManager>();
+        newCellManager.agentID = agentID;
+        newCellManager.cellType = cellType; // Set cell type right after instantiation.
         spawnedCells.Add(newCell);
         return newCell;
     }
@@ -165,22 +231,18 @@ public class SimulationManager : MonoBehaviour
             while (timeAccumulator >= 1.0f)
             {
                 currentBioTick++;
+
+                UpdateSliderValue(currentBioTick);
+
                 timeAccumulator -= 1.0f; // Decrease accumulator by one tick, handling multiple ticks if necessary
 
-                onScreenText.text = "BioTick: " + currentBioTick;
+                bioTickDisplay.text = "BioTick: " + currentBioTick + "/" + simulationDuration;
 
                 // Update each cell for the currentBioTick
                 foreach (GameObject cellObject in spawnedCells)
                 {
                     CellManager cellManager = cellObject.GetComponent<CellManager>();
-                    if (cellManager.GetCellState() == "APOPTOSIS") // if cellState is 5 - #"APOPTOSIS"
-                    {
-                        cellManager.gameObject.GetComponent<MeshRenderer>().material = deadCellMaterial;
-                    }
-                    else
-                    {
-                        cellManager.UpdateState(currentBioTick, interactionMaterials);
-                    }
+                    cellManager.UpdateState(currentBioTick);
                 }
 
                 foreach (GameObject voxelObject in spawnedVoxels)
@@ -210,6 +272,12 @@ public class SimulationManager : MonoBehaviour
     {
         XmlDocument xmlDoc = new XmlDocument();
         xmlDoc.Load(filePath);
+
+        XmlNode simulationDurationNode = xmlDoc.SelectSingleNode("//Model/simulation_duration");
+        if (simulationDurationNode != null && int.TryParse(simulationDurationNode.InnerText, out int simulationDuration))
+        {
+            this.simulationDuration = simulationDuration;
+        }
 
         XmlNode areaSizeNode = xmlDoc.SelectSingleNode("//area_size");
         gridSize = new Vector3(
@@ -270,6 +338,65 @@ public class SimulationManager : MonoBehaviour
             }
         }
         isVoxelDataLoaded = true;
+    }
+
+    public Material[] GetMaterialsForCellType(string cellType)
+    {
+        if (string.IsNullOrEmpty(cellType))
+        {
+            Debug.LogWarning("Cell type is null or empty.");
+            return null;
+        }
+
+        if (cellMaterialsMap.TryGetValue(cellType, out Material[] materials))
+        {
+            return materials;
+        }
+        else
+        {
+            Debug.LogWarning($"Materials for cell type '{cellType}' not found.");
+            return null;
+        }
+    }
+
+    void HandleSliderValueChanged(float value)
+    {
+        currentBioTick = (int)value;
+        UpdateSimulationStateToCurrentBioTick();
+    }
+
+    void UpdateSimulationStateToCurrentBioTick()
+    {
+        foreach (GameObject cellObject in spawnedCells)
+        {
+            CellManager cellManager = cellObject.GetComponent<CellManager>();
+            cellManager.UpdateStateToTick(currentBioTick);
+        }
+    }
+
+    public void UpdateSliderMaxValue()
+    {
+        int maxBioTick = 0;
+        foreach (var cellList in csvReader.CellPositionData.Values) // Or csvReader.CellPositionData.Values if using a property
+        {
+            foreach (var data in cellList)
+            {
+                if (data.bioTicks > maxBioTick)
+                {
+                    maxBioTick = (int)Math.Ceiling(data.bioTicks);
+                }
+            }
+        }
+        timeSlider.maxValue = maxBioTick;
+        Debug.Log($"Max BioTick updated to: {maxBioTick}");
+    }
+
+    void UpdateSliderValue(int bioTick)
+    {
+        if (timeSlider != null)
+        {
+            timeSlider.value = bioTick;
+        }
     }
 
     public void ExitSimulation()
