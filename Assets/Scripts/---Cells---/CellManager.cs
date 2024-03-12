@@ -20,7 +20,7 @@ public class CellManager : MonoBehaviour
     private string interaction;
 
     [Header("Cell UI")]
-    [SerializeField] private GameObject cellInfoPanel;
+    [SerializeField] private GameObject cellCanvas;
     [SerializeField] private TextMeshProUGUI cellIdText;
     [SerializeField] private TextMeshProUGUI cellTypeText;
     [SerializeField] private TextMeshProUGUI cellStateText;
@@ -174,12 +174,12 @@ public class CellManager : MonoBehaviour
         cellIdText.text = "ID: " + agentID;
         cellTypeText.text = "Type: " + cellType;
         cellStateText.text = "State: " + cellState;
-        cellInfoPanel.SetActive(true);
+        cellCanvas.SetActive(true);
     }
 
     public void HideCellUI()
     {
-        cellInfoPanel.SetActive(false);
+        cellCanvas.SetActive(false);
     }
 
     void FetchMaterials()

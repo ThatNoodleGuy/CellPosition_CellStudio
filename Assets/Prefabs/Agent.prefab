@@ -53,8 +53,7 @@ MonoBehaviour:
   cellType: 
   cellState: 
   cylinderInteraction: 0
-  interaction: 
-  cellInfoPanel: {fileID: 7644259383404479200}
+  cellCanvas: {fileID: 7722523896940590537}
   cellIdText: {fileID: 1955216750349740233}
   cellTypeText: {fileID: 8898448959740547790}
   cellStateText: {fileID: 8514392974791793284}
@@ -87,7 +86,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3c25a1b889e1573c08823a90c90fc53e, type: 2}
+  - {fileID: 2100000, guid: 9639db5728c9b2f4d96ec5b04756d5bc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

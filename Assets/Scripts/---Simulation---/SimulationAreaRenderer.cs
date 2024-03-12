@@ -5,7 +5,6 @@ using System.Xml;
 [RequireComponent(typeof(LineRenderer))]
 public class SimulationAreaRenderer : MonoBehaviour
 {
-    public TextAsset xmlFile; // Assign your XML file in the Inspector
     private LineRenderer lineRenderer;
     private List<Vector3> points = new List<Vector3>();
 
@@ -20,7 +19,7 @@ public class SimulationAreaRenderer : MonoBehaviour
     void ParseXMLAndGeneratePoints()
     {
         XmlDocument xmlDoc = new XmlDocument();
-        xmlDoc.LoadXml(xmlFile.text);
+        xmlDoc.Load("Assets/Resources/ExampleReduced_SV.xml");
         XmlNode areaSizeNode = xmlDoc.SelectSingleNode("//Environments/array_element_0/area_size");
 
         float x = float.Parse(areaSizeNode.SelectSingleNode("x").InnerText);

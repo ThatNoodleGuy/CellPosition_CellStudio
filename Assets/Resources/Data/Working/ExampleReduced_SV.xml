@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Model_data>
+    <Model>
+        <name>ExampleReduced</name>
+		<simulation_duration value_type="scalar">2500</simulation_duration>
+		<random_seed value_type="scalar">-1</random_seed>
+    </Model>
+	<Environments>
+        <array_element_0>
+	<CylindersPath>Cylinders.xml</CylindersPath>
+	<CylindersShift>
+		<x value_type="scalar">0</x>
+		<y value_type="scalar">100</y>	
+		<z value_type="scalar">0</z>
+	</CylindersShift>
+            <name>Area 1</name>
+            <ID>0</ID>
+            <area_size> 	
+				<x value_type="scalar">500</x> 	
+				<y value_type="scalar">600</y> 	
+				<z value_type="scalar">500</z> 
+			</area_size>
+			<area_origin>
+				<x value_type="scalar">0</x>
+				<y value_type="scalar">0</y>
+				<z value_type="scalar">0</z> 
+			</area_origin>
+			<area_step> 
+				<x value_type="scalar">30</x>
+				<y value_type="scalar">30</y>
+				<z value_type="scalar">30</z>
+			</area_step>
+        </array_element_0>
+    </Environments>
+	<Soluble_molecules>
+        <array_element_0>
+		    <area>Area 1</area>
+            <name>IFN-g</name>
+            <ID>0</ID>
+			<regionID>0</regionID>
+			<diffusion_coefficient value_type="scalar">1</diffusion_coefficient>
+            <basic_concentration value_type="scalar">0</basic_concentration>
+        </array_element_0>
+        <array_element_1>
+		    <area>Area 1</area>
+            <name>antiPD-L1</name>
+            <ID>1</ID>
+			<regionID>0</regionID>
+			<diffusion_coefficient value_type="scalar">1</diffusion_coefficient>
+            <basic_concentration value_type="scalar">0</basic_concentration>
+        </array_element_1>
+    </Soluble_molecules>
+    <Cells>
+        <array_element_0>
+            <cell_type>APC</cell_type>
+			<ID>0</ID>
+            <regionID>0</regionID>
+            <cell_population_size 				value_type="scalar">1000</cell_population_size>
+			<cell_size_distribution  			value_type="distribution_Uniform"> <min>7</min> <max>9</max> </cell_size_distribution>
+            <cell_speed_distribution 			value_type="distribution_Uniform"> <min>0.1</min> <max>0.2</max> </cell_speed_distribution>
+            <cell_death_distribution 			value_type="distribution_Uniform"> <min>0.000010</min> <max>0.000010</max> </cell_death_distribution>
+			<cell_proliferation_distribution 	value_type="distribution_Uniform"> <min>0</min> <max>0</max></cell_proliferation_distribution>
+			<scan_time_distribution  			value_type="distribution_Normal">  <mean>-1</mean> <sigma>10</sigma></scan_time_distribution>
+            <refractary_time_distribution 		value_type="distribution_Normal">  <mean>1</mean> <sigma>0.01</sigma></refractary_time_distribution>
+			<max_number_in_conglomerate 		value_type="scalar">1</max_number_in_conglomerate>
+			<scan_velocity 						value_type="scalar">0</scan_velocity>
+			<cell_distribution>Random</cell_distribution>
+			<cell_cluster_3d_shape>Cloud</cell_cluster_3d_shape>
+			<cell_cluster_center> 
+				<x value_type="scalar">500</x> 
+				<y value_type="scalar">500</y> 
+				<z value_type="scalar">500</z> 
+			</cell_cluster_center>
+			<cell_color> 
+				<r value_type="scalar">125</r> 
+				<g value_type="scalar">0</g> 
+				<b value_type="scalar">0</b> 
+				<a value_type="scalar">0.6</a>
+			</cell_color>
+			<adhesive_wall>
+				<U value_type="scalar">0</U>
+				<D value_type="scalar">1</D>
+				<R value_type="scalar">0</R>
+				<L value_type="scalar">0</L>
+				<F value_type="scalar">0</F>
+				<B value_type="scalar">0</B>
+			</adhesive_wall>
+			<parameter_set>
+				<k_IFN	value_type="scalar"> 0.0001</k_IFN>
+				<kPDLIn value_type="scalar">0.000111</kPDLIn>
+				<kPDLEx	value_type="scalar">0.0000833</kPDLEx>
+				<kCD80In value_type="scalar">0.000111</kCD80In>
+				<kCD80Ex value_type="scalar">0.0000833</kCD80Ex>
+			</parameter_set>
+            <receptors>
+                <array_element_0>
+                    <ID>0</ID>
+                    <receptor_type>PD-L1</receptor_type>
+					<receptor_expression_distibution value_type="distribution_Normal"> <mean>0.6</mean> <sigma>0.1</sigma>  </receptor_expression_distibution>
+					<receptor_binding_distribution value_type="distribution_Normal">   <mean>0.7</mean> <sigma>0.1</sigma>  </receptor_binding_distribution>             
+				</array_element_0>
+				<array_element_1>
+                    <ID>1</ID>
+                    <receptor_type>CD80</receptor_type>
+					<receptor_expression_distibution value_type="distribution_Normal"> <mean>0.6</mean> <sigma>0.1</sigma>  </receptor_expression_distibution>
+					<receptor_binding_distribution   value_type="distribution_Normal"> <mean>0.1</mean> <sigma>0.01</sigma> </receptor_binding_distribution>
+                </array_element_1>
+            </receptors>
+        </array_element_0>
+        <array_element_1>
+			<cell_type>CD8+ T-Cell</cell_type>
+		    <ID>1</ID>
+            <regionID>0</regionID>
+            <cell_population_size 	 			value_type="scalar">1000</cell_population_size>
+			<cell_size_distribution  			value_type="distribution_Uniform"> <min>4</min> <max>6</max> </cell_size_distribution>
+            <cell_speed_distribution 			value_type="distribution_Uniform"> <min>0.1</min> <max>0.2</max> </cell_speed_distribution>
+            <cell_death_distribution 			value_type="distribution_Uniform"> <min>-1</min> <max>-1</max> </cell_death_distribution>
+			<cell_proliferation_distribution 	value_type="distribution_Uniform"> <min>0</min> <max>0</max></cell_proliferation_distribution>
+			<scan_time_distribution  			value_type="distribution_Normal">  <mean>500</mean> <sigma>10</sigma></scan_time_distribution>
+            <refractary_time_distribution 		value_type="distribution_Normal">  <mean>75000</mean> <sigma>5000</sigma></refractary_time_distribution>
+			<max_number_in_conglomerate 		value_type="scalar">3</max_number_in_conglomerate>
+			<scan_velocity 						value_type="scalar">10</scan_velocity>
+            <cell_distribution>Random</cell_distribution>
+			<cell_cluster_3d_shape>Cloud</cell_cluster_3d_shape>
+            <cell_cluster_center> 
+				<x value_type="scalar">500</x> 
+				<y value_type="scalar">500</y> 
+				<z value_type="scalar">500</z> 
+			</cell_cluster_center>
+			<cell_color> 
+				<r value_type="scalar">0.0</r>
+				<g value_type="scalar">125</g> 
+				<b value_type="scalar">0.0</b> 
+				<a value_type="scalar">0.6</a> 
+			</cell_color>
+			<adhesive_wall>
+				<U value_type="scalar">0</U>
+				<D value_type="scalar">0</D>
+				<R value_type="scalar">0</R>
+				<L value_type="scalar">0</L>
+				<F value_type="scalar">0</F>
+				<B value_type="scalar">0</B>
+			</adhesive_wall>
+			<parameter_set>
+				<synapse_delay	value_type="scalar">3000</synapse_delay>
+				<kA_Inhib_Time	value_type="scalar">4000</kA_Inhib_Time>
+				<kA_Inhib_Const	value_type="scalar">0.00004</kA_Inhib_Const>
+				<kF1 			value_type="scalar">2</kF1>
+				<kF1_exp 		value_type="scalar">-10</kF1_exp>
+				<kF1_Pd1 		value_type="scalar">0.8</kF1_Pd1>
+				<kF2 			value_type="scalar">2</kF2>
+				<kA_Inhib 		value_type="scalar">2.3</kA_Inhib>
+				<kA_Cost 		value_type="scalar">1.2</kA_Cost>
+				<kA_IFN 		value_type="scalar">0.2</kA_IFN>
+				<kA_aCD3 		value_type="scalar">1</kA_aCD3>
+				<beta 			value_type="scalar">1.5</beta>
+				<teta 			value_type="scalar">.3</teta>
+				<kPDIn_Act 		value_type="scalar">0.00005</kPDIn_Act>
+				<kPDIn_Ex 		value_type="scalar">0.0002</kPDIn_Ex>
+				<kPDIn_Const 	value_type="scalar">1</kPDIn_Const>
+				<kIFNIn_Act 	value_type="scalar">0.0004</kIFNIn_Act>
+				<kIFNIn_Ex 		value_type="scalar">0.005</kIFNIn_Ex>
+				<kIFNIn_Const	value_type="scalar">15000</kIFNIn_Const>
+			</parameter_set>
+            <receptors>
+                <array_element_0>
+				    <ID>0</ID>
+                    <receptor_type>PD-1</receptor_type>
+					<receptor_expression_distibution value_type="distribution_Weibull"> <a>0.09</a> <b>0.55</b> </receptor_expression_distibution>
+					<receptor_binding_distribution 	 value_type="distribution_Normal"> <mean>0.1</mean> <sigma>0.000001</sigma> </receptor_binding_distribution>
+                </array_element_0>
+				<array_element_1>
+                    <ID>1</ID>
+                    <receptor_type>CD28</receptor_type>
+					<receptor_expression_distibution value_type="distribution_Normal"> <mean>0.8</mean> <sigma>0.1</sigma>  </receptor_expression_distibution>
+					<receptor_binding_distribution   value_type="distribution_Normal"> <mean>0.5</mean> <sigma>0.01</sigma> </receptor_binding_distribution>
+                </array_element_1>
+            </receptors>
+        </array_element_1>
+    </Cells>
+    <Rules>
+		<array_element_0>
+		    <ID>1</ID>
+            <cooldown_time value_type="scalar">60</cooldown_time>
+            <events>
+                <array_element_0>
+                    <ID>0</ID>
+                    <type>Receptor - receptor binding</type>
+                    <minimum_receptors_required value_type="scalar">50</minimum_receptors_required>
+                    <bound_receptors_side_1 value_type="scalar">0</bound_receptors_side_1>
+                    <bound_receptors_side_2 value_type="scalar">0</bound_receptors_side_2>
+                    <cell_side_1 value_type="scalar">0</cell_side_1>
+                    <cell_side_2 value_type="scalar">1</cell_side_2>
+                </array_element_0>
+				<array_element_1>
+                    <ID>1</ID>
+                    <type>Receptor - receptor binding</type>
+                    <minimum_receptors_required value_type="scalar">50</minimum_receptors_required>
+                    <bound_receptors_side_1 value_type="scalar">1</bound_receptors_side_1>
+                    <bound_receptors_side_2 value_type="scalar">1</bound_receptors_side_2>
+                    <cell_side_1 value_type="scalar">0</cell_side_1>
+                    <cell_side_2 value_type="scalar">1</cell_side_2>
+                </array_element_1>
+            </events>
+        </array_element_0>
+    </Rules>
+    <Advanced>
+        <server_port />
+        <path />
+        <run_source>Local</run_source>
+        <string_matching>10</string_matching>
+        <server_host />
+    </Advanced>
+</Model_data>
