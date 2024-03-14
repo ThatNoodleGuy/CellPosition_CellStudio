@@ -98,7 +98,7 @@ public class SimulationManager : MonoBehaviour
             {
                 // Update the UI here based on your logic, for example:
                 Debug.Log("All data loaded successfully.");
-                onScreenText.text = "Preloading Data Complete. You can now spawn cells or start the simulation.";
+                onScreenText.text = "Preloading Data Complete. You can now spawn cells.";
                 spawnCellsButton.gameObject.SetActive(true);
             }
         }
