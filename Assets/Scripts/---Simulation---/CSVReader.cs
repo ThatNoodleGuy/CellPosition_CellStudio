@@ -173,11 +173,13 @@ public class CSVReader : MonoBehaviour
         return new List<CellPositionCSVData>();
     }
 
-    public List<MoleculeCSVData> GetDataForVoxel(int globalID)
+    public List<MoleculeCSVData> GetDataForVoxel(int globalID, int bioTick)
     {
-        if (moleculeData.ContainsKey(globalID))
+        // Assuming moleculeData stores lists of MoleculeCSVData indexed by globalID
+        if (moleculeData.TryGetValue(globalID, out List<MoleculeCSVData> allData))
         {
-            return moleculeData[globalID];
+            // Filter the data for the specific bioTick
+            return allData.Where(data => data.bioTick == bioTick).ToList();
         }
         return new List<MoleculeCSVData>();
     }
@@ -210,4 +212,5 @@ public class CSVReader : MonoBehaviour
     {
         get { return cellPositionData; }
     }
+
 }

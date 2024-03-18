@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Voxel_Mol0
+  m_Name: moleculeType1
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -82,6 +82,6 @@ Material:
     - _UVSec: 0
     - _ZWrite: 0
     m_Colors:
-    - _Color: {r: 0, g: 1, b: 0.29411766, a: 0}
+    - _Color: {r: 0.21960784, g: 0.3529412, b: 0.56078434, a: 0.8627451}
     - _EmissionColor: {r: 498.4327, g: 498.4327, b: 498.4327, a: 1}
   m_BuildTextureStacks: []

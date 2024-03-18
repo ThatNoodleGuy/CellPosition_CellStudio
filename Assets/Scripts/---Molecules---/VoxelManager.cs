@@ -9,100 +9,64 @@ public class VoxelManager : MonoBehaviour
 {
     [Header("Voxel Data")]
     public int globalID;
-    public float concentration;
-    public int moleculeType;
-    public int bioTick;
 
-    public Material[] moleculeMaterials;
-    private MeshRenderer voxelRenderer;
-    private float maxConcentration = 1000f; // Set this to your maximum expected concentration
-
-    private List<MoleculeCSVData> moleculeCSVData = new List<MoleculeCSVData>();
+    private Dictionary<int, GameObject> moleculeObjects = new Dictionary<int, GameObject>();
 
     private void Awake()
     {
-        voxelRenderer = GetComponent<MeshRenderer>();
+        // Initialize moleculeObjects if needed
     }
 
-    // Example function to initialize voxel data, assuming you have a similar structure for voxel data
-    public void Initialize(int globalID, MoleculeCSVData initialData = null)
+    public void Initialize(int globalID, List<MoleculeCSVData> initialDataList = null)
     {
         this.globalID = globalID;
-        if (initialData != null)
+        foreach (var data in initialDataList)
         {
-            SetVoxelProperties(initialData);
+            UpdateOrCreateMoleculeObject(data);
         }
     }
 
-    // Similar to SetCellProperties but adapted for voxel properties
-    private void SetVoxelProperties(MoleculeCSVData data)
+    private void UpdateOrCreateMoleculeObject(MoleculeCSVData data)
     {
-        // Set the properties of your voxel based on the data
-        this.concentration = data.concentration;
-        this.moleculeType = data.moleculeType;
-        this.bioTick = data.bioTick;
-    }
+        GameObject moleculeObject;
+        if (!moleculeObjects.TryGetValue(data.moleculeType, out moleculeObject))
+        {
+            // Create a new molecule representation as a child of the voxel
+            moleculeObject = GameObject.CreatePrimitive(PrimitiveType.Cube); // Or use a custom mesh
+            moleculeObject.transform.SetParent(this.transform);
+            moleculeObject.name = "Molecule_" + data.moleculeType;
+            moleculeObjects[data.moleculeType] = moleculeObject;
 
-    public void AddData(MoleculeCSVData data)
-    {
-        moleculeCSVData.Add(data);
-    }
-
-    public void UpdateVoxelMaterial(int moleculeType, float concentration)
-    {
-        if (moleculeType >= 0 && moleculeType < moleculeMaterials.Length)
-        {
-            voxelRenderer.material = moleculeMaterials[moleculeType];
-            // Adjust alpha based on concentration
-            float alphaValue = Mathf.Lerp(0f, 1f, concentration / maxConcentration);
-            alphaValue = Mathf.Clamp(alphaValue, 0f, 1f);
-            Color color = voxelRenderer.material.color;
-            color.a = alphaValue;
-            voxelRenderer.material.color = color;
-        }
-        else
-        {
-            Debug.LogWarning("Invalid molecule type provided. Cannot update material.");
-        }
-    }
-
-    public void UpdateVoxelForBioTick(int bioTick)
-    {
-        var relevantData = moleculeCSVData.FirstOrDefault(data => data.bioTick == bioTick);
-        if (relevantData != null)
-        {
-            UpdateVoxelMaterial(relevantData.moleculeType, relevantData.concentration);
-            UpdateVoxelData(relevantData);
-        }
-    }
-
-    public void UpdateVoxelData(MoleculeCSVData data)
-    {
-        voxelRenderer = GetComponent<MeshRenderer>();
-        // Select the material based on the molecule type
-        // Ensuring the first material corresponds to moleculeType = 0
-        if (data.moleculeType >= 0 && data.moleculeType < moleculeMaterials.Length)
-        {
-            voxelRenderer.material = moleculeMaterials[data.moleculeType];
-        }
-        else
-        {
-            Debug.LogWarning($"Invalid molecule type provided: {data.moleculeType}. Cannot update material.");
-            return;
+            // Find and apply the material corresponding to the molecule type
+            string materialName = $"moleculeType{data.moleculeType}";
+            var material = Resources.Load<Material>(materialName); // Assumes the materials are located in a Resources folder
+            if (material != null)
+            {
+                var renderer = moleculeObject.GetComponent<Renderer>();
+                renderer.material = material;
+            }
+            else
+            {
+                Debug.LogWarning($"Material '{materialName}' not found. Ensure it's located in a Resources folder.");
+            }
         }
 
-        // Calculate and clamp the alpha value based on concentration
-        float alphaValue = Mathf.Lerp(0f, 1f, data.concentration / maxConcentration);
-        alphaValue = Mathf.Clamp(alphaValue, 0f, 1f);
-
-        // Update the material's alpha value
-        Color color = voxelRenderer.material.color;
-        color.a = alphaValue;
-        voxelRenderer.material.color = color;
+        // Adjust the moleculeObject based on the concentration
+        AdjustMoleculeVisualization(moleculeObject, data);
     }
 
-    public int GetVoxelGlobalID()
+    private void AdjustMoleculeVisualization(GameObject moleculeObject, MoleculeCSVData data)
     {
-        return globalID;
+        // Example: adjust the size and color based on concentration
+        float scale = Mathf.Clamp(data.concentration, 0.1f, 1f); // Adjust scaling logic based on actual concentration range
+        moleculeObject.transform.localScale = new Vector3(scale, scale, scale);
+    }
+
+    public void UpdateVoxelForBioTick(int bioTick, List<MoleculeCSVData> dataList)
+    {
+        foreach (var data in dataList)
+        {
+            UpdateOrCreateMoleculeObject(data);
+        }
     }
 }

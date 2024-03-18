@@ -81,17 +81,17 @@ public class SimulationManager : MonoBehaviour
         StartCoroutine(csvReader.PreloadCellPositionData(() =>
         {
             isCellDataLoaded = true;
-            isVoxelDataLoaded = true;
+            //isVoxelDataLoaded = true;
             CheckDataLoadingCompletion();
         }));
-        /*
-                StartCoroutine(csvReader.PreloadMoleculeData(() =>
-                {
-                    
-                    GenerateVoxelGrid();
-                    CheckDataLoadingCompletion();
-                }));
-        */
+
+        StartCoroutine(csvReader.PreloadMoleculeData(() =>
+        {
+
+            GenerateVoxelGrid();
+            CheckDataLoadingCompletion();
+        }));
+
         void CheckDataLoadingCompletion()
         {
             if (isCellDataLoaded && isVoxelDataLoaded)
@@ -245,11 +245,7 @@ public class SimulationManager : MonoBehaviour
                     cellManager.UpdateState(currentBioTick);
                 }
 
-                foreach (GameObject voxelObject in spawnedVoxels)
-                {
-                    VoxelManager voxelManager = voxelObject.GetComponent<VoxelManager>();
-                    voxelManager.UpdateVoxelForBioTick(currentBioTick);
-                }
+                UpdateVoxelsForBioTick(currentBioTick);
             }
         }
     }
@@ -312,24 +308,20 @@ public class SimulationManager : MonoBehaviour
                     // Calculate the position based on grid coordinates and voxel dimensions
                     Vector3 position = startPosition + new Vector3(x * voxelDimensions.x, y * voxelDimensions.y, z * voxelDimensions.z);
 
-                    List<MoleculeCSVData> voxelDataList = csvReader.GetDataForVoxel(voxelIndex);
+                    // Check if there is molecule data for the current voxel index
+                    List<MoleculeCSVData> voxelDataList = csvReader.GetDataForVoxel(voxelIndex, currentBioTick);
                     if (voxelDataList.Count > 0)
                     {
-                        // Assuming we take the first entry as the data example
-                        MoleculeCSVData data = voxelDataList[0];
-
                         // Instantiate voxel GameObject and initialize its properties using voxelData
-                        GameObject voxelGO = Instantiate(voxelPrefab, position, Quaternion.identity);
-                        voxelGO.transform.parent = transform;
+                        GameObject voxelGO = Instantiate(voxelPrefab, position, Quaternion.identity, transform);
                         VoxelManager voxelManager = voxelGO.GetComponent<VoxelManager>();
                         voxelGO.transform.name = "Voxel_" + voxelIndex;
                         spawnedVoxels.Add(voxelGO);
 
+                        // Initialize the voxel with all molecule data pertaining to it
                         if (voxelManager != null)
                         {
-                            voxelManager.Initialize(data.globalID, data);
-
-                            voxelManager.UpdateVoxelData(data);
+                            voxelManager.Initialize(voxelIndex, voxelDataList); // Adjusted to pass the whole list
                         }
                     }
 
@@ -396,6 +388,22 @@ public class SimulationManager : MonoBehaviour
         if (timeSlider != null)
         {
             timeSlider.value = bioTick;
+        }
+    }
+
+    private void UpdateVoxelsForBioTick(int bioTick)
+    {
+        foreach (GameObject voxelObject in spawnedVoxels)
+        {
+            VoxelManager voxelManager = voxelObject.GetComponent<VoxelManager>();
+            int globalID = voxelManager.globalID;
+            // Retrieve the list of MoleculeCSVData for the current bioTick and voxel
+            List<MoleculeCSVData> dataList = csvReader.GetDataForVoxel(globalID, bioTick);
+            if (dataList != null && dataList.Count > 0)
+            {
+                // Update the voxel for the current bioTick with the retrieved data list
+                voxelManager.UpdateVoxelForBioTick(bioTick, dataList);
+            }
         }
     }
 
