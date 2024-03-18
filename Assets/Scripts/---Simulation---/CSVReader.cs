@@ -32,7 +32,7 @@ public class CSVReader : MonoBehaviour
     public static CSVReader instance;
 
     [Header("CellPosition CSV")]
-    public string cellPositionCSVFilePath = "Assets/Resources/CellPosition.csv";
+    public string cellPositionCSVFilePath = "Assets/Resources/cellPosition.csv";
     public int cellPositionCSVLinesPerFrame = 5000; // Adjust based on performance
     [SerializeField] private int cellPositionCSVLinesLoaded = 0;
     private Dictionary<int, List<CellPositionCSVData>> cellPositionData = new Dictionary<int, List<CellPositionCSVData>>();
@@ -128,6 +128,7 @@ public class CSVReader : MonoBehaviour
         {
             string line;
             int lineCount = 0;
+            List<MoleculeCSVData> batch = new List<MoleculeCSVData>(); // Prepare a batch list
 
             while ((line = reader.ReadLine()) != null)
             {
@@ -136,29 +137,31 @@ public class CSVReader : MonoBehaviour
                 string[] values = line.Split(',');
                 if (values.Length >= 4)
                 {
-                    MoleculeCSVData data = new MoleculeCSVData();
-                    if (int.TryParse(values[0].Trim(), out data.globalID) &&
-                        float.TryParse(values[1].Trim(), out data.concentration) &&
-                        int.TryParse(values[2].Trim(), out data.moleculeType) &&
-                        int.TryParse(values[3].Trim(), out data.bioTick))
+                    if (TryParseMoleculeCSVLine(values, out MoleculeCSVData data))
                     {
-                        if (!moleculeData.ContainsKey(data.globalID))
-                        {
-                            moleculeData[data.globalID] = new List<MoleculeCSVData>();
-                        }
-                        moleculeData[data.globalID].Add(data);
+                        // Add to batch instead of immediately to the dictionary
+                        batch.Add(data);
                     }
                 }
 
+                // Process in batches
                 if (lineCount % moleculeCSVLinesPerFrame == 0)
                 {
+                    ProcessMoleculeDataBatch(batch); // Process the current batch
+                    batch.Clear(); // Clear the batch for the next round
                     yield return null; // Yield execution to keep the UI responsive
                 }
 
                 moleculeCSVLinesLoaded++;
             }
 
-            // Here, you'd typically update any relevant UI or state to reflect that molecule data has been loaded
+            // Process any remaining data in the batch
+            if (batch.Count > 0)
+            {
+                ProcessMoleculeDataBatch(batch);
+                batch.Clear();
+            }
+
             Debug.Log($"Total MoleExpre CSV lines loaded: {moleculeCSVLinesLoaded}");
             onCompleted?.Invoke();
         }
@@ -213,4 +216,24 @@ public class CSVReader : MonoBehaviour
         get { return cellPositionData; }
     }
 
+    private bool TryParseMoleculeCSVLine(string[] values, out MoleculeCSVData data)
+    {
+        data = new MoleculeCSVData();
+        return int.TryParse(values[0].Trim(), out data.globalID) &&
+               float.TryParse(values[1].Trim(), out data.concentration) &&
+               int.TryParse(values[2].Trim(), out data.moleculeType) &&
+               int.TryParse(values[3].Trim(), out data.bioTick);
+    }
+
+    private void ProcessMoleculeDataBatch(List<MoleculeCSVData> batch)
+    {
+        foreach (var data in batch)
+        {
+            if (!moleculeData.ContainsKey(data.globalID))
+            {
+                moleculeData[data.globalID] = new List<MoleculeCSVData>();
+            }
+            moleculeData[data.globalID].Add(data);
+        }
+    }
 }

@@ -36,6 +36,7 @@ public class SimulationManager : MonoBehaviour
     private Vector3 voxelDimensions;
 
     [Header("Timer")]
+    [SerializeField] private int bioTickStep = 50;
     [SerializeField] private int currentBioTick = 0;
     [SerializeField] private float timeMultiplier = 1.0f; // Adjust the speed of time in your simulation
 
@@ -128,14 +129,14 @@ public class SimulationManager : MonoBehaviour
 
     void InitializeTimeSlider()
     {
-        // This should be called after all data is loaded
         bioTickDisplay.text = "BioTick: " + currentBioTick + "/" + simulationDuration;
 
-        int maxBioTick = simulationDuration; // Make sure this method gets the maximum bioTick from your data
-        timeSlider.maxValue = maxBioTick;
+        // Calculate the number of steps based on the simulation duration and bioTickStep
+        int maxSteps = simulationDuration / bioTickStep;
+        timeSlider.maxValue = maxSteps;
 
-        // Set the slider's current value to the currentBioTick, which might be 0 initially or another value if the simulation was paused/resumed
-        timeSlider.value = currentBioTick;
+        // Set the slider's current value based on the current bio tick and bioTickStep
+        timeSlider.value = currentBioTick / bioTickStep;
     }
 
     public void OnSpawnCellsButtonClicked()
@@ -230,7 +231,7 @@ public class SimulationManager : MonoBehaviour
             // Check if at least one whole bio tick has passed
             while (timeAccumulator >= 1.0f)
             {
-                currentBioTick++;
+                currentBioTick += bioTickStep;
 
                 UpdateSliderValue(currentBioTick);
 
@@ -353,7 +354,7 @@ public class SimulationManager : MonoBehaviour
 
     void HandleSliderValueChanged(float value)
     {
-        currentBioTick = (int)value;
+        currentBioTick = (int)value * bioTickStep;
         UpdateSimulationStateToCurrentBioTick();
     }
 
@@ -387,7 +388,8 @@ public class SimulationManager : MonoBehaviour
     {
         if (timeSlider != null)
         {
-            timeSlider.value = bioTick;
+            // Convert the current bio tick to steps for the slider
+            timeSlider.value = bioTick / bioTickStep;
         }
     }
 

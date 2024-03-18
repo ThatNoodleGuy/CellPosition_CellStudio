@@ -1124,18 +1124,18 @@ MonoBehaviour:
   cellTypeMaterialSets:
   - cellType: Monocyte
     materials:
-    - {fileID: 2100000, guid: 3c25a1b889e1573c08823a90c90fc53e, type: 2}
-    - {fileID: 2100000, guid: 1de8867a24aef9028844be9e064f766d, type: 2}
-    - {fileID: 2100000, guid: 178441e9717a54000bd12a68bb6d571a, type: 2}
-    - {fileID: 2100000, guid: 68d518bb35b2841518c990781c25c80b, type: 2}
-    - {fileID: 2100000, guid: 2cda19bba4329a44ab28f9b02905d2bd, type: 2}
+    - {fileID: 2100000, guid: e8a575d1289ca5e438495a49a71964f4, type: 2}
+    - {fileID: 2100000, guid: 53e42be484ec7e94db57e7cbbe73ac66, type: 2}
+    - {fileID: 2100000, guid: da7b1ac81b2e16a4c8267bd186920b21, type: 2}
+    - {fileID: 2100000, guid: fcd08d601c9034f4f945e6aa3706087c, type: 2}
+    - {fileID: 2100000, guid: 4b20e07e151114946bffe8af04a8f2a1, type: 2}
   - cellType: TCell
     materials:
-    - {fileID: 2100000, guid: 12be24957f96a06439a8abbc1d39926b, type: 2}
-    - {fileID: 2100000, guid: 9fd6dcdb89d1ef24c82f630e4c8069ae, type: 2}
-    - {fileID: 2100000, guid: 193f230bac195584f81a21a602132d1f, type: 2}
-    - {fileID: 2100000, guid: ee414bb3ba3e7664d817f45638d0d5ba, type: 2}
-    - {fileID: 2100000, guid: a0dfa1ba3011ede4eb3430715274be31, type: 2}
+    - {fileID: 2100000, guid: 65b5abdba051f724488f48cc6be9512a, type: 2}
+    - {fileID: 2100000, guid: 256fa34d42b38d14096553f3dd3b1420, type: 2}
+    - {fileID: 2100000, guid: bcef77524d6939149afa54ca16a6eec0, type: 2}
+    - {fileID: 2100000, guid: ce2c60cfecf35a9499b4d05ad716770f, type: 2}
+    - {fileID: 2100000, guid: 4b5c7d7c8bfb62f4791d5dd47d3fbe25, type: 2}
   cellPrefab: {fileID: 1580431748523265128, guid: 0bda9ade7c71aea1c93acc1bb737527d, type: 3}
   spawnedCells: []
   voxelPrefab: {fileID: 2606775755480607014, guid: d4bbcd2dc7bb2264a985ce261e6bd872, type: 3}

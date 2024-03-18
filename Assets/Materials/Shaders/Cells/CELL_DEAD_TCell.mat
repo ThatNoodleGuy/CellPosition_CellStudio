@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: moleculeType1
-  m_Shader: {fileID: 4800000, guid: a21f1cffc21363f4394544a096ed5a39, type: 3}
+  m_Name: CELL_DEAD_TCell
+  m_Shader: {fileID: 4800000, guid: d570bfd7b79d76f41b7491432941dffd, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -30,5 +30,5 @@ Material:
     m_Ints: []
     m_Floats: []
     m_Colors:
-    - _Color: {r: 1, g: 0.3529412, b: 0.3529412, a: 1}
+    - _Color: {r: 0.27450982, g: 0.27450982, b: 0.27450982, a: 0.7058824}
   m_BuildTextureStacks: []
