@@ -16,9 +16,9 @@
             <name>Area 1</name>
             <ID>0</ID>
             <area_size> 	
-				<x value_type="scalar">500</x> 	
-				<y value_type="scalar">500</y> 	
-				<z value_type="scalar">500</z> 
+				<x value_type="scalar">510</x> 	
+				<y value_type="scalar">510</y> 	
+				<z value_type="scalar">510</z> 
 			</area_size>
 			<area_origin>
 				<x value_type="scalar">0</x>
@@ -55,7 +55,7 @@
             <cell_type>APC</cell_type>
 			<ID>0</ID>
             <regionID>0</regionID>
-            <cell_population_size 				value_type="scalar">1000</cell_population_size>
+            <cell_population_size 				value_type="scalar">2500</cell_population_size>
 			<cell_size_distribution  			value_type="distribution_Uniform"> <min>7</min> <max>9</max> </cell_size_distribution>
             <cell_speed_distribution 			value_type="distribution_Uniform"> <min>0.1</min> <max>0.2</max> </cell_speed_distribution>
             <cell_death_distribution 			value_type="distribution_Uniform"> <min>0.000010</min> <max>0.000010</max> </cell_death_distribution>
@@ -111,7 +111,7 @@
 			<cell_type>CD8+ T-Cell</cell_type>
 		    <ID>1</ID>
             <regionID>0</regionID>
-            <cell_population_size 	 			value_type="scalar">1000</cell_population_size>
+            <cell_population_size 	 			value_type="scalar">2500</cell_population_size>
 			<cell_size_distribution  			value_type="distribution_Uniform"> <min>4</min> <max>6</max> </cell_size_distribution>
             <cell_speed_distribution 			value_type="distribution_Uniform"> <min>0.1</min> <max>0.2</max> </cell_speed_distribution>
             <cell_death_distribution 			value_type="distribution_Uniform"> <min>-1</min> <max>-1</max> </cell_death_distribution>

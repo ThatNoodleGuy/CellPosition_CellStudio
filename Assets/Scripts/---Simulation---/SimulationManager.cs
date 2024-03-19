@@ -117,7 +117,7 @@ public class SimulationManager : MonoBehaviour
 
         onScreenText.text = "Preloading Data, Please Wait...";
 
-        LoadConfigurationFromXML("Assets/Resources/ExampleReduced_SV.xml");
+        LoadConfigurationFromXML("Assets/Resources/E0.xml");
 
         exitButton.onClick.AddListener(ExitSimulation);
 

@@ -37,7 +37,7 @@ public class CylindersGenerator : MonoBehaviour
         XmlDocument exampleReducedDoc = new XmlDocument();
         exampleReducedDoc.LoadXml(exampleReducedXml);
 
-        // Parse the ExampleReduced_SV.xml to retrieve the cylinder shift information
+        // Parse the E0.xml to retrieve the cylinder shift information
         XmlNodeList shiftNodes = exampleReducedDoc.GetElementsByTagName("CylindersShift");
         if (shiftNodes.Count > 0)
         {

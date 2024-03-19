@@ -51,17 +51,17 @@ Shader "Custom/TransparentWithStencilWrite" {
 
             fixed4 frag (v2f i) : SV_Target {
                 // Sample the noise texture
-                float noise = tex2D(_NoiseTex, i.uv * 4.0).r; // Adjust UV scaling for noise
+                float noise = tex2D(_NoiseTex, i.uv * 20.0).r; // Adjust UV scaling for noise
 
                 // Calculate distance in local space
                 float dist = length(i.localPos); // Use local position for distance calculation
 
                 // Incorporate noise into the fade effect for a more cloud-like appearance
-                float alphaFade = saturate(4.0 - dist / 15.0 + noise * 0.001); // Mix distance and noise for fade
+                float alphaFade = saturate(1.0 - dist / 2.0 + noise * 0.1); // Mix distance and noise for fade
 
                 fixed4 col = tex2D(_MainTex, i.uv) * _Color;
                 // Apply the modified alpha fade effect
-                col.a *= alphaFade * 0.5f; // Apply both the distance-based and noise-modulated fade
+                col.a *= alphaFade * 0.85f; // Apply both the distance-based and noise-modulated fade
                 return col;
             }
             ENDCG

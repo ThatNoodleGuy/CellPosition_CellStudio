@@ -15,7 +15,7 @@ public class CameraController : MonoBehaviour
 
     private void Start()
     {
-        LoadConfigurationFromXML("Assets/Resources/ExampleReduced_SV.xml");
+        LoadConfigurationFromXML("Assets/Resources/E0.xml");
     }
 
     private void Update()

@@ -19,7 +19,7 @@ public class SimulationAreaRenderer : MonoBehaviour
     void ParseXMLAndGeneratePoints()
     {
         XmlDocument xmlDoc = new XmlDocument();
-        xmlDoc.Load("Assets/Resources/ExampleReduced_SV.xml");
+        xmlDoc.Load("Assets/Resources/E0.xml");
         XmlNode areaSizeNode = xmlDoc.SelectSingleNode("//Environments/array_element_0/area_size");
 
         float x = float.Parse(areaSizeNode.SelectSingleNode("x").InnerText);
