@@ -43,6 +43,7 @@ public class CSVReader : MonoBehaviour
     [SerializeField] private int moleculeCSVLinesLoaded = 0;
     private Dictionary<int, List<MoleculeCSVData>> moleculeData = new Dictionary<int, List<MoleculeCSVData>>();
 
+
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -54,6 +55,7 @@ public class CSVReader : MonoBehaviour
             instance = this;
         }
     }
+
 
     public IEnumerator PreloadCellPositionData(Action onCompleted = null)
     {
@@ -114,6 +116,7 @@ public class CSVReader : MonoBehaviour
         }
     }
 
+
     public IEnumerator PreloadMoleculeData(Action onCompleted = null)
     {
         moleculeCSVLinesLoaded = 0; // Reset count at the start
@@ -167,6 +170,7 @@ public class CSVReader : MonoBehaviour
         }
     }
 
+
     public List<CellPositionCSVData> GetDataForAgent(int agentID)
     {
         if (cellPositionData.ContainsKey(agentID))
@@ -175,6 +179,7 @@ public class CSVReader : MonoBehaviour
         }
         return new List<CellPositionCSVData>();
     }
+
 
     public List<MoleculeCSVData> GetDataForVoxel(int globalID, int bioTick)
     {
@@ -187,15 +192,18 @@ public class CSVReader : MonoBehaviour
         return new List<MoleculeCSVData>();
     }
 
+
     public List<int> GetAllAgentIDs()
     {
         return cellPositionData.Keys.ToList();
     }
 
+
     public List<int> GetAllVoxelsIDs()
     {
         return moleculeData.Keys.ToList();
     }
+
 
     public int GetMaxBioTick()
     {
@@ -211,10 +219,12 @@ public class CSVReader : MonoBehaviour
         return maxBioTick;
     }
 
+
     public Dictionary<int, List<CellPositionCSVData>> CellPositionData
     {
         get { return cellPositionData; }
     }
+
 
     private bool TryParseMoleculeCSVLine(string[] values, out MoleculeCSVData data)
     {
@@ -224,6 +234,7 @@ public class CSVReader : MonoBehaviour
                int.TryParse(values[2].Trim(), out data.moleculeType) &&
                int.TryParse(values[3].Trim(), out data.bioTick);
     }
+
 
     private void ProcessMoleculeDataBatch(List<MoleculeCSVData> batch)
     {
@@ -236,4 +247,13 @@ public class CSVReader : MonoBehaviour
             moleculeData[data.globalID].Add(data);
         }
     }
+
+
+    public List<MoleculeCSVData> GetAllMoleculeData()
+    {
+        // Assuming moleculeData contains all data correctly
+        return moleculeData.Values.SelectMany(list => list).ToList();
+    }
+
+
 }

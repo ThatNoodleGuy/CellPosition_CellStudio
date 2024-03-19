@@ -36,7 +36,7 @@ public class SimulationManager : MonoBehaviour
     private Vector3 voxelDimensions;
 
     [Header("Timer")]
-    [SerializeField] private int bioTickStep = 50;
+    private int bioTickStep = 50;
     [SerializeField] private int currentBioTick = 0;
     [SerializeField] private float timeMultiplier = 1.0f; // Adjust the speed of time in your simulation
 
@@ -76,7 +76,8 @@ public class SimulationManager : MonoBehaviour
         timeSlider.gameObject.SetActive(false);
     }
 
-    void HandleDataLoaded()
+
+    private void HandleDataLoaded()
     {
         // Assuming csvReader is an instance of CSVReader
         StartCoroutine(csvReader.PreloadCellPositionData(() =>
@@ -105,7 +106,8 @@ public class SimulationManager : MonoBehaviour
         }
     }
 
-    void Start()
+
+    private void Start()
     {
         cellMaterialsMap = new Dictionary<string, Material[]>();
         foreach (var set in cellTypeMaterialSets)
@@ -127,7 +129,8 @@ public class SimulationManager : MonoBehaviour
         HandleDataLoaded();
     }
 
-    void InitializeTimeSlider()
+
+    private void InitializeTimeSlider()
     {
         bioTickDisplay.text = "BioTick: " + currentBioTick + "/" + simulationDuration;
 
@@ -139,12 +142,14 @@ public class SimulationManager : MonoBehaviour
         timeSlider.value = currentBioTick / bioTickStep;
     }
 
+
     public void OnSpawnCellsButtonClicked()
     {
         spawnCellsButton.gameObject.SetActive(false); // Hide the spawn button
         onScreenText.text = "Please Wait...";
         StartCoroutine(PreloadDataAndInitializeCells());
     }
+
 
     public void OnStartSimulationButtonClicked()
     {
@@ -159,7 +164,8 @@ public class SimulationManager : MonoBehaviour
         InitializeTimeSlider();
     }
 
-    IEnumerator PreloadDataAndInitializeCells()
+
+    private IEnumerator PreloadDataAndInitializeCells()
     {
         var agentIDs = csvReader.GetAllAgentIDs();
         int cellsPerBatch = 1000; // Adjust based on performance
@@ -197,7 +203,8 @@ public class SimulationManager : MonoBehaviour
 
     }
 
-    GameObject FindOrCreateCell(int agentID, string cellType)
+
+    private GameObject FindOrCreateCell(int agentID, string cellType)
     {
         foreach (GameObject cell in spawnedCells)
         {
@@ -216,7 +223,8 @@ public class SimulationManager : MonoBehaviour
         return newCell;
     }
 
-    IEnumerator CheckForUpdates()
+
+    private IEnumerator CheckForUpdates()
     {
         float timeAccumulator = 0f; // Accumulate time here
 
@@ -251,6 +259,7 @@ public class SimulationManager : MonoBehaviour
         }
     }
 
+
     public void PauseSimulation()
     {
         timeMultiplier = 0;
@@ -258,12 +267,14 @@ public class SimulationManager : MonoBehaviour
         resumeSimulationButton.gameObject.SetActive(true);
     }
 
+
     public void ResumeSimulation()
     {
         timeMultiplier = 1.0f;
         pauseSimulationButton.gameObject.SetActive(true);
         resumeSimulationButton.gameObject.SetActive(false);
     }
+
 
     void LoadConfigurationFromXML(string filePath)
     {
@@ -289,6 +300,7 @@ public class SimulationManager : MonoBehaviour
             float.Parse(areaStepNode.SelectSingleNode("z").InnerText));
     }
 
+
     void GenerateVoxelGrid()
     {
         int voxelIndex = 0;
@@ -298,7 +310,8 @@ public class SimulationManager : MonoBehaviour
             gridSize.y / voxelDimensions.y,
             gridSize.z / voxelDimensions.z);
 
-        Vector3 startPosition = transform.position; // Adjust as needed
+        Vector3 startPosition = transform.position;
+        startPosition += voxelDimensions * 0.5f;
 
         for (int z = 0; z < gridCubeNumber.z; z++)
         {
@@ -333,6 +346,7 @@ public class SimulationManager : MonoBehaviour
         isVoxelDataLoaded = true;
     }
 
+
     public Material[] GetMaterialsForCellType(string cellType)
     {
         if (string.IsNullOrEmpty(cellType))
@@ -352,11 +366,13 @@ public class SimulationManager : MonoBehaviour
         }
     }
 
+
     void HandleSliderValueChanged(float value)
     {
         currentBioTick = (int)value * bioTickStep;
         UpdateSimulationStateToCurrentBioTick();
     }
+
 
     void UpdateSimulationStateToCurrentBioTick()
     {
@@ -366,6 +382,7 @@ public class SimulationManager : MonoBehaviour
             cellManager.UpdateStateToTick(currentBioTick);
         }
     }
+
 
     public void UpdateSliderMaxValue()
     {
@@ -384,6 +401,7 @@ public class SimulationManager : MonoBehaviour
         Debug.Log($"Max BioTick updated to: {maxBioTick}");
     }
 
+
     void UpdateSliderValue(int bioTick)
     {
         if (timeSlider != null)
@@ -393,21 +411,46 @@ public class SimulationManager : MonoBehaviour
         }
     }
 
+
     private void UpdateVoxelsForBioTick(int bioTick)
     {
+        // Calculate global maximum concentrations for this bioTick
+        var globalMaxConcentrationPerType = CalculateGlobalMaxConcentration();
+
         foreach (GameObject voxelObject in spawnedVoxels)
         {
             VoxelManager voxelManager = voxelObject.GetComponent<VoxelManager>();
             int globalID = voxelManager.globalID;
-            // Retrieve the list of MoleculeCSVData for the current bioTick and voxel
+
+            // Ensure to get data for the current bioTick
             List<MoleculeCSVData> dataList = csvReader.GetDataForVoxel(globalID, bioTick);
+
+            // Pass globalMaxConcentrationPerType to each voxel manager
             if (dataList != null && dataList.Count > 0)
             {
-                // Update the voxel for the current bioTick with the retrieved data list
-                voxelManager.UpdateVoxelForBioTick(bioTick, dataList);
+                voxelManager.UpdateVoxelForBioTick(bioTick, dataList, globalMaxConcentrationPerType);
             }
         }
     }
+
+    /// a method to calculate the global maximum concentrations and update it every bioTick
+    private Dictionary<int, float> CalculateGlobalMaxConcentration()
+    {
+        var globalMaxConcentrationPerType = new Dictionary<int, float>();
+
+        // This assumes GetAllMoleculeData() provides all molecule data correctly
+        var allMoleculeData = csvReader.GetAllMoleculeData();
+        foreach (var data in allMoleculeData)
+        {
+            if (!globalMaxConcentrationPerType.ContainsKey(data.moleculeType) ||
+                data.concentration > globalMaxConcentrationPerType[data.moleculeType])
+            {
+                globalMaxConcentrationPerType[data.moleculeType] = data.concentration;
+            }
+        }
+        return globalMaxConcentrationPerType;
+    }
+
 
     public void ExitSimulation()
     {

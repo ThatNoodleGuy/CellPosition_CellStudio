@@ -1140,7 +1140,8 @@ MonoBehaviour:
   spawnedCells: []
   voxelPrefab: {fileID: 2606775755480607014, guid: d4bbcd2dc7bb2264a985ce261e6bd872, type: 3}
   spawnedVoxels: []
-  currentBioTick: 0
+  bioTickStep: 50
+  currentBioTick: 4500
   timeMultiplier: 1
   spawnCellsButton: {fileID: 787233666}
   startSimulationButton: {fileID: 1417734900}

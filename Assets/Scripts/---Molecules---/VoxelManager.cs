@@ -66,6 +66,7 @@ public class VoxelManager : MonoBehaviour
         if (originalMaterial != null)
         {
             Renderer renderer = moleculeObject.GetComponent<Renderer>();
+            // Instantiate a new Material instance based on the original material
             renderer.material = new Material(originalMaterial);
         }
         else
@@ -76,9 +77,9 @@ public class VoxelManager : MonoBehaviour
 
 
     /// Updates the visualization of molecules within the voxel for a specific bio tick.
-    public void UpdateVoxelForBioTick(int bioTick, List<MoleculeCSVData> dataList)
+    public void UpdateVoxelForBioTick(int bioTick, List<MoleculeCSVData> dataList, Dictionary<int, float> globalMaxConcentrationPerType)
     {
-        Dictionary<int, float> globalMaxConcentrationPerType = CalculateGlobalMaxConcentrationPerType(dataList);
+        // No need to calculate globalMaxConcentrationPerType here; it's passed in directly
 
         moleculeObjects.Values.ToList().ForEach(Destroy);
         moleculeObjects.Clear();
@@ -92,15 +93,6 @@ public class VoxelManager : MonoBehaviour
         }
     }
 
-
-    private Dictionary<int, float> CalculateGlobalMaxConcentrationPerType(List<MoleculeCSVData> dataList)
-    {
-        return dataList
-            .GroupBy(data => data.moleculeType)
-            .ToDictionary(group => group.Key, group => group.Max(data => data.concentration));
-    }
-
-
     /// Adjusts the visibility and alpha value of a molecule object based on its concentration.
     private void AdjustMoleculeVisualization(GameObject moleculeObject, MoleculeCSVData data, Dictionary<int, float> globalMaxConcentrationPerType)
     {
@@ -109,8 +101,10 @@ public class VoxelManager : MonoBehaviour
         {
             float maxConcentration = globalMaxConcentrationPerType[data.moleculeType];
             float relativeConcentration = data.concentration / maxConcentration;
-            float alphaValue = Mathf.Clamp(relativeConcentration, 0.1f, 0.95f); // Ensures no full opacity
-            renderer.material.color = new Color(renderer.material.color.r, renderer.material.color.g, renderer.material.color.b, alphaValue);
+            float alphaValue = Mathf.Clamp(relativeConcentration, 0.001f, 0.99f); // Ensures no full opacity
+            Color newColor = renderer.material.color;
+            newColor.a = alphaValue;
+            renderer.material.color = newColor; // Apply the new color with adjusted alpha
             renderer.enabled = true;
         }
         else
