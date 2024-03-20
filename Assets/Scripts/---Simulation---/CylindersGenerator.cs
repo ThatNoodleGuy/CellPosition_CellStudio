@@ -19,10 +19,10 @@ public class CylindersGenerator : MonoBehaviour
             return;
         }
 
-        TextAsset xmlExampleReducedSV = Resources.Load<TextAsset>("ExampleReduced_SV");
+        TextAsset xmlExampleReducedSV = Resources.Load<TextAsset>("E0");
         if (xmlExampleReducedSV == null)
         {
-            Debug.LogError("Failed to load ExampleReduced_SV XML file.");
+            Debug.LogError("Failed to load E0 XML file.");
             return;
         }
 
