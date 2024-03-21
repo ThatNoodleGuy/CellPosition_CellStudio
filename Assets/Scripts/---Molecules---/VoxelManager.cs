@@ -21,7 +21,6 @@ public class VoxelManager : MonoBehaviour
     private float totalConcentration;
     private const float negligibleConcentrationThreshold = 0.01f; // Adjust as needed
 
-
     /// Initializes the voxel manager with a global ID and an optional list of initial molecule data.
     public void Initialize(int globalID, List<MoleculeCSVData> initialDataList = null)
     {
@@ -33,13 +32,11 @@ public class VoxelManager : MonoBehaviour
         }
     }
 
-
     /// Calculates the total concentration of all molecules in the voxel.
     private void CalculateTotalConcentration(List<MoleculeCSVData> dataList)
     {
         totalConcentration = dataList.Sum(data => data.concentration);
     }
-
 
     /// Updates an existing molecule object or creates a new one if it doesn't exist.
     /// Applies visualization adjustments based on molecule concentration.
@@ -58,7 +55,6 @@ public class VoxelManager : MonoBehaviour
         AdjustMoleculeVisualization(moleculeObject, data, globalMaxConcentrationPerType);
     }
 
-
     /// Assigns a material to a molecule object based on its type. Ensures each molecule has a unique material instance.
     private void ApplyMaterial(GameObject moleculeObject, int moleculeType)
     {
@@ -76,12 +72,9 @@ public class VoxelManager : MonoBehaviour
         }
     }
 
-
     /// Updates the visualization of molecules within the voxel for a specific bio tick.
     public void UpdateVoxelForBioTick(int bioTick, List<MoleculeCSVData> dataList, Dictionary<int, float> globalMaxConcentrationPerType)
     {
-        // No need to calculate globalMaxConcentrationPerType here; it's passed in directly
-
         moleculeObjects.Values.ToList().ForEach(Destroy);
         moleculeObjects.Clear();
 
@@ -113,5 +106,4 @@ public class VoxelManager : MonoBehaviour
             renderer.enabled = false;
         }
     }
-
 }

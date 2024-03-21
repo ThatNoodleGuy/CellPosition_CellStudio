@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.IO;
 using System.Linq;
 using UnityEngine;
@@ -31,18 +32,19 @@ public class CSVReader : MonoBehaviour
 {
     public static CSVReader instance;
 
-    [Header("CellPosition CSV")]
+    [Header("File Paths")]
     public string cellPositionCSVFilePath = "Assets/Resources/cellPosition.csv";
-    public int cellPositionCSVLinesPerFrame = 5000; // Adjust based on performance
-    [SerializeField] private int cellPositionCSVLinesLoaded = 0;
-    private Dictionary<int, List<CellPositionCSVData>> cellPositionData = new Dictionary<int, List<CellPositionCSVData>>();
-
-    [Header("Molecule CSV")]
     public string moleculeCSVFilePath = "Assets/Resources/MolExpr.csv";
-    public int moleculeCSVLinesPerFrame = 5000; // Adjust based on performance
-    [SerializeField] private int moleculeCSVLinesLoaded = 0;
-    private Dictionary<int, List<MoleculeCSVData>> moleculeData = new Dictionary<int, List<MoleculeCSVData>>();
 
+    [Header("Progress Tracking")]
+    [SerializeField] private int cellPositionCSVLinesLoaded = 0;
+    [SerializeField] private int moleculeCSVLinesLoaded = 0;
+
+    [Header("Performance Settings")]
+    public int linesPerBatch = 5000; // Adjust based on performance
+
+    private Dictionary<int, List<CellPositionCSVData>> cellPositionData = new Dictionary<int, List<CellPositionCSVData>>();
+    private Dictionary<int, List<MoleculeCSVData>> moleculeData = new Dictionary<int, List<MoleculeCSVData>>();
 
     private void Awake()
     {
@@ -56,185 +58,84 @@ public class CSVReader : MonoBehaviour
         }
     }
 
-
-    public IEnumerator PreloadCellPositionData(Action onCompleted = null)
+    public async Task LoadDataAsync()
     {
-        cellPositionCSVLinesLoaded = 0;
+        await Task.WhenAll(
+            LoadCellPositionDataAsync(),
+            LoadMoleculeDataAsync()
+        );
+        Debug.Log("Data loading complete.");
+    }
 
-        if (!File.Exists(cellPositionCSVFilePath))
-        {
-            Debug.LogError("CSV file not found at path: " + cellPositionCSVFilePath);
-            yield break;
-        }
-
-        using (StreamReader reader = new StreamReader(cellPositionCSVFilePath))
+    private async Task LoadCellPositionDataAsync()
+    {
+        using (var reader = new StreamReader(cellPositionCSVFilePath))
         {
             string line;
-            int lineCount = 0;
-
-            while ((line = reader.ReadLine()) != null)
+            while ((line = await reader.ReadLineAsync()) != null)
             {
-                // Skip the header line
-                if (lineCount++ == 0) continue;
-
-                string[] values = line.Split(',');
-                if (values.Length >= 10)
-                {
-                    CellPositionCSVData data = new CellPositionCSVData();
-                    if (int.TryParse(values[0].Trim(), out data.agentID) &&
-                        float.TryParse(values[1].Trim(), out data.bioTicks) &&
-                        float.TryParse(values[2].Trim(), out data.posX) &&
-                        float.TryParse(values[3].Trim(), out data.posY) &&
-                        float.TryParse(values[4].Trim(), out data.posZ) &&
-                        int.TryParse(values[5].Trim(), out data.interactionType) &&
-                        int.TryParse(values[6].Trim(), out data.otherCellID) &&
-                        int.TryParse(values[8].Trim(), out data.cylinderInteraction))
-                    {
-                        // Direct assignment for strings, no need for TryParse
-                        data.cellType = values[7].Trim();
-                        data.cellState = values[9].Trim();
-
-                        if (!cellPositionData.ContainsKey(data.agentID))
-                        {
-                            cellPositionData[data.agentID] = new List<CellPositionCSVData>();
-                        }
-                        cellPositionData[data.agentID].Add(data);
-                    }
-                }
-
-                if (lineCount % cellPositionCSVLinesPerFrame == 0)
-                {
-                    // Optionally, update a progress bar or log progress
-                    yield return null; // Yield execution to keep the UI responsive
-                }
-
                 cellPositionCSVLinesLoaded++;
-            }
 
-            Debug.Log($"Total CellPosition CSV lines loaded: {cellPositionCSVLinesLoaded}");
-            onCompleted?.Invoke(); // Invoke the completion callback
+                // Skip the header
+                if (cellPositionCSVLinesLoaded == 1) continue;
+
+                var data = ParseCellPositionCSVLine(line);
+                if (data != null)
+                {
+                    if (!cellPositionData.ContainsKey(data.agentID))
+                        cellPositionData[data.agentID] = new List<CellPositionCSVData>();
+                    cellPositionData[data.agentID].Add(data);
+                }
+            }
         }
+        Debug.Log("Finished loading cell position data.");
     }
 
-
-    public IEnumerator PreloadMoleculeData(Action onCompleted = null)
+    private CellPositionCSVData ParseCellPositionCSVLine(string line)
     {
-        moleculeCSVLinesLoaded = 0; // Reset count at the start
-
-        if (!File.Exists(moleculeCSVFilePath))
+        string[] values = line.Split(',');
+        if (values.Length >= 9) // Ensure all expected data is present
         {
-            Debug.LogError("Molecule CSV file not found at path: " + moleculeCSVFilePath);
-            yield break;
+            return new CellPositionCSVData
+            {
+                agentID = int.Parse(values[0]),
+                bioTicks = float.Parse(values[1]),
+                posX = float.Parse(values[2]),
+                posY = float.Parse(values[3]),
+                posZ = float.Parse(values[4]),
+                interactionType = int.Parse(values[5]),
+                otherCellID = int.Parse(values[6]),
+                cellType = values[7],
+                cylinderInteraction = int.Parse(values[8]),
+                cellState = values.Length > 9 ? values[9] : "Unknown" // Optional; check if present
+            };
         }
+        return null; // Line didn't match expected format
+    }
 
-        using (StreamReader reader = new StreamReader(moleculeCSVFilePath))
+    private async Task LoadMoleculeDataAsync()
+    {
+        using (var reader = new StreamReader(moleculeCSVFilePath))
         {
             string line;
-            int lineCount = 0;
-            List<MoleculeCSVData> batch = new List<MoleculeCSVData>(); // Prepare a batch list
-
-            while ((line = reader.ReadLine()) != null)
+            while ((line = await reader.ReadLineAsync()) != null)
             {
-                if (lineCount++ == 0) continue; // Skip the header line
-
-                string[] values = line.Split(',');
-                if (values.Length >= 4)
-                {
-                    if (TryParseMoleculeCSVLine(values, out MoleculeCSVData data))
-                    {
-                        // Add to batch instead of immediately to the dictionary
-                        batch.Add(data);
-                    }
-                }
-
-                // Process in batches
-                if (lineCount % moleculeCSVLinesPerFrame == 0)
-                {
-                    ProcessMoleculeDataBatch(batch); // Process the current batch
-                    batch.Clear(); // Clear the batch for the next round
-                    yield return null; // Yield execution to keep the UI responsive
-                }
-
                 moleculeCSVLinesLoaded++;
-            }
 
-            // Process any remaining data in the batch
-            if (batch.Count > 0)
-            {
-                ProcessMoleculeDataBatch(batch);
-                batch.Clear();
-            }
+                // Skip the header
+                if (moleculeCSVLinesLoaded == 1) continue;
 
-            Debug.Log($"Total MoleExpre CSV lines loaded: {moleculeCSVLinesLoaded}");
-            onCompleted?.Invoke();
-        }
-    }
-
-
-    public List<CellPositionCSVData> GetDataForAgent(int agentID)
-    {
-        if (cellPositionData.ContainsKey(agentID))
-        {
-            return cellPositionData[agentID];
-        }
-        return new List<CellPositionCSVData>();
-    }
-
-
-    public List<MoleculeCSVData> GetDataForVoxel(int globalID, int bioTick)
-    {
-        // Assuming moleculeData stores lists of MoleculeCSVData indexed by globalID
-        if (moleculeData.TryGetValue(globalID, out List<MoleculeCSVData> allData))
-        {
-            // Filter the data for the specific bioTick
-            return allData.Where(data => data.bioTick == bioTick).ToList();
-        }
-        return new List<MoleculeCSVData>();
-    }
-
-
-    public List<int> GetAllAgentIDs()
-    {
-        return cellPositionData.Keys.ToList();
-    }
-
-
-    public List<int> GetAllVoxelsIDs()
-    {
-        return moleculeData.Keys.ToList();
-    }
-
-
-    public int GetMaxBioTick()
-    {
-        int maxBioTick = 0;
-        foreach (var list in cellPositionData.Values)
-        {
-            foreach (var data in list)
-            {
-                if (data.bioTicks > maxBioTick)
-                    maxBioTick = (int)data.bioTicks;
+                var data = ParseMoleculeCSVLine(line);
+                if (data != null)
+                {
+                    if (!moleculeData.ContainsKey(data.globalID))
+                        moleculeData[data.globalID] = new List<MoleculeCSVData>();
+                    moleculeData[data.globalID].Add(data);
+                }
             }
         }
-        return maxBioTick;
+        Debug.Log("Finished loading molecule data.");
     }
-
-
-    public Dictionary<int, List<CellPositionCSVData>> CellPositionData
-    {
-        get { return cellPositionData; }
-    }
-
-
-    private bool TryParseMoleculeCSVLine(string[] values, out MoleculeCSVData data)
-    {
-        data = new MoleculeCSVData();
-        return int.TryParse(values[0].Trim(), out data.globalID) &&
-               float.TryParse(values[1].Trim(), out data.concentration) &&
-               int.TryParse(values[2].Trim(), out data.moleculeType) &&
-               int.TryParse(values[3].Trim(), out data.bioTick);
-    }
-
 
     private void ProcessMoleculeDataBatch(List<MoleculeCSVData> batch)
     {
@@ -248,12 +149,104 @@ public class CSVReader : MonoBehaviour
         }
     }
 
-
-    public List<MoleculeCSVData> GetAllMoleculeData()
+    private MoleculeCSVData ParseMoleculeCSVLine(string line)
     {
-        // Assuming moleculeData contains all data correctly
-        return moleculeData.Values.SelectMany(list => list).ToList();
+        string[] values = line.Split(',');
+        if (values.Length == 4) // Ensure all expected data is present
+        {
+            return new MoleculeCSVData
+            {
+                globalID = int.Parse(values[0]),
+                concentration = float.Parse(values[1]),
+                moleculeType = int.Parse(values[2]),
+                bioTick = int.Parse(values[3])
+            };
+        }
+        return null; // Line didn't match expected format
     }
 
+    public List<CellPositionCSVData> GetCellDataForAgent(int agentID)
+    {
+        if (cellPositionData.TryGetValue(agentID, out var dataList))
+        {
+            return dataList;
+        }
+        return new List<CellPositionCSVData>();
+    }
+
+    public List<MoleculeCSVData> GetMoleculeDataForVoxel(int globalID, int bioTick)
+    {
+        if (moleculeData.TryGetValue(globalID, out var dataList))
+        {
+            return dataList.Where(data => data.bioTick == bioTick).ToList();
+        }
+        return new List<MoleculeCSVData>();
+    }
+
+    // Expose Loaded Lines Count for Editor
+    public int CellPositionCSVLinesLoaded => cellPositionCSVLinesLoaded;
+    public int MoleculeCSVLinesLoaded => moleculeCSVLinesLoaded;
+
+    // Retrieves cell data for a specific agent by ID
+    public List<CellPositionCSVData> GetDataForAgent(int agentID)
+    {
+        return GetCellDataForAgent(agentID); // Utilizes the previously defined method
+    }
+
+    // Retrieves molecule data for a specific voxel and bioTick
+    public List<MoleculeCSVData> GetDataForVoxel(int globalID, int bioTick)
+    {
+        return GetMoleculeDataForVoxel(globalID, bioTick); // Utilizes the previously defined method
+    }
+
+    // Returns a list of all unique agent IDs
+    public List<int> GetAllAgentIDs()
+    {
+        return cellPositionData.Keys.ToList();
+    }
+
+    // Returns a list of all unique voxel IDs
+    public List<int> GetAllVoxelsIDs()
+    {
+        return moleculeData.Keys.ToList();
+    }
+
+    // Calculates the maximum bioTick across all cell position data
+    public int GetMaxBioTick()
+    {
+        return cellPositionData.Values.SelectMany(list => list)
+                                       .Max(data => (int)data.bioTicks);
+    }
+
+    // Accessor for cell position data dictionary
+    public Dictionary<int, List<CellPositionCSVData>> CellPositionData => cellPositionData;
+
+    // Attempts to parse a line of molecule data from the CSV, safely
+    private bool TryParseMoleculeCSVLine(string[] values, out MoleculeCSVData data)
+    {
+        data = null;
+        if (values.Length == 4 &&
+            int.TryParse(values[0].Trim(), out int globalID) &&
+            float.TryParse(values[1].Trim(), out float concentration) &&
+            int.TryParse(values[2].Trim(), out int moleculeType) &&
+            int.TryParse(values[3].Trim(), out int bioTick))
+        {
+            data = new MoleculeCSVData
+            {
+                globalID = globalID,
+                concentration = concentration,
+                moleculeType = moleculeType,
+                bioTick = bioTick
+            };
+            return true;
+        }
+        return false;
+    }
+
+    // Returns all molecule data, flattened from the dictionary
+    public List<MoleculeCSVData> GetAllMoleculeData()
+    {
+        return moleculeData.Values.SelectMany(list => list).ToList();
+    }
 
 }

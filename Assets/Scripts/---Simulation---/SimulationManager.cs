@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.IO;
 using System.Xml;
 using UnityEngine;
@@ -23,8 +24,8 @@ public class SimulationManager : MonoBehaviour
     public static SimulationManager instance;
 
     [Header("Cells")]
-    [SerializeField] private List<CellTypeMaterialSet> cellTypeMaterialSets;
     [SerializeField] private GameObject cellPrefab;
+    [SerializeField] private List<CellTypeMaterialSet> cellTypeMaterialSets;
     private Dictionary<string, Material[]> cellMaterialsMap = new Dictionary<string, Material[]>();
     [SerializeField] private List<GameObject> spawnedCells = new List<GameObject>();
 
@@ -52,9 +53,6 @@ public class SimulationManager : MonoBehaviour
     [Header("Misc")]
     [SerializeField] private CSVReader csvReader; // Reference to the CSVReader component
     private int simulationDuration;
-    bool isCellDataLoaded = false;
-    bool isVoxelDataLoaded = false;
-
 
     private void Awake()
     {
@@ -75,49 +73,24 @@ public class SimulationManager : MonoBehaviour
         timeSlider.gameObject.SetActive(false);
     }
 
-
-    private void HandleDataLoaded()
+    private async void Start()
     {
-        // Assuming csvReader is an instance of CSVReader
-        StartCoroutine(csvReader.PreloadCellPositionData(() =>
-        {
-            isCellDataLoaded = true;
-            //isVoxelDataLoaded = true;
-            CheckDataLoadingCompletion();
-        }));
-
-        StartCoroutine(csvReader.PreloadMoleculeData(() =>
-        {
-
-            GenerateVoxelGrid();
-            CheckDataLoadingCompletion();
-        }));
-
-        void CheckDataLoadingCompletion()
-        {
-            if (isCellDataLoaded && isVoxelDataLoaded)
-            {
-                // Update the UI here based on your logic, for example:
-                Debug.Log("All data loaded successfully.");
-                onScreenText.text = "Preloading Data Complete. You can now spawn cells.";
-                spawnCellsButton.gameObject.SetActive(true);
-            }
-        }
-    }
-
-
-    private void Start()
-    {
-        cellMaterialsMap = new Dictionary<string, Material[]>();
-        foreach (var set in cellTypeMaterialSets)
-        {
-            cellMaterialsMap[set.cellType] = set.materials;
-        }
-
+        // Initialization code...
         onScreenText.text = "Preloading Data, Please Wait...";
 
         LoadConfigurationFromXML("Assets/Resources/E0.xml");
 
+        SetupUI();
+
+        // Replace the old method calls with the new unified LoadDataAsync method
+        await csvReader.LoadDataAsync();
+
+        // Update the completion check based on the data loaded flags
+        CheckDataLoaded();
+    }
+
+    private void SetupUI()
+    {
         exitButton.onClick.AddListener(ExitSimulation);
 
         spawnCellsButton.gameObject.SetActive(false);
@@ -125,9 +98,17 @@ public class SimulationManager : MonoBehaviour
         pauseSimulationButton.gameObject.SetActive(false);
         resumeSimulationButton.gameObject.SetActive(false);
         timeSlider.gameObject.SetActive(false);
-        HandleDataLoaded();
     }
 
+    private void CheckDataLoaded()
+    {
+        // You may directly check if the data is loaded without specific flags,
+        // assuming LoadDataAsync completes only when both datasets are fully loaded.
+        Debug.Log("All data loaded successfully.");
+        onScreenText.text = "Preloading Data Complete. You can now spawn cells.";
+        GenerateVoxelGrid();
+        spawnCellsButton.gameObject.SetActive(true);
+    }
 
     private void InitializeTimeSlider()
     {
@@ -141,14 +122,12 @@ public class SimulationManager : MonoBehaviour
         timeSlider.value = currentBioTick / bioTickStep;
     }
 
-
     public void OnSpawnCellsButtonClicked()
     {
         spawnCellsButton.gameObject.SetActive(false); // Hide the spawn button
         onScreenText.text = "Please Wait...";
         StartCoroutine(PreloadDataAndInitializeCells());
     }
-
 
     public void OnStartSimulationButtonClicked()
     {
@@ -162,7 +141,6 @@ public class SimulationManager : MonoBehaviour
         timeSlider.onValueChanged.AddListener(HandleSliderValueChanged);
         InitializeTimeSlider();
     }
-
 
     private IEnumerator PreloadDataAndInitializeCells()
     {
@@ -202,7 +180,6 @@ public class SimulationManager : MonoBehaviour
 
     }
 
-
     private GameObject FindOrCreateCell(int agentID, string cellType)
     {
         foreach (GameObject cell in spawnedCells)
@@ -221,7 +198,6 @@ public class SimulationManager : MonoBehaviour
         spawnedCells.Add(newCell);
         return newCell;
     }
-
 
     private IEnumerator CheckForUpdates()
     {
@@ -258,14 +234,12 @@ public class SimulationManager : MonoBehaviour
         }
     }
 
-
     public void PauseSimulation()
     {
         timeMultiplier = 0;
         pauseSimulationButton.gameObject.SetActive(false);
         resumeSimulationButton.gameObject.SetActive(true);
     }
-
 
     public void ResumeSimulation()
     {
@@ -274,8 +248,7 @@ public class SimulationManager : MonoBehaviour
         resumeSimulationButton.gameObject.SetActive(false);
     }
 
-
-    void LoadConfigurationFromXML(string filePath)
+    private void LoadConfigurationFromXML(string filePath)
     {
         XmlDocument xmlDoc = new XmlDocument();
         xmlDoc.Load(filePath);
@@ -299,9 +272,10 @@ public class SimulationManager : MonoBehaviour
             float.Parse(areaStepNode.SelectSingleNode("z").InnerText));
     }
 
-
-    void GenerateVoxelGrid()
+    private void GenerateVoxelGrid()
     {
+        Debug.Log("Starting to generate voxel grid...");
+
         int voxelIndex = 0;
 
         Vector3 gridCubeNumber = new Vector3(
@@ -342,9 +316,7 @@ public class SimulationManager : MonoBehaviour
                 }
             }
         }
-        isVoxelDataLoaded = true;
     }
-
 
     public Material[] GetMaterialsForCellType(string cellType)
     {
@@ -365,15 +337,13 @@ public class SimulationManager : MonoBehaviour
         }
     }
 
-
-    void HandleSliderValueChanged(float value)
+    private void HandleSliderValueChanged(float value)
     {
         currentBioTick = (int)value * bioTickStep;
         UpdateSimulationStateToCurrentBioTick();
     }
 
-
-    void UpdateSimulationStateToCurrentBioTick()
+    private void UpdateSimulationStateToCurrentBioTick()
     {
         foreach (GameObject cellObject in spawnedCells)
         {
@@ -381,7 +351,6 @@ public class SimulationManager : MonoBehaviour
             cellManager.UpdateStateToTick(currentBioTick);
         }
     }
-
 
     public void UpdateSliderMaxValue()
     {
@@ -400,8 +369,7 @@ public class SimulationManager : MonoBehaviour
         Debug.Log($"Max BioTick updated to: {maxBioTick}");
     }
 
-
-    void UpdateSliderValue(int bioTick)
+    private void UpdateSliderValue(int bioTick)
     {
         if (timeSlider != null)
         {
@@ -409,7 +377,6 @@ public class SimulationManager : MonoBehaviour
             timeSlider.value = bioTick / bioTickStep;
         }
     }
-
 
     private void UpdateVoxelsForBioTick(int bioTick)
     {
@@ -450,12 +417,10 @@ public class SimulationManager : MonoBehaviour
         return globalMaxConcentrationPerType;
     }
 
-
     public float GetTimeMultiplier()
     {
         return timeMultiplier;
     }
-
 
     public void ExitSimulation()
     {

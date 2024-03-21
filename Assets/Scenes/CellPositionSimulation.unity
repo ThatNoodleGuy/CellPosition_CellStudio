@@ -1121,6 +1121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6863e229879bbcc438c96fc6fcee0189, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cellPrefab: {fileID: 1580431748523265128, guid: 0bda9ade7c71aea1c93acc1bb737527d, type: 3}
   cellTypeMaterialSets:
   - cellType: Monocyte
     materials:
@@ -1136,11 +1137,10 @@ MonoBehaviour:
     - {fileID: 2100000, guid: bcef77524d6939149afa54ca16a6eec0, type: 2}
     - {fileID: 2100000, guid: ce2c60cfecf35a9499b4d05ad716770f, type: 2}
     - {fileID: 2100000, guid: 4b5c7d7c8bfb62f4791d5dd47d3fbe25, type: 2}
-  cellPrefab: {fileID: 1580431748523265128, guid: 0bda9ade7c71aea1c93acc1bb737527d, type: 3}
   spawnedCells: []
   voxelPrefab: {fileID: 2606775755480607014, guid: d4bbcd2dc7bb2264a985ce261e6bd872, type: 3}
   spawnedVoxels: []
-  currentBioTick: 4700
+  currentBioTick: 0
   timeMultiplier: 1
   spawnCellsButton: {fileID: 787233666}
   startSimulationButton: {fileID: 1417734900}
@@ -2164,11 +2164,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cellPositionCSVFilePath: Assets/Resources/cellPosition.csv
-  cellPositionCSVLinesPerFrame: 100000
-  cellPositionCSVLinesLoaded: 0
   moleculeCSVFilePath: Assets/Resources/MolExpr.csv
-  moleculeCSVLinesPerFrame: 300000
+  cellPositionCSVLinesLoaded: 0
   moleculeCSVLinesLoaded: 0
+  linesPerBatch: 500000
 --- !u!4 &1103232244
 Transform:
   m_ObjectHideFlags: 0
@@ -2178,7 +2177,7 @@ Transform:
   m_GameObject: {fileID: 1103232242}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2538.625, y: 605.63055, z: 1160.0895}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2459,7 +2458,7 @@ Transform:
   m_GameObject: {fileID: 1703064162}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -528.9208, y: -421.78485, z: -1823.1975}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
