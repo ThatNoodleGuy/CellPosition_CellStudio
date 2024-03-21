@@ -32,6 +32,8 @@ public class CellManager : MonoBehaviour
     private int currentDataIndex = 0;
     private bool sizeHasBeenSet = false; // Flag to track if size has been set
     private int interactionType;
+    private static bool isPanelOpen = false;
+
 
     private Dictionary<string, SizeRange> cellTypeSizeRanges = new Dictionary<string, SizeRange>()
     {
@@ -40,10 +42,12 @@ public class CellManager : MonoBehaviour
         // Additional cell types and their size ranges
     };
 
+
     private void Awake()
     {
         simulationManager = SimulationManager.instance; // Assuming there's a public static instance
     }
+
 
     private void Start()
     {
@@ -52,24 +56,16 @@ public class CellManager : MonoBehaviour
         closeCellUIButton.onClick.AddListener(HideCellUI);
     }
 
-    void Update()
-    {
-        if (Input.GetMouseButtonDown(0)) // Checks for left mouse click
-        {
-            RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            if (Physics.Raycast(ray, out hit, 100.0f)) // Raycasts to detect clicks on objects
-            {
-                CellManager clickedCell = hit.collider.GetComponent<CellManager>();
-                if (clickedCell != null)
-                {
-                    // If the hit object has a CellManager, show its info using its own method
-                    clickedCell.UpdateCellUI(clickedCell.agentID, clickedCell.cellType, clickedCell.cellState);
-                }
-            }
+    private void OnMouseDown()
+    {
+        if (SimulationManager.instance.GetTimeMultiplier() == 0 && !isPanelOpen)
+        {
+            UpdateCellUI(agentID, cellType, cellState);
+            isPanelOpen = true;
         }
     }
+
 
     public void Initialize(int agentID, string cellType, CellPositionCSVData initialData)
     {
@@ -180,6 +176,7 @@ public class CellManager : MonoBehaviour
     public void HideCellUI()
     {
         cellCanvas.SetActive(false);
+        isPanelOpen = false;
     }
 
     void FetchMaterials()

@@ -24,21 +24,20 @@ public class SimulationManager : MonoBehaviour
 
     [Header("Cells")]
     [SerializeField] private List<CellTypeMaterialSet> cellTypeMaterialSets;
-    [Space(10)]
     [SerializeField] private GameObject cellPrefab;
-    [SerializeField] private List<GameObject> spawnedCells = new List<GameObject>();
     private Dictionary<string, Material[]> cellMaterialsMap = new Dictionary<string, Material[]>();
+    [SerializeField] private List<GameObject> spawnedCells = new List<GameObject>();
 
     [Header("Voxels")]
     [SerializeField] private GameObject voxelPrefab; // Assign in the Inspector
-    [SerializeField] private List<GameObject> spawnedVoxels = new List<GameObject>();
     private Vector3 gridSize;
     private Vector3 voxelDimensions;
+    [SerializeField] private List<GameObject> spawnedVoxels = new List<GameObject>();
 
     [Header("Timer")]
-    private int bioTickStep = 50;
     [SerializeField] private int currentBioTick = 0;
     [SerializeField] private float timeMultiplier = 1.0f; // Adjust the speed of time in your simulation
+    private int bioTickStep = 50;
 
     [Header("UI")]
     [SerializeField] private Button spawnCellsButton;
@@ -449,6 +448,12 @@ public class SimulationManager : MonoBehaviour
             }
         }
         return globalMaxConcentrationPerType;
+    }
+
+
+    public float GetTimeMultiplier()
+    {
+        return timeMultiplier;
     }
 
 

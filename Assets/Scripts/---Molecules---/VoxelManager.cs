@@ -19,7 +19,7 @@ public class VoxelManager : MonoBehaviour
 
     private Dictionary<int, GameObject> moleculeObjects = new Dictionary<int, GameObject>();
     private float totalConcentration;
-    private const float negligibleConcentrationThreshold = 0.001f; // Adjust as needed
+    private const float negligibleConcentrationThreshold = 0.01f; // Adjust as needed
 
 
     /// Initializes the voxel manager with a global ID and an optional list of initial molecule data.
@@ -48,6 +48,7 @@ public class VoxelManager : MonoBehaviour
         if (!moleculeObjects.TryGetValue(data.moleculeType, out GameObject moleculeObject))
         {
             moleculeObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            Destroy(moleculeObject.GetComponent<Collider>());
             moleculeObject.transform.SetParent(this.transform, false);
             moleculeObject.name = $"Molecule_{data.moleculeType}";
             moleculeObjects[data.moleculeType] = moleculeObject;
