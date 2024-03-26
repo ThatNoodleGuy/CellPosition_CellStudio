@@ -30,18 +30,8 @@ public class CellManager : MonoBehaviour
     private Material[] interactionMaterials;
     private List<CellPositionCSVData> cellData = new List<CellPositionCSVData>();
     private int currentDataIndex = 0;
-    private bool sizeHasBeenSet = false; // Flag to track if size has been set
     private int interactionType;
     private static bool isPanelOpen = false;
-
-
-    private Dictionary<string, SizeRange> cellTypeSizeRanges = new Dictionary<string, SizeRange>()
-    {
-        {"Monocyte", new SizeRange { minSize = new Vector3(7f, 7f, 7f), maxSize = new Vector3(9f, 9f, 9f) }},
-        {"TCell", new SizeRange { minSize = new Vector3(4f, 4f, 4f), maxSize = new Vector3(6f, 6f, 6f) }},
-        // Additional cell types and their size ranges
-    };
-
 
     private void Awake()
     {
@@ -78,11 +68,6 @@ public class CellManager : MonoBehaviour
         if (initialData != null)
         {
             SetCellProperties(initialData, interactionMaterials);
-            if (!sizeHasBeenSet)
-            {
-                SetCellSize(cellType);
-                sizeHasBeenSet = true;
-            }
         }
     }
 
@@ -101,34 +86,14 @@ public class CellManager : MonoBehaviour
         cellState = data.cellState;
         cylinderInteraction = data.cylinderInteraction;
 
+        transform.localScale = new Vector3(data.scaleX * 10, data.scaleX * 10, data.scaleX * 10);
+
         if (interactionMaterials != null && data.interactionType >= 0 && data.interactionType < interactionMaterials.Length)
         {
             GetComponent<Renderer>().material = interactionMaterials[data.interactionType];
         }
-
-        // Only set size if it hasn't been set yet
-        if (!sizeHasBeenSet)
-        {
-            SetCellSize(cellType);
-            sizeHasBeenSet = true;
-        }
     }
 
-    private void SetCellSize(string cellType)
-    {
-        if (cellTypeSizeRanges.TryGetValue(cellType, out SizeRange sizeRange))
-        {
-            Vector3 randomSize = new Vector3(
-                UnityEngine.Random.Range(sizeRange.minSize.x, sizeRange.maxSize.x),
-                UnityEngine.Random.Range(sizeRange.minSize.y, sizeRange.maxSize.y),
-                UnityEngine.Random.Range(sizeRange.minSize.z, sizeRange.maxSize.z));
-            transform.localScale = randomSize;
-        }
-        else
-        {
-            transform.localScale = new Vector3(1f, 1f, 1f); // Default size if not specified
-        }
-    }
 
     public void UpdateState(int bioTick)
     {

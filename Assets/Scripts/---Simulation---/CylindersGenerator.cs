@@ -12,7 +12,7 @@ public class CylindersGenerator : MonoBehaviour
     void Start()
     {
         // Load the XML file from the Resources folder
-        TextAsset xmlCylindersFile = Resources.Load<TextAsset>("Cylinders");
+        TextAsset xmlCylindersFile = Resources.Load<TextAsset>("Data/Cylinders");
         if (xmlCylindersFile == null)
         {
             Debug.LogError("Failed to load Cylinders XML file.");

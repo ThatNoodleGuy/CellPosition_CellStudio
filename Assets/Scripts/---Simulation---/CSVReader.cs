@@ -17,6 +17,7 @@ public class CellPositionCSVData
     public string cellType;
     public int cylinderInteraction;
     public string cellState;
+    public float scaleX;
 }
 
 [System.Serializable]
@@ -94,7 +95,7 @@ public class CSVReader : MonoBehaviour
     private CellPositionCSVData ParseCellPositionCSVLine(string line)
     {
         string[] values = line.Split(',');
-        if (values.Length >= 9) // Ensure all expected data is present
+        if (values.Length >= 11) // Ensure all expected data is present
         {
             return new CellPositionCSVData
             {
@@ -107,7 +108,8 @@ public class CSVReader : MonoBehaviour
                 otherCellID = int.Parse(values[6]),
                 cellType = values[7],
                 cylinderInteraction = int.Parse(values[8]),
-                cellState = values.Length > 9 ? values[9] : "Unknown" // Optional; check if present
+                cellState = values.Length > 9 ? values[9] : "Unknown", // Optional; check if present
+                scaleX = float.Parse(values[10])
             };
         }
         return null; // Line didn't match expected format

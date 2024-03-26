@@ -53,6 +53,8 @@ public class SimulationManager : MonoBehaviour
     [Header("Misc")]
     [SerializeField] private CSVReader csvReader; // Reference to the CSVReader component
     private int simulationDuration;
+    [SerializeField] private GameObject cellsParent;
+    [SerializeField] private GameObject voxelsParent;
 
     private void Awake()
     {
@@ -86,6 +88,8 @@ public class SimulationManager : MonoBehaviour
         await csvReader.LoadDataAsync();
 
         // Update the completion check based on the data loaded flags
+        Debug.Log("Generating voxel grid...");
+
         CheckDataLoaded();
     }
 
@@ -154,6 +158,7 @@ public class SimulationManager : MonoBehaviour
             if (dataTimeline.Count > 0)
             {
                 GameObject cellObject = FindOrCreateCell(agentID, dataTimeline[0].cellType);
+                cellObject.transform.parent = cellsParent.transform;
                 CellManager cell = cellObject.GetComponent<CellManager>();
 
                 // Find the correct material set based on the cell's type
@@ -274,8 +279,6 @@ public class SimulationManager : MonoBehaviour
 
     private void GenerateVoxelGrid()
     {
-        Debug.Log("Starting to generate voxel grid...");
-
         int voxelIndex = 0;
 
         Vector3 gridCubeNumber = new Vector3(
@@ -301,6 +304,8 @@ public class SimulationManager : MonoBehaviour
                     {
                         // Instantiate voxel GameObject and initialize its properties using voxelData
                         GameObject voxelGO = Instantiate(voxelPrefab, position, Quaternion.identity, transform);
+                        voxelGO.transform.localScale = new Vector3(voxelDimensions.x, voxelDimensions.y, voxelDimensions.z);
+                        voxelGO.transform.parent = voxelsParent.transform;
                         VoxelManager voxelManager = voxelGO.GetComponent<VoxelManager>();
                         voxelGO.transform.name = "Voxel_" + voxelIndex;
                         spawnedVoxels.Add(voxelGO);
