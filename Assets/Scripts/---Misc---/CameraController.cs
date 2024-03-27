@@ -7,25 +7,30 @@ public class CameraController : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 5.0f; // Camera movement speed
     [SerializeField] private float rotationSpeed = 45.0f; // Camera rotation speed
-    [SerializeField] private KeyCode resetRotationKey = KeyCode.R; // Key to reset camera rotation
+    [SerializeField] private KeyCode resetCameraKey = KeyCode.R; // Key to reset camera
     [SerializeField] private KeyCode topViewKey = KeyCode.T; // Key to switch to top view
     [SerializeField] private Transform rotationCenter; // The point around which the camera rotates
+
+    private Vector3 originalPosition;
+    private Quaternion originalRotation;
 
     private Vector3 areaSize;
 
     private void Start()
     {
+        originalPosition = transform.position;
+        originalRotation = transform.rotation;
+
         LoadConfigurationFromXML("Assets/Resources/E0.xml");
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(topViewKey))
+        // Reset camera on key press
+        if (Input.GetKeyDown(resetCameraKey))
         {
-            // Move to top view when T key is pressed
-            transform.position = new Vector3(rotationCenter.position.x, transform.position.y, rotationCenter.position.z);
-            transform.rotation = Quaternion.Euler(90, 0, 0);
-            return; // Skip the rest of the update to avoid moving or rotating the camera further
+            transform.position = originalPosition;
+            transform.rotation = originalRotation;
         }
 
         // Camera movement
@@ -57,10 +62,12 @@ public class CameraController : MonoBehaviour
             transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, lookRotation.eulerAngles.y, transform.rotation.eulerAngles.z);
         }
 
-        // Reset camera rotation on key press
-        if (Input.GetKeyDown(resetRotationKey))
+        if (Input.GetKeyDown(topViewKey))
         {
-            transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
+            // Move to top view when T key is pressed
+            transform.position = new Vector3(rotationCenter.position.x, transform.position.y, rotationCenter.position.z);
+            transform.rotation = Quaternion.Euler(90, 0, 0);
+            return; // Skip the rest of the update to avoid moving or rotating the camera further
         }
     }
 

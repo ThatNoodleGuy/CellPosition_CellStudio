@@ -2,7 +2,7 @@
 <Model_data>
 	<Model>
 		<name>ExampleReduced</name>
-		<simulation_duration value_type="scalar">1000</simulation_duration>
+		<simulation_duration value_type="scalar">10000</simulation_duration>
 		<random_seed value_type="scalar">-1</random_seed>
 	</Model>
 	<Environments>
@@ -10,14 +10,14 @@
 			<CylindersPath>Cylinders.xml</CylindersPath>
 			<CylindersShift>
 				<x value_type="scalar">100</x>
-				<y value_type="scalar">200</y>
+				<y value_type="scalar">500</y>
 				<z value_type="scalar">100</z>
 			</CylindersShift>
 			<name>Area 1</name>
 			<ID>0</ID>
 			<area_size>
 				<x value_type="scalar">700</x>
-				<y value_type="scalar">700</y>
+				<y value_type="scalar">1000</y>
 				<z value_type="scalar">700</z>
 			</area_size>
 			<area_origin>
@@ -55,7 +55,7 @@
 			<cell_type>APC</cell_type>
 			<ID>0</ID>
 			<regionID>0</regionID>
-			<cell_population_size value_type="scalar">1500</cell_population_size>
+			<cell_population_size value_type="scalar">5000</cell_population_size>
 			<cell_size_distribution value_type="distribution_Uniform">
 				<min>7</min>
 				<max>9</max>
@@ -141,7 +141,7 @@
 			<cell_type>CD8+ T-Cell</cell_type>
 			<ID>1</ID>
 			<regionID>0</regionID>
-			<cell_population_size value_type="scalar">1500</cell_population_size>
+			<cell_population_size value_type="scalar">5000</cell_population_size>
 			<cell_size_distribution value_type="distribution_Uniform">
 				<min>4</min>
 				<max>6</max>
